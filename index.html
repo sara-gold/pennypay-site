@@ -1296,11 +1296,14 @@
         '<g>' + wires + '</g><g id="flows"></g><g>' + nodes + '</g><g id="tokens"></g></svg>';
     }
 
-    /* --- the four scenes from the deck --- */
+    /* --- the four scenes ---
+       NOTE: these scenes are adapted from PennyPay's internal "How It Works" deck, which is marked
+       CONFIDENTIAL. Captions were rewritten in plain language, but the diagrams still show how the
+       system works. Get explicit sign-off from PennyPay before this goes live. */
     var scenes = [
       {
         title: 'Funding an account', dur: 8200,
-        cap: 'When Alice funds her PennyPay account, the $10 from Alice’s credit card transaction is converted into bitcoin and held in a PennyPay managed bitcoin wallet associated with Alice’s PennyPay account.',
+        cap: 'Alice loads her PennyPay wallet with one ordinary card payment. PennyPay converts those dollars and holds them in a hosted wallet tied to her account, ready for tipping.',
         svg: function () {
           var card = '<g id="card" transform="translate(150 150)"><g class="pop"><rect x="-64" y="-40" width="128" height="80" rx="11" class="nf"/>' +
             '<rect x="-48" y="-16" width="24" height="18" rx="4" fill="#C98A5E" opacity=".75"/><rect x="-48" y="14" width="70" height="5" rx="2.5" fill="rgba(155,184,158,.4)"/><rect x="-48" y="24" width="40" height="5" rx="2.5" fill="rgba(155,184,158,.25)"/>' +
@@ -1330,10 +1333,10 @@
         }
       },
       {
-        title: 'Tipping through a channel', dur: 10400,
-        cap: 'At the time Bob registers to receive PennyPay tips, PennyPay creates a unique PennyPay Bitcoin Lightning Network Channel (“PBLNC”) for Bob. Bob has one PBLNC for each website he registers to receive tips through. When Alice tips Bob, a new wallet is created for Alice within the appropriate PBLNC and the wallet is funded with an amount calculated based on Alice’s tip amount (e.g., tip amount × 50). Each time Alice tips Bob through the same website, the tip is sent through the corresponding PBLNC.',
+        title: 'Sending a tip', dur: 10400,
+        cap: 'When Alice taps Tip on Bob’s post, the amount moves between their hosted wallets over a dedicated payment channel secured on the Bitcoin Lightning Network. Her card is not charged again.',
         svg: function () {
-          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PENNYPAY BITCOIN LIGHTNING NETWORK CHANNEL (“PBLNC”) · BOB / WEBSITE A');
+          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PAYMENT CHANNEL · BOB / WEBSITE A');
           var bp = '<g id="bp" transform="translate(895 320)"><g class="pop"><rect x="-27" y="-46" width="54" height="92" rx="11" class="nf"/><rect x="-8" y="-39" width="16" height="4" rx="2" fill="rgba(155,184,158,.35)"/>' +
             '<text id="bpn" class="note amt" y="8" text-anchor="middle" style="font-size:17px;fill:#E7B289">+2¢</text></g></g>';
           var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M90 262 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
@@ -1356,10 +1359,10 @@
       },
       {
         title: 'Closing and payout', dur: 9400,
-        cap: 'At the end of every closing period (e.g., monthly) all tips received by Bob through various websites are sent from the corresponding PBLNCs to a clearing account. From there, the BTC is distributed to Bob, the website hosts, and PennyPay, according to agreed distribution percentages.',
+        cap: 'At the end of each settlement period, Bob’s tips from every site he posts on are pooled, split by agreed rules between Bob, the host sites, and PennyPay, and paid out to bank accounts in dollars.',
         svg: function () {
-          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', '“PBLNC” · BOB / WEBSITE A') +
-            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', '“PBLNC” · BOB / WEBSITE B');
+          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'CHANNEL · BOB / WEBSITE A') +
+            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'CHANNEL · BOB / WEBSITE B');
           var wires = wire('pa', 'M180 128 H 300 V 216 H 354') + wire('pb', 'M180 328 H 300 V 244 H 354') +
             wire('x1', 'M444 230 H 500 V 90 H 554') + wire('x2', 'M444 230 H 554') + wire('x3', 'M444 230 H 500 V 370 H 554') +
             wire('y1', 'M646 90 H 786') + wire('y2', 'M646 230 H 786') + wire('y3', 'M646 370 H 786');
@@ -1390,7 +1393,7 @@
       },
       {
         title: 'The platform behind it', dur: 12600,
-        cap: 'This is all accomplished through PennyPay proprietary application software that is integrated into websites registered to facilitate PennyPay tips, and the PennyPay proprietary technology interface platform, which sends and receives data to link actions taken by PennyPay users with corresponding wallets hosted by PennyPay on the Bitcoin Lightning Network.',
+        cap: 'PennyPay software on each participating site connects to the PennyPay platform, which matches every tap to the right wallets and keeps the transaction records and analytics.',
         svg: function () {
           var web = '<rect x="180" y="28" width="640" height="122" rx="14" class="box2"/>' + text(500, 52, 'lbl', 'WEB CONTENT PROVIDER WEBSITE');
           var app = '<g id="app"><g class="pop"><rect x="360" y="70" width="280" height="46" rx="10" class="box3"/>' + text(500, 98, 'boxl', 'PennyPay Application Software') + '</g></g>';
