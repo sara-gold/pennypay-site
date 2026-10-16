@@ -308,6 +308,16 @@
   @media (min-width: 900px) { .evidence { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; padding: 52px 56px; } }
   .evidence h3 { font-weight: 600; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: -.035em; line-height: 1.08; text-wrap: balance; }
   .agg { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 26px; max-width: 420px; }
+  .ev-copy { display: flex; flex-direction: column; gap: 18px; } .ev-copy .agg { margin-top: 6px; }
+  .ev-src { font-family: var(--font-ui); font-size: 13px; line-height: 1.5; color: var(--putney); max-width: 46ch; }
+  .stats { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--line); margin: 0; }
+  @media (min-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .stat { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+  @media (min-width: 560px) { .stat:nth-child(odd) { padding-right: 20px; border-right: 1px solid var(--line); } .stat:nth-child(even) { padding-left: 20px; } }
+  .stats dd { margin: 0; }
+  .stat-num { font-family: var(--font-accent); font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -.01em; color: var(--penny); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat:last-child .stat-num { font-size: clamp(26px, 2.6vw, 34px); padding-top: 8px; }
+  .stat-lbl { font-family: var(--font-ui); font-size: 14px; line-height: 1.5; color: var(--forest); }
   .agg i { width: 14px; height: 14px; border-radius: 50%; background-color: var(--pewter); background-position: center; background-size: cover; opacity: .4; transform: scale(.75); transition: opacity .5s, transform .5s var(--ease); }
   .agg i.on { background-image: var(--penny-front); opacity: 1; transform: none; box-shadow: 0 1px 1px rgba(40,16,4,.35); }
 
@@ -727,8 +737,18 @@
         </article>
       </div>
       <div class="evidence reveal">
-        <div class="min-w-0"><h3>Independent evaluation found substantial interest.</h3><div class="agg" id="agg" aria-hidden="true"></div></div>
-        <p class="body-copy" style="color:var(--forest)">An independent evaluation and user survey found substantial interest in a simpler way to pay creators directly. The market is the sum of many small, repeat payments across digital platforms.</p>
+        <div class="min-w-0 ev-copy">
+          <h3>Independent evaluation found substantial interest.</h3>
+          <p class="body-copy" style="color:var(--forest)">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and surveyed website users aged 18–34. The market is the sum of many small, repeat payments across digital platforms.</p>
+          <div class="agg" id="agg" aria-hidden="true"></div>
+          <p class="ev-src">Source: Notre Dame IDEA Center technology evaluation and user survey (ages 18–34). Full report available on request.</p>
+        </div>
+        <dl class="stats" id="stats">
+          <div class="stat"><dt class="sr-only">Wish they could easily tip creators</dt><dd class="stat-num"><span data-count="76.83" data-dec="2">76.83</span>%</dd><dd class="stat-lbl">wish they could easily tip creators whose posts they like</dd></div>
+          <div class="stat"><dt class="sr-only">Would sign up</dt><dd class="stat-num"><span data-count="70.37" data-dec="2">70.37</span>%</dd><dd class="stat-lbl">would “definitely” or “probably” sign up and use PennyPay to tip</dd></div>
+          <div class="stat"><dt class="sr-only">Projected tips per user</dt><dd class="stat-num">$<span data-count="45.50" data-dec="2">45.50</span></dd><dd class="stat-lbl">projected annual tips per user, at about 1.68 tips a day</dd></div>
+          <div class="stat"><dt class="sr-only">Estimated revenue opportunity</dt><dd class="stat-num">$<span data-count="103.5" data-dec="1">103.5</span>M–$<span data-count="950" data-dec="0">950</span>M</dd><dd class="stat-lbl">estimated annual revenue opportunity</dd></div>
+        </dl>
       </div>
     </div>
   </section>
@@ -1068,6 +1088,22 @@
   var dots = $$('i', agg);
   function lightDots() { dots.forEach(function (d, i) { setTimeout(function () { d.classList.add('on'); }, reduce ? 0 : i * 18 + Math.random() * 300); }); }
   if ('IntersectionObserver' in window && !reduce) { var aggIO = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { lightDots(); aggIO.disconnect(); } }, { threshold: .4 }); aggIO.observe(agg); } else lightDots();
+
+  /* ---------- Evidence stats: count up once when visible ---------- */
+  (function () {
+    var nums = $$('#stats [data-count]'); if (!nums.length) return;
+    function run() {
+      nums.forEach(function (el) {
+        var to = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0, t0 = null, dur = 1400;
+        var fmt = function (v) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
+        (function step(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * e); if (k < 1) requestAnimationFrame(step); })(performance.now());
+      });
+    }
+    if (reduce || !('IntersectionObserver' in window)) return; // static final values already in the markup
+    nums.forEach(function (el) { el.textContent = '0'; });
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { run(); io.disconnect(); } }, { threshold: .35 });
+    io.observe($('#stats'));
+  })();
 
   /* ---------- Uses: audience views with direct #anchors ---------- */
   var personas = {
