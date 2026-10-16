@@ -145,7 +145,9 @@
 
   /* Jump index under hero: full browse or direct jump */
   .jump { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line-dark); }
-  @media (min-width: 760px) { .jump { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  @media (min-width: 760px) { .jump { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .jump a:last-child { grid-column: 1 / -1; }
+  @media (min-width: 760px) { .jump a:last-child { grid-column: auto; } }
   .jump a { display: flex; flex-direction: column; gap: 6px; padding: 18px 16px 20px 0; border-bottom: 1px solid var(--line-dark); font-family: var(--font-ui); font-size: 14px; color: rgba(242,237,228,.78); transition: color .25s, background-color .25s; }
   @media (min-width: 760px) { .jump a { border-bottom: 0; border-right: 1px solid var(--line-dark); padding-left: 16px; } .jump a:first-child { padding-left: 0; } .jump a:last-child { border-right: 0; } }
   .jump a .jn { font-family: var(--font-accent); font-size: 22px; color: var(--pewter); transition: color .25s, transform .35s var(--ease); display: inline-block; }
@@ -373,7 +375,6 @@
         <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
         <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
         <a class="nav-tab" href="#uses" data-sec="uses">Uses</a>
-        <a class="nav-tab" href="#opportunity" data-sec="opportunity">Opportunity</a>
         <a class="nav-tab" href="#patents" data-sec="patents">Patents</a>
         <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
       </div>
@@ -387,7 +388,6 @@
         <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
         <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
         <a class="nav-tab" href="#uses" data-sec="uses">Uses</a>
-        <a class="nav-tab" href="#opportunity" data-sec="opportunity">Opportunity</a>
         <a class="nav-tab" href="#patents" data-sec="patents">Patents</a>
         <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
       </div>
@@ -419,9 +419,8 @@
         <a href="#how"><span class="jn">01</span>How It Works</a>
         <a href="#technology"><span class="jn">02</span>Technology</a>
         <a href="#uses"><span class="jn">03</span>Uses</a>
-        <a href="#opportunity"><span class="jn">04</span>Opportunity</a>
-        <a href="#patents"><span class="jn">05</span>Patents</a>
-        <a href="#leadership"><span class="jn">06</span>Leadership</a>
+        <a href="#patents"><span class="jn">04</span>Patents</a>
+        <a href="#leadership"><span class="jn">05</span>Leadership</a>
       </nav>
     </div>
   </section>
