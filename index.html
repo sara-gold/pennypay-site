@@ -42,6 +42,10 @@
     --line: rgba(78, 128, 96, 0.45);
     --line-dark: rgba(155, 184, 158, 0.22);
     --penny-light: #C98A5E;
+    --putney-ink: #3C6A4E;   /* green for small text on light backgrounds: 4.6:1+ */
+    --penny-ink: #8C522F;    /* copper for small text on light backgrounds: 4.6:1+ */
+    --penny-deep: #9A5A33;   /* copper fill behind light text: 4.6:1 */
+    --muted-ink: #526557;    /* inactive labels on light backgrounds: 5.3:1 */
     --font-display: 'Inter', system-ui, 'Segoe UI', Helvetica, Arial, sans-serif;
     --font-ui: 'Alexandria', 'Inter', system-ui, sans-serif;
     --font-accent: 'Gideon Roman', Georgia, 'Times New Roman', serif;
@@ -53,6 +57,8 @@
   html { scroll-behavior: smooth; }
   body { background: var(--offwhite); color: var(--forest); font-family: var(--font-display); -webkit-font-smoothing: antialiased; }
   body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--forest); }
+  .skip { position: fixed; z-index: 100; left: max(16px, env(safe-area-inset-left, 0px)); top: calc(10px + env(safe-area-inset-top, 0px)); padding: 12px 18px; border-radius: 999px; background: var(--offwhite); color: var(--forest); font-family: var(--font-ui); font-weight: 600; transform: translateY(-160%); transition: transform .2s; }
+  .skip:focus { transform: none; }
   ::selection { background: var(--penny); color: var(--offwhite); }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -66,10 +72,10 @@
   .band-wash { background: var(--wash); color: var(--forest); }
   .rule-top { border-top: 1px solid var(--line); }
 
-  .eyebrow { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; }
+  .eyebrow { font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 10px; }
   .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--penny); flex: none; }
   .band-dark .eyebrow { color: var(--pewter); }
-  .band-light .eyebrow, .band-wash .eyebrow { color: var(--putney); }
+  .band-light .eyebrow, .band-wash .eyebrow { color: var(--putney-ink); }
 
   .h-display { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.045em; line-height: .96; text-wrap: balance; }
   .h-section { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em; line-height: 1.04; text-wrap: balance; font-size: clamp(32px, 4.6vw, 60px); }
@@ -88,15 +94,15 @@
   .btn:hover .arrow.down { transform: translateY(3px); }
   .btn:active { transform: translateY(2px) scale(.985); }
   a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--penny); outline-offset: 3px; }
-  .btn-penny { background: var(--penny); color: var(--offwhite); box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 6px 0 -1px #7A4A2C, 0 14px 30px -12px rgba(171,108,67,.7); }
-  .btn-penny:hover { background: #B8774C; }
+  .btn-penny { background: var(--penny-deep); color: var(--offwhite); box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 6px 0 -1px #7A4A2C, 0 14px 30px -12px rgba(171,108,67,.7); }
+  .btn-penny:hover { background: #8A4F2B; }
   .btn-penny:active { box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 2px 0 -1px #7A4A2C, 0 6px 14px -8px rgba(171,108,67,.7); }
   .btn-ghost-dark { color: var(--offwhite); border-color: rgba(242,237,228,.38); background: rgba(242,237,228,.02); }
   .btn-ghost-dark:hover { background: rgba(242,237,228,.1); border-color: var(--offwhite); }
   .btn-forest { background: var(--forest); color: var(--offwhite); box-shadow: 0 6px 0 -1px #04130A, 0 14px 30px -14px rgba(13,43,26,.6); }
   .btn-forest:hover { background: var(--forest-2); }
   .btn-forest:active { box-shadow: 0 2px 0 -1px #04130A; }
-  .btn-sm { padding: 11px 18px; font-size: 14px; }
+  .btn-sm { padding: 14px 20px; font-size: 14px; }
   .btn-sm.btn-penny { box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 4px 0 -1px #7A4A2C; }
   .link-ul { position: relative; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-weight: 600; }
   .link-ul::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: currentColor; transform-origin: left; transform: scaleX(.25); transition: transform .35s var(--ease); }
@@ -114,7 +120,7 @@
   .footer .logo-mark { height: 44px; }
   .watermark { position: absolute; pointer-events: none; color: var(--penny); opacity: .09; height: auto; }
   .tabbar { position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid var(--line-dark); }
-  .nav-tab { position: relative; z-index: 1; font-family: var(--font-ui); font-size: 14px; padding: 9px 15px; border-radius: 999px; color: rgba(242,237,228,.74); white-space: nowrap; transition: color .25s; }
+  .nav-tab { position: relative; z-index: 1; font-family: var(--font-ui); font-size: 14px; padding: 11px 15px; border-radius: 999px; color: rgba(242,237,228,.74); white-space: nowrap; transition: color .25s; }
   .nav-tab:hover { color: var(--offwhite); }
   .nav-tab[aria-current="true"] { color: var(--offwhite); }
   .tab-ind { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: rgba(171,108,67,.9); box-shadow: inset 0 0 0 1px rgba(242,237,228,.18); opacity: 0; transition: transform .45s var(--ease), width .45s var(--ease), opacity .3s; }
@@ -168,12 +174,12 @@
   .fees { margin: 0 0 96px; padding-top: 32px; border-top: 1px solid var(--line); display: grid; gap: 18px; }
   @media (min-width: 900px) { .fees { margin-bottom: 128px; margin-top: -40px; } }
   .fees-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; }
-  .fees-note { font-family: var(--font-ui); font-size: 13px; color: var(--putney); }
+  .fees-note { font-family: var(--font-ui); font-size: 14px; color: var(--putney-ink); }
   .fee-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "amt val" "bar bar"; gap: 8px 16px; align-items: center; }
   @media (min-width: 760px) { .fee-row { grid-template-columns: 150px minmax(0, 1fr) 170px; grid-template-areas: "amt bar val"; } }
   .fee-amt { grid-area: amt; font-family: var(--font-ui); font-weight: 600; font-size: 15px; }
-  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 20px; color: var(--putney); text-align: right; font-variant-numeric: tabular-nums; }
-  .fee-row.hot .fee-val { color: var(--penny); }
+  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 20px; color: var(--putney-ink); text-align: right; font-variant-numeric: tabular-nums; }
+  .fee-row.hot .fee-val { color: var(--penny-ink); }
   .fee-track { grid-area: bar; height: 14px; border-radius: 99px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
   .fee-bar { display: block; height: 100%; width: var(--pct); min-width: 6px; border-radius: 99px; background: var(--putney); transform-origin: left; transition: transform 1.2s var(--ease); }
   .fee-row.hot .fee-bar { background: linear-gradient(90deg, var(--penny), var(--penny-light)); }
@@ -181,7 +187,7 @@
   .fees-foot { font-family: var(--font-ui); font-size: 15px; line-height: 1.6; max-width: 70ch; }
   @media (min-width: 900px) { .intro-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 72px; padding-block: 128px; } }
   .reaction-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .reaction { font-family: var(--font-ui); font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 8px; color: var(--putney); background: var(--paper); transition: transform .3s var(--ease), border-color .3s, color .3s; }
+  .reaction { font-family: var(--font-ui); font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 8px; color: var(--putney-ink); background: var(--paper); transition: transform .3s var(--ease), border-color .3s, color .3s; }
   .reaction:hover { transform: translateY(-2px); border-color: var(--penny); color: var(--penny); }
 
   .sec { padding-block: 96px; }
@@ -192,8 +198,8 @@
   @media (min-width: 960px) { .stepper { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; } }
   .step-list { display: grid; align-content: start; border-top: 1px solid var(--line); }
   .step-tab { text-align: left; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 4px 16px; padding: 22px 6px 22px 0; border-bottom: 1px solid var(--line); position: relative; cursor: pointer; }
-  .step-tab .num { font-family: var(--font-accent); font-size: 34px; line-height: 1; color: var(--pewter); transition: color .3s; font-variant-numeric: tabular-nums; }
-  .step-tab .txt { font-weight: 600; font-size: clamp(17px, 1.5vw, 20px); letter-spacing: -.02em; line-height: 1.35; color: rgba(13,43,26,.55); transition: color .3s; min-width: 0; }
+  .step-tab .num { font-family: var(--font-accent); font-size: 34px; line-height: 1; color: var(--muted-ink); transition: color .3s; font-variant-numeric: tabular-nums; }
+  .step-tab .txt { font-weight: 600; font-size: clamp(17px, 1.5vw, 20px); letter-spacing: -.02em; line-height: 1.35; color: var(--muted-ink); transition: color .3s; min-width: 0; }
   .step-tab .bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--penny); transform: scaleX(0); transform-origin: left; }
   .step-tab[aria-selected="true"] .num { color: var(--penny); }
   .step-tab[aria-selected="true"] .txt, .step-tab:hover .txt { color: var(--forest); }
@@ -221,13 +227,13 @@
   .chip { font-family: var(--font-accent); font-size: 22px; min-width: 64px; padding: 12px 16px; border-radius: 14px; border: 1px solid var(--line-dark); color: var(--offwhite); background: rgba(242,237,228,.03); cursor: pointer; transition: transform .2s var(--ease), background-color .25s, border-color .25s, box-shadow .2s; font-variant-numeric: tabular-nums; }
   .chip:hover { border-color: var(--pewter); transform: translateY(-2px); }
   .chip:active { transform: translateY(1px) scale(.97); }
-  .chip[aria-checked="true"] { background: var(--penny); border-color: var(--penny); box-shadow: 0 4px 0 -1px #7A4A2C; }
+  .chip[aria-checked="true"] { background: var(--penny-deep); border-color: var(--penny-deep); box-shadow: 0 4px 0 -1px #7A4A2C; }
   .post { width: min(300px, 100%); border-radius: 18px; background: var(--paper); color: var(--forest); padding: 14px; position: relative; }
   .post .media { height: 110px; border-radius: 12px; background: linear-gradient(140deg, var(--pewter), var(--putney)); }
   .post .lines { display: grid; gap: 7px; margin-top: 14px; } .post .lines span { height: 8px; border-radius: 99px; background: rgba(13,43,26,.12); } .post .lines span:last-child { width: 60%; }
   .post .actions { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
   .post .dots { display: flex; gap: 8px; } .post .dots i { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(13,43,26,.25); display: block; }
-  .tip-btn { font-family: var(--font-ui); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 999px; background: var(--penny); color: var(--offwhite); box-shadow: 0 4px 0 -1px #7A4A2C; transition: transform .15s, box-shadow .15s; cursor: pointer; }
+  .tip-btn { font-family: var(--font-ui); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 999px; background: var(--penny-deep); color: var(--offwhite); box-shadow: 0 4px 0 -1px #7A4A2C; transition: transform .15s, box-shadow .15s; cursor: pointer; }
   .tip-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 -1px #7A4A2C; }
   .tip-btn .coin-dot { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 1px 2px rgba(40,16,4,.45); }
   .fly { position: absolute; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 4px 8px rgba(20,8,2,.4); pointer-events: none; animation: fly 1s var(--ease) forwards; }
@@ -245,7 +251,7 @@
   .layer-list { border-top: 1px solid var(--line-dark); }
   .layer { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 6px 18px; padding: 30px 0; border-bottom: 1px solid var(--line-dark); transition: opacity .5s var(--ease); }
   .layer .ln { font-family: var(--font-accent); font-size: 30px; line-height: 1; color: rgba(155,184,158,.45); transition: color .4s; font-variant-numeric: tabular-nums; }
-  .layer h3 { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--pewter); transition: color .4s; }
+  .layer h3 { font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; color: var(--pewter); transition: color .4s; }
   .layer p { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.4; letter-spacing: -.02em; margin-top: 8px; color: rgba(242,237,228,.6); transition: color .4s; text-wrap: pretty; }
   .layer.on .ln { color: var(--penny-light); } .layer.on h3 { color: var(--offwhite); } .layer.on p { color: var(--offwhite); }
   .pipe { grid-column: 2; margin-top: 22px; position: relative; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -258,7 +264,7 @@
   .value-block { margin-top: 88px; padding-top: 48px; border-top: 1px solid var(--line); }
   .filter-scroll { overflow-x: auto; margin-top: 32px; padding-bottom: 6px; scrollbar-width: none; } .filter-scroll::-webkit-scrollbar { display: none; }
   .filters { display: inline-flex; gap: 6px; padding: 5px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); position: relative; }
-  .filter { position: relative; z-index: 1; font-family: var(--font-ui); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 999px; color: var(--putney); white-space: nowrap; transition: color .3s; cursor: pointer; }
+  .filter { position: relative; z-index: 1; font-family: var(--font-ui); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 999px; color: var(--putney-ink); white-space: nowrap; transition: color .3s; cursor: pointer; }
   .filter[aria-pressed="true"] { color: var(--offwhite); }
   .filter-pill { position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 0; border-radius: 999px; background: var(--forest); transition: transform .45s var(--ease), width .45s var(--ease); }
   .ledger { margin-top: 28px; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
@@ -269,14 +275,14 @@
   .v-card:hover::before, .v-card:focus-visible::before { transform: none; }
   .v-card:hover, .v-card:focus-visible { color: var(--offwhite); }
   .v-card:hover .v-label, .v-card:focus-visible .v-label { color: var(--pewter); }
-  .v-label { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--putney); }
+  .v-label { font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; color: var(--putney-ink); }
   .v-title { font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.035em; line-height: 1.08; }
   .v-body { font-family: var(--font-ui); font-size: 16px; line-height: 1.65; max-width: 44ch; }
   .v-go { font-family: var(--font-ui); font-weight: 600; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; }
   .v-coin { position: absolute; right: 28px; top: 30px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-family: var(--font-accent); font-size: 20px; color: var(--penny); transition: transform .6s var(--ease), background-color .4s, color .4s, border-color .4s; }
   .v-card:hover .v-coin, .v-card:focus-visible .v-coin { transform: rotate(360deg); background: var(--penny-front) center / cover no-repeat; color: transparent; border-color: transparent; box-shadow: 0 6px 14px rgba(0,0,0,.35); }
   .v-card.dim { opacity: .28; filter: saturate(.3); }
-  .v-card.hit .v-label { color: var(--penny); }
+  .v-card.hit .v-label { color: var(--penny-ink); }
 
   /* Uses (audience views) */
   .uses-grid { display: grid; gap: 28px; margin-top: 44px; }
@@ -284,13 +290,13 @@
   .u-tabs-scroll { overflow-x: auto; scrollbar-width: none; } .u-tabs-scroll::-webkit-scrollbar { display: none; }
   .u-tabs { display: flex; border-bottom: 1px solid var(--line); min-width: max-content; }
   @media (min-width: 1000px) { .u-tabs { flex-direction: column; border-bottom: 0; border-top: 1px solid var(--line); min-width: 0; } }
-  .u-tab { display: flex; align-items: center; gap: 14px; text-align: left; font-family: var(--font-ui); font-weight: 600; font-size: 15px; padding: 14px 16px 16px; color: rgba(13,43,26,.55); white-space: nowrap; position: relative; cursor: pointer; transition: color .25s; }
-  .u-tab .un { font-family: var(--font-accent); font-weight: 400; font-size: 20px; color: var(--pewter); transition: color .25s; }
+  .u-tab { display: flex; align-items: center; gap: 14px; text-align: left; font-family: var(--font-ui); font-weight: 600; font-size: 15px; padding: 14px 16px 16px; color: var(--muted-ink); white-space: nowrap; position: relative; cursor: pointer; transition: color .25s; }
+  .u-tab .un { font-family: var(--font-accent); font-weight: 400; font-size: 20px; color: var(--muted-ink); transition: color .25s; }
   .u-tab::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; background: var(--penny); transform: scaleX(0); transition: transform .4s var(--ease); }
   @media (min-width: 1000px) { .u-tab { padding: 20px 4px; border-bottom: 1px solid var(--line); white-space: normal; } .u-tab::after { left: 0; right: auto; top: 0; bottom: 0; width: 2px; height: auto; transform: scaleY(0); } .u-tab[aria-selected="true"] { padding-left: 16px; } }
   .u-tab:hover { color: var(--forest); }
   .u-tab[aria-selected="true"] { color: var(--forest); }
-  .u-tab[aria-selected="true"] .un { color: var(--penny); }
+  .u-tab[aria-selected="true"] .un { color: var(--penny-ink); }
   .u-tab[aria-selected="true"]::after { transform: none; }
   .u-tab { transition: color .25s, padding-left .35s var(--ease); }
   .u-panel { position: relative; overflow: hidden; border-radius: 22px; background: var(--forest); color: var(--offwhite); padding: 40px 28px; display: grid; gap: 28px; min-height: 380px; align-content: space-between; }
@@ -318,7 +324,7 @@
   .evidence h3 { font-weight: 600; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: -.035em; line-height: 1.08; text-wrap: balance; }
   .agg { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 26px; max-width: 420px; }
   .ev-copy { display: flex; flex-direction: column; gap: 18px; } .ev-copy .agg { margin-top: 6px; }
-  .ev-src { font-family: var(--font-ui); font-size: 13px; line-height: 1.5; color: var(--putney); max-width: 46ch; }
+  .ev-src { font-family: var(--font-ui); font-size: 14px; line-height: 1.5; color: var(--putney-ink); max-width: 46ch; }
   .stats { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--line); margin: 0; }
   @media (min-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .stat { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); min-width: 0; }
@@ -348,10 +354,10 @@
   .lp-photo { width: 100%; height: 100%; object-fit: cover; }
   .lp-body { display: flex; flex-direction: column; gap: 6px; }
   .lp-name { font-weight: 600; font-size: 22px; letter-spacing: -.025em; line-height: 1.2; }
-  .lp-title { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--penny); }
+  .lp-title { font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; color: var(--penny-ink); }
   .lp-bio { font-family: var(--font-ui); font-size: 15px; line-height: 1.55; color: var(--forest); margin-top: 6px; }
   .lp-title:empty, .lp-bio:empty { display: none; }
-  .lp-link { align-self: flex-start; margin-top: 10px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--putney); border-bottom: 1px solid currentColor; }
+  .lp-link { align-self: flex-start; margin-top: 10px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--putney-ink); border-bottom: 1px solid currentColor; display: inline-flex; align-items: center; min-height: 44px; }
   .lp-link:hover { color: var(--penny); }
 
   /* Final CTA */
@@ -368,7 +374,7 @@
   @media (min-width: 640px) { .cf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .cf-field { display: grid; gap: 8px; min-width: 0; }
   .cf-field label { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: .02em; color: var(--pewter); }
-  .cf-opt { font-weight: 400; opacity: .75; }
+  .cf-opt { font-weight: 400; opacity: .9; }
   .cf-field input, .cf-field select, .cf-field textarea { width: 100%; font-family: var(--font-ui); font-size: 16px; color: var(--offwhite); background: var(--forest-3); border: 1px solid var(--line-dark); border-radius: 12px; padding: 13px 14px; transition: border-color .2s, background-color .2s, box-shadow .2s; }
   .cf-field textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
   .cf-field input:hover, .cf-field select:hover, .cf-field textarea:hover { border-color: rgba(155,184,158,.45); }
@@ -398,8 +404,8 @@
   .footer { background: var(--forest-3); color: var(--offwhite); padding-block: 72px 40px; }
   .foot-grid { display: grid; gap: 40px; }
   @media (min-width: 900px) { .foot-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); } }
-  .foot-col h3 { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--pewter); margin-bottom: 14px; }
-  .foot-col a { display: block; font-family: var(--font-ui); font-size: 14px; color: rgba(242,237,228,.78); padding-block: 5px; transition: color .2s, transform .3s var(--ease); }
+  .foot-col h3 { font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; color: var(--pewter); margin-bottom: 14px; }
+  .foot-col a { display: flex; align-items: center; min-height: 44px; font-family: var(--font-ui); font-size: 15px; color: rgba(242,237,228,.82); padding-block: 4px; transition: color .2s, transform .3s var(--ease); }
   .foot-col a:hover { color: var(--offwhite); transform: translateX(3px); }
   .to-top { position: fixed; z-index: 40; right: max(18px, calc(env(safe-area-inset-right, 0px) + 18px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--forest); color: var(--offwhite); border: 1px solid var(--line-dark); box-shadow: 0 12px 24px -12px rgba(9,31,19,.7); transform: translateY(90px); transition: transform .45s var(--ease), background-color .2s; }
   .to-top.show { transform: none; }
@@ -412,13 +418,13 @@
   .pcard { display: flex; flex-direction: column; gap: 18px; padding: 32px 28px; border-radius: 22px; background: var(--offwhite); color: var(--forest); border: 1px solid rgba(201,138,94,.45); transition: transform .45s var(--ease), box-shadow .45s var(--ease); min-width: 0; }
   @media (min-width: 900px) { .pcard { padding: 40px 36px; } }
   .pcard:hover { transform: translateY(-4px); box-shadow: 0 28px 60px -34px rgba(0,0,0,.65); }
-  .pc-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--putney); }
-  .pc-tag { letter-spacing: .02em; text-transform: none; font-size: 12px; color: var(--penny); background: rgba(171,108,67,.12); padding: 6px 12px; border-radius: 999px; }
+  .pc-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; color: var(--putney-ink); }
+  .pc-tag { letter-spacing: .01em; text-transform: none; font-size: 13px; color: var(--penny-ink); background: rgba(171,108,67,.12); padding: 6px 12px; border-radius: 999px; }
   .pc-num { font-family: var(--font-accent); font-size: clamp(44px, 5vw, 64px); line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
   .pc-title { font-weight: 600; font-size: 18px; line-height: 1.35; letter-spacing: -.015em; }
   .pc-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .pc-meta div { padding: 12px 10px 12px 0; min-width: 0; } .pc-meta div + div { padding-left: 14px; border-left: 1px solid var(--line); }
-  .pc-meta dt { font-family: var(--font-ui); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--putney); }
+  .pc-meta dt { font-family: var(--font-ui); font-size: 13px; letter-spacing: .01em; color: var(--putney-ink); }
   .pc-meta dd { font-family: var(--font-ui); font-weight: 600; font-size: 15px; margin-top: 4px; text-align: left; font-variant-numeric: tabular-nums; }
   .pcard p, .pcard h3, .pcard dl, .pcard dd, .pcard ul { margin: 0; padding: 0; }
   .pc-list { display: grid; gap: 12px; flex: 1; list-style: none; }
@@ -436,10 +442,10 @@
   .bts-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin-top: 32px; }
   @media (min-width: 860px) { .bts-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .bts-tab { position: relative; text-align: left; padding: 16px 0 18px; border-top: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; cursor: pointer; }
-  .bts-tab .n { font-family: var(--font-accent); font-size: 22px; color: var(--pewter); transition: color .3s; }
-  .bts-tab .t { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: rgba(13,43,26,.55); transition: color .3s; }
+  .bts-tab .n { font-family: var(--font-accent); font-size: 22px; color: var(--muted-ink); transition: color .3s; }
+  .bts-tab .t { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--muted-ink); transition: color .3s; }
   .bts-tab:hover .t { color: var(--forest); }
-  .bts-tab[aria-selected="true"] .n { color: var(--penny); }
+  .bts-tab[aria-selected="true"] .n { color: var(--penny-ink); }
   .bts-tab[aria-selected="true"] .t { color: var(--forest); }
   .bts-tab .pb { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--penny); transform: scaleX(0); transform-origin: left; }
   .bts-tab.done .pb { transform: scaleX(1); opacity: .35; }
@@ -464,7 +470,7 @@
   .bts-svg .dot { fill: #9BB89E; }
   .bts-svg .coinc { fill: none; stroke: rgba(201,138,94,.7); stroke-width: 1.4; }
   .bts-svg .btc { fill: #C98A5E; font: 600 15px 'Inter', system-ui, sans-serif; }
-  .bts-svg .lbl { fill: #9BB89E; font: 600 11.5px 'Alexandria', 'Inter', sans-serif; letter-spacing: .1em; }
+  .bts-svg .lbl { fill: #9BB89E; font: 600 13px 'Alexandria', 'Inter', sans-serif; letter-spacing: .01em; }
   .bts-svg .amt { fill: #F2EDE4; font: 19px 'Gideon Roman', Georgia, serif; font-variant-numeric: tabular-nums; }
   .bts-svg .init { fill: #F2EDE4; font: 26px 'Gideon Roman', Georgia, serif; }
   .bts-svg .wl { fill: #F2EDE4; font: 13px 'Alexandria', 'Inter', sans-serif; opacity: .85; }
@@ -506,6 +512,7 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="pp-mark" viewBox="0 -751 550 773"><g transform="scale(1,-1)" fill="currentColor"><path d="M20 -2 28 19Q116 18 129 63Q141 104 141 283Q141 611 120 635Q101 651 70 651Q63 651 54.0 650.0Q45 649 35 647L45 667Q76 663 179 658Q183 658 203.5 659.0Q224 660 261 663Q303 666 333 666Q432 666 478 630Q530 590 530 509Q530 446 498 396Q455 330 378 308Q356 302 332.5 298.5Q309 295 285 295Q278 295 270.5 295.5Q263 296 255 297L265 315Q311 313 355 331Q415 354 439 400Q461 438 461 484Q461 546 422 588Q382 633 314 633Q265 633 250 630Q223 626 220 603Q217 570 215.0 520.0Q213 470 213 403V259Q213 82 225 46Q233 31 285 24Q302 22 314.5 20.5Q327 19 335 19Q344 19 347 20L337 -1Q324 0 310.0 1.5Q296 3 282 4Q255 6 232.5 7.0Q210 8 192 8Q185 8 179.0 8.0Q173 8 167 7Z"/><rect x="270.4" y="157.2" width="42.3" height="573.3"/><rect x="338.2" y="157.2" width="40.3" height="573.3"/></g></symbol></svg>
 
+<a class="skip" href="#top">Skip to content</a>
 <header class="site-header" id="siteHeader">
   <div class="wrap nav-row">
     <a href="#top" class="brand" aria-label="PennyPay home"><svg class="logo-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>PennyPay</a>
@@ -514,7 +521,7 @@
         <span class="tab-ind" aria-hidden="true"></span>
         <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
         <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
-        <a class="nav-tab" href="#uses" data-sec="uses">Uses</a>
+        <a class="nav-tab" href="#uses" data-sec="uses">Use cases</a>
         <a class="nav-tab" href="#patents" data-sec="patents">Patents</a>
         <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
       </div>
@@ -527,7 +534,7 @@
         <span class="tab-ind-m" aria-hidden="true"></span>
         <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
         <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
-        <a class="nav-tab" href="#uses" data-sec="uses">Uses</a>
+        <a class="nav-tab" href="#uses" data-sec="uses">Use cases</a>
         <a class="nav-tab" href="#patents" data-sec="patents">Patents</a>
         <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
       </div>
@@ -536,7 +543,7 @@
   <div class="read-progress" aria-hidden="true"><span id="readBar"></span></div>
 </header>
 
-<main id="top" data-anchor>
+<main id="top" data-anchor tabindex="-1" style="outline:none">
   <!-- HERO -->
   <section class="hero band-dark" aria-labelledby="heroTitle">
     <div class="wrap hero-grid">
@@ -558,7 +565,7 @@
       <nav class="jump" aria-label="Jump to a section">
         <a href="#how"><span class="jn">01</span>How It Works</a>
         <a href="#technology"><span class="jn">02</span>Technology</a>
-        <a href="#uses"><span class="jn">03</span>Uses</a>
+        <a href="#uses"><span class="jn">03</span>Use cases</a>
         <a href="#patents"><span class="jn">04</span>Patents</a>
         <a href="#leadership"><span class="jn">05</span>Leadership</a>
       </nav>
@@ -570,9 +577,9 @@
     <div class="wrap intro-grid">
       <h2 id="introTitle" class="h-section reveal">Card fees make <span class="accent text-penny">small payments</span> uneconomical.</h2>
       <div class="reveal flex flex-col justify-end min-w-0">
-        <p class="body-copy">Audiences like, share, and comment on content all day, and none of it pays the people who made it. Card networks charge a fixed fee on every transaction, which can exceed the payment itself when the amount is a few cents. So paid interactions online stay large: subscriptions, donations, purchases. PennyPay handles everything below that line, from 1¢ to $3.</p>
+        <p class="body-copy">Audiences like, share, and comment on content all day, and none of it pays the people who made it. Card networks charge a fixed fee on every transaction. On a payment of a few cents, the fee can be larger than the payment. So paid interactions online stay large: subscriptions, donations, purchases. PennyPay handles everything below that line, from 1¢ to $3.</p>
         <div class="reaction-row" aria-hidden="true">
-          <span class="reaction">♡ likes</span><span class="reaction">✦ reactions</span><span class="reaction">↗ shares</span><span class="reaction">❝ comments</span><span class="reaction" style="border-color:var(--penny);color:var(--penny)">¢ PennyPay</span>
+          <span class="reaction">♡ likes</span><span class="reaction">✦ reactions</span><span class="reaction">↗ shares</span><span class="reaction">❝ comments</span><span class="reaction" style="border-color:var(--penny);color:var(--penny-ink)">¢ PennyPay</span>
         </div>
       </div>
     </div>
@@ -594,7 +601,7 @@
           <span class="eyebrow">How It Works</span>
           <h2 id="howTitle" class="h-section reveal">Three parts, <span class="accent text-penny">one click</span> for the user.</h2>
         </div>
-        <a href="#technology" class="btn btn-forest">Technology <span class="arrow down" aria-hidden="true">↓</span></a>
+        <a href="#technology" class="btn btn-forest">See the architecture <span class="arrow down" aria-hidden="true">↓</span></a>
       </div>
       <div class="stepper">
         <div class="step-list" role="tablist" aria-label="How it works steps" aria-orientation="vertical" id="stepList">
@@ -655,7 +662,7 @@
         <div class="bts-tabs" role="tablist" aria-label="Behind the screens scenes" id="btsTabs"></div>
         <div class="bts-stage" role="tabpanel" id="btsPanel" aria-live="polite">
           <div class="bts-cap"><h4 id="btsTitle"></h4><p id="btsCap"></p></div>
-          <div class="bts-scroll"><div class="bts-svg" id="btsSvg"></div></div>
+          <div class="bts-scroll" tabindex="0" role="region" aria-label="Scene diagram"><div class="bts-svg" id="btsSvg"></div></div>
           <p class="bts-hint">Swipe sideways to see the whole diagram.</p>
         </div>
       </div>
@@ -668,15 +675,15 @@
       <div class="tech-head flex flex-col gap-6 min-w-0">
         <span class="eyebrow">Technology</span>
         <h2 id="techTitle" class="h-section reveal">The architecture behind each tip</h2>
-        <div><a href="#patents" class="btn btn-ghost-dark">Patents <span class="arrow down" aria-hidden="true">↓</span></a></div>
+        <div><a href="#patents" class="btn btn-ghost-dark">View the patents <span class="arrow down" aria-hidden="true">↓</span></a></div>
       </div>
       <ol class="layer-list" id="layers">
-        <li class="layer"><span class="ln">1</span><div><h3>Card economics</h3><p>A fixed card fee on every transaction makes payments under a few dollars too expensive to process one at a time.</p></div></li>
+        <li class="layer"><span class="ln">1</span><div><h3>Card economics</h3><p>Card networks charge a fixed fee per transaction. That makes payments under a few dollars too expensive to process one by one.</p></div></li>
         <li class="layer"><span class="ln">2</span><div><h3>Publisher integration</h3><p>Publishers embed the tip button next to their content and earn a configurable share of every tip.</p></div></li>
         <li class="layer"><span class="ln">3</span><div><h3>Transaction layer</h3><p>The patented architecture links each user action to hosted wallets: tip intent, payment initiation, wallet updates, transaction records, and analytics.</p></div>
           <div class="pipe" id="pipe" aria-hidden="true"><span>user intent</span><span>payment initiation</span><span>wallet updates</span><span>records</span><span>analytics</span></div>
         </li>
-        <li class="layer"><span class="ln">4</span><div><h3>Settlement rules</h3><p>Balances settle on a schedule or once they cross a threshold, and each party’s share is set by rule, so creators can be paid across every site they publish on.</p></div></li>
+        <li class="layer"><span class="ln">4</span><div><h3>Settlement rules</h3><p>Balances settle on a schedule or once they cross a threshold. Each party’s share is set by rule, so creators get paid across every site they publish on.</p></div></li>
       </ol>
     </div>
   </section>
@@ -684,8 +691,8 @@
   <!-- 03 USES -->
   <section id="uses" data-anchor class="band-light sec" aria-labelledby="usesTitle">
     <div class="wrap">
-      <span class="eyebrow">Uses</span>
-      <h2 id="usesTitle" class="sr-only">Uses</h2>
+      <span class="eyebrow">Use cases</span>
+      <h2 id="usesTitle" class="sr-only">Use cases</h2>
       <div class="uses-grid">
         <div class="u-tabs-scroll">
           <div class="u-tabs" role="tablist" aria-label="Audience" id="uTabs">
@@ -718,7 +725,7 @@
           <span class="eyebrow">Opportunity</span>
           <h2 id="oppTitle" class="h-section reveal">A paid action next to <span class="accent text-putney">like, share, and comment</span></h2>
         </div>
-        <p class="body-copy reveal">Platforms already track every like, share, and comment. PennyPay adds a paid action beside those buttons, so creators, nonprofits, and the platforms that host them earn from engagement they already have.</p>
+        <p class="body-copy reveal">Platforms already track every like, share, and comment. PennyPay adds a paid action beside those buttons. Creators, nonprofits, and their host platforms earn from engagement they already have.</p>
       </div>
       <div class="value-block">
         <h3 class="h-section" style="font-size:clamp(28px,3.4vw,44px)">Who it’s built for</h3>
@@ -750,7 +757,7 @@
         <div class="flex flex-col gap-6 min-w-0">
           <span class="eyebrow">Patents</span>
           <h2 id="patTitle" class="h-section reveal">PennyPay’s core asset: <span class="accent" style="color:var(--penny-light)">protected platform architecture.</span></h2>
-          <p class="body-copy">Two issued U.S. patents, both with an October 28, 2018 priority date, cover how PennyPay connects tips on third-party content to platform-hosted wallets and automated settlement between consumers, creators, websites, and processing services.</p>
+          <p class="body-copy">PennyPay holds two issued U.S. patents with an October 28, 2018 priority date. They cover how tips on third-party content move through hosted wallets and settle automatically among every party.</p>
         </div>
       </div>
       <div class="pat-cards reveal">
@@ -883,10 +890,10 @@
       </div>
       <nav class="foot-col" aria-label="Sections">
         <h3>Sections</h3>
-        <a href="#how">How It Works</a><a href="#technology">Technology</a><a href="#uses">Uses</a><a href="#opportunity">Opportunity</a><a href="#patents">Patents</a><a href="#leadership">Leadership</a>
+        <a href="#how">How It Works</a><a href="#technology">Technology</a><a href="#uses">Use cases</a><a href="#opportunity">Opportunity</a><a href="#patents">Patents</a><a href="#leadership">Leadership</a>
       </nav>
       <nav class="foot-col" aria-label="Audiences">
-        <h3>Uses</h3>
+        <h3>Use cases</h3>
         <a href="#investors">Investors</a><a href="#creators">Creators</a><a href="#nonprofits">Nonprofits</a><a href="#platforms">Platforms</a><a href="#careers">Careers</a>
       </nav>
     </div>
@@ -894,12 +901,12 @@
 
     <div class="mt-12 flex flex-wrap justify-between gap-4 font-alex text-xs" style="color:rgba(242,237,228,.5)">
       <span>© <span id="yr">2026</span> PennyPay, Inc.</span>
-      <a href="#top" class="link-ul">PennyPay ↑</a>
+      <a href="#top" class="link-ul" style="min-height:44px">Back to top ↑</a>
     </div>
   </div>
+  <a href="#top" class="to-top" id="toTop" aria-label="Back to top"><span aria-hidden="true">↑</span></a>
 </footer>
 
-<a href="#top" class="to-top" id="toTop" aria-label="Back to top"><span aria-hidden="true">↑</span></a>
 
 <script>
 (function () {
@@ -949,15 +956,31 @@
   window.addEventListener('resize', function () { var a = active; active = null; setActive(a); });
   spy();
 
-  // Clicking a tab: smooth-scroll to the section and keep a shareable #anchor
+  // In-page links: smooth-scroll, add a history entry, and move keyboard focus to the target.
+  // The Back button returns to the exact spot the visitor left.
+  try { history.scrollRestoration = 'manual'; history.replaceState({ y: window.scrollY }, ''); } catch (err) {}
+  function jumpTo(el, id) {
+    try { history.replaceState({ y: window.scrollY }, ''); history.pushState({ y: null, id: id }, '', id === 'top' ? location.pathname + location.search : '#' + id); } catch (err) {}
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+  var fromHistory = false;
+  window.addEventListener('popstate', function (e) {
+    fromHistory = true; setTimeout(function () { fromHistory = false; }, 100);
+    var h = (location.hash || '').slice(1);
+    if (personas[h]) selectPersona(h);
+    if (e.state && typeof e.state.y === 'number') window.scrollTo({ top: e.state.y, behavior: 'instant' });
+    else if (h && document.getElementById(h)) document.getElementById(h).scrollIntoView({ block: 'start' });
+    else if (h && personas[h]) $('#uses').scrollIntoView({ block: 'start' });
+  });
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]'); if (!a) return;
     var id = a.getAttribute('href').slice(1); if (!id) return;
     if (personas[id]) { e.preventDefault(); goPersona(id); return; }
     var el = document.getElementById(id); if (!el) return;
     e.preventDefault();
-    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    try { history.replaceState(null, '', id === 'top' ? location.pathname + location.search : '#' + id); } catch (err) {}
+    jumpTo(el, id);
     if (secIds.indexOf(id) > -1) setActive(id);
   });
 
@@ -1190,8 +1213,7 @@
   }
   function goPersona(k) {
     selectPersona(k);
-    $('#uses').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    try { history.replaceState(null, '', '#' + k); } catch (err) {}
+    jumpTo($('#uses'), k);
   }
   uTabs.forEach(function (t, i) {
     t.addEventListener('click', function () { selectPersona(t.dataset.p); try { history.replaceState(null, '', '#' + t.dataset.p); } catch (err) {} });
@@ -1204,7 +1226,7 @@
     if (personas[h]) { selectPersona(h); setTimeout(function () { $('#uses').scrollIntoView({ block: 'start' }); }, 50); }
     else { var el = document.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 50); }
   }
-  window.addEventListener('hashchange', handleHash); handleHash();
+  window.addEventListener('hashchange', function () { if (!fromHistory) handleHash(); }); handleHash();
 
 
   /* ---------- Contact form ---------- */
@@ -1302,16 +1324,16 @@
         svg: function () {
           var card = '<g id="card" transform="translate(150 150)"><g class="pop"><rect x="-64" y="-40" width="128" height="80" rx="11" class="nf"/>' +
             '<rect x="-48" y="-16" width="24" height="18" rx="4" fill="#C98A5E" opacity=".75"/><rect x="-48" y="14" width="70" height="5" rx="2.5" fill="rgba(155,184,158,.4)"/><rect x="-48" y="24" width="40" height="5" rx="2.5" fill="rgba(155,184,158,.25)"/>' +
-            '<circle cx="36" cy="-20" r="9" fill="rgba(201,138,94,.55)"/><circle cx="48" cy="-20" r="9" fill="rgba(155,184,158,.45)"/></g><text class="lbl" y="-54" text-anchor="middle">ALICE’S CREDIT CARD</text></g>';
+            '<circle cx="36" cy="-20" r="9" fill="rgba(201,138,94,.55)"/><circle cx="48" cy="-20" r="9" fill="rgba(155,184,158,.45)"/></g><text class="lbl" y="-54" text-anchor="middle">Alice’s credit card</text></g>';
           var phone = '<g id="phone" transform="translate(860 150)"><g class="pop"><rect x="-56" y="-100" width="112" height="200" rx="18" class="nf"/>' +
             '<rect x="-16" y="-90" width="32" height="6" rx="3" fill="rgba(155,184,158,.35)"/>' +
             '<text y="-56" text-anchor="middle" class="amt" style="font-size:17px;fill:#C98A5E">PennyPay</text>' +
             '<image class="mini" id="mn1" href="' + PENNY + '" x="-37" y="-40" width="22" height="22"/><image class="mini" id="mn2" href="' + PENNY + '" x="-11" y="-40" width="22" height="22"/><image class="mini" id="mn3" href="' + PENNY + '" x="15" y="-40" width="22" height="22"/>' +
             '<text id="bal" y="18" text-anchor="middle" class="amt" style="font-size:28px">$0.00</text>' +
-            '<text y="44" text-anchor="middle" class="lbl" style="font-size:10px">ALICE’S ACCOUNT</text></g></g>';
+            '<text y="44" text-anchor="middle" class="lbl" style="font-size:10px">Alice’s account</text></g></g>';
           var wires = wire('w1', 'M216 150 C 420 108, 620 108, 802 148') + wire('w2', 'M150 192 V 360 H 296') + wire('w3', 'M364 360 H 566') + wire('w4', 'M656 360 H 860 V 254');
-          var nodes = card + phone + bank('bank', 330, 360) + wallet('wal', 612, 360, null, 'BITCOIN WALLET') +
-            text(509, 106, 'wl', '$10 credit card transaction') + text(330, 412, 'lbl', 'BANK') + text(465, 348, 'wl', 'USD → BTC') + text(612, 412, 'lbl', 'MANAGED BY PENNYPAY');
+          var nodes = card + phone + bank('bank', 330, 360) + wallet('wal', 612, 360, null, 'Bitcoin wallet') +
+            text(509, 106, 'wl', '$10 credit card transaction') + text(330, 412, 'lbl', 'Bank') + text(465, 348, 'wl', 'USD → BTC') + text(612, 412, 'lbl', 'Managed by PennyPay');
           return frame(wires, nodes);
         },
         play: async function (o) {
@@ -1329,15 +1351,15 @@
       },
       {
         title: 'Sending a tip', dur: 10400,
-        cap: 'When Alice taps Tip on Bob’s post, the amount moves between their hosted wallets over a dedicated payment channel secured on the Bitcoin Lightning Network. Her card is not charged again.',
+        cap: 'When Alice taps Tip on Bob’s post, the amount moves between their hosted wallets. It travels over a dedicated payment channel on the Bitcoin Lightning Network. Her card is not charged again.',
         svg: function () {
-          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PAYMENT CHANNEL · BOB / WEBSITE A');
+          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'Bob’s payment channel · Website A');
           var bp = '<g id="bp" transform="translate(895 320)"><g class="pop"><rect x="-27" y="-46" width="54" height="92" rx="11" class="nf"/><rect x="-8" y="-39" width="16" height="4" rx="2" fill="rgba(155,184,158,.35)"/>' +
             '<text id="bpn" class="note amt" y="8" text-anchor="middle" style="font-size:17px;fill:#E7B289">+2¢</text></g></g>';
-          var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M90 262 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
-          var nodes = chan + person('alice', 200, 80, 'A', 'ALICE') + person('bob', 800, 80, 'B', 'BOB') +
-            wallet('aw', 90, 230, '$10.00', 'ALICE’S WALLET') + wallet('ca', 360, 320, '$0.00', 'ALICE') + wallet('cb', 640, 320, '$0.00', 'BOB') + bp +
-            text(500, 66, 'big', '2¢') + text(500, 306, 'big', '2¢') + text(196, 308, 'wl', '$1.00');
+          var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M132 230 H 200 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
+          var nodes = chan + person('alice', 200, 80, 'A', 'Alice') + person('bob', 800, 80, 'B', 'Bob') +
+            wallet('aw', 90, 230, '$10.00', 'Alice’s wallet') + wallet('ca', 360, 320, '$0.00', 'Alice') + wallet('cb', 640, 320, '$0.00', 'Bob') + bp +
+            text(500, 66, 'big', '2¢') + text(500, 306, 'big', '2¢') + text(250, 308, 'wl', '$1.00');
           return frame(wires, nodes);
         },
         play: async function (o) {
@@ -1354,15 +1376,15 @@
       },
       {
         title: 'Closing and payout', dur: 9400,
-        cap: 'At the end of each settlement period, Bob’s tips from every site he posts on are pooled, split by agreed rules between Bob, the host sites, and PennyPay, and paid out to bank accounts in dollars.',
+        cap: 'At the end of each settlement period, Bob’s tips from every site he posts on are pooled. They are split by agreed rules between Bob, the host sites, and PennyPay. Each share is paid out to a bank account in dollars.',
         svg: function () {
-          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'CHANNEL · BOB / WEBSITE A') +
-            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'CHANNEL · BOB / WEBSITE B');
+          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'Bob’s channel · Website A') +
+            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'Bob’s channel · Website B');
           var wires = wire('pa', 'M180 128 H 300 V 216 H 354') + wire('pb', 'M180 328 H 300 V 244 H 354') +
             wire('x1', 'M444 230 H 500 V 90 H 554') + wire('x2', 'M444 230 H 554') + wire('x3', 'M444 230 H 500 V 370 H 554') +
             wire('y1', 'M646 90 H 786') + wire('y2', 'M646 230 H 786') + wire('y3', 'M646 370 H 786');
-          var nodes = boxes + wallet('wa', 135, 128, '$50.00', 'BOB') + wallet('wb', 135, 328, '$50.00', 'BOB') +
-            wallet('cl', 400, 230, '$0.00', 'BOB · CLEARING') +
+          var nodes = boxes + wallet('wa', 135, 128, '$50.00', 'Bob') + wallet('wb', 135, 328, '$50.00', 'Bob') +
+            wallet('cl', 400, 230, '$0.00', 'Bob · clearing account') +
             wallet('s1', 600, 90, '$0.00') + wallet('s2', 600, 230, '$0.00') + wallet('s3', 600, 370, '$0.00') +
             bank('b1', 820, 90) + bank('b2', 820, 230) + bank('b3', 820, 370) +
             text(716, 78, 'wl', 'FX · BTC → USD') + text(716, 218, 'wl', 'FX · BTC → USD') + text(716, 358, 'wl', 'FX · BTC → USD') +
@@ -1388,18 +1410,18 @@
       },
       {
         title: 'The platform behind it', dur: 12600,
-        cap: 'PennyPay software on each participating site connects to the PennyPay platform, which matches every tap to the right wallets and keeps the transaction records and analytics.',
+        cap: 'PennyPay software on each participating site connects to the PennyPay platform. The platform matches every tap to the right wallets and keeps transaction records and analytics.',
         svg: function () {
-          var web = '<rect x="180" y="28" width="640" height="122" rx="14" class="box2"/>' + text(500, 52, 'lbl', 'WEB CONTENT PROVIDER WEBSITE');
+          var web = '<rect x="180" y="28" width="640" height="122" rx="14" class="box2"/>' + text(500, 52, 'lbl', 'Content provider’s website');
           var app = '<g id="app"><g class="pop"><rect x="360" y="70" width="280" height="46" rx="10" class="box3"/>' + text(500, 98, 'boxl', 'PennyPay Application Software') + '</g></g>';
           var plat = '<g id="plat"><g class="pop"><rect x="360" y="190" width="280" height="46" rx="10" class="box3"/>' + text(500, 218, 'boxl', 'PennyPay Tech Interface Platform') + '</g></g>';
-          var chan = '<rect x="336" y="300" width="328" height="104" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PENNYPAY BITCOIN LIGHTNING NETWORK CHANNEL');
+          var chan = '<rect x="336" y="300" width="328" height="104" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'Payment channel on the Lightning Network');
           var wires = wire('top1', 'M128 93 H 358') + wire('top2', 'M642 93 H 870') +
             wire('v1', 'M430 117 V 188') + wire('v3', 'M430 237 V 318') + wire('v4', 'M570 318 V 238') + wire('v2', 'M570 188 V 118') +
             wire('a0', 'M90 156 V 316') + wire('e1', 'M124 352 H 171') + wire('e2', 'M259 352 H 386') + wire('lt', 'M474 352 H 526') +
             wire('e3', 'M614 352 H 741') + wire('e4', 'M829 352 H 876') + wire('e5', 'M910 316 V 158');
-          var nodes = web + app + plat + chan + person('alice', 90, 95, 'A', 'ALICE') + person('bob', 910, 95, 'B', 'BOB') +
-            bank('bl', 90, 352) + wallet('wl', 215, 352) + wallet('la', 430, 352) + wallet('lb', 570, 352) + text(430, 397, 'lbl', 'ALICE') + text(570, 397, 'lbl', 'BOB') + wallet('wr', 785, 352) + bank('br', 910, 352) +
+          var nodes = web + app + plat + chan + person('alice', 90, 95, 'A', 'Alice') + person('bob', 910, 95, 'B', 'Bob') +
+            bank('bl', 90, 352) + wallet('wl', 215, 352) + wallet('la', 430, 352) + wallet('lb', 570, 352) + text(430, 397, 'lbl', 'Alice') + text(570, 397, 'lbl', 'Bob') + wallet('wr', 785, 352) + bank('br', 910, 352) +
             text(244, 82, 'wl', '2¢') + text(756, 82, 'wl', '2¢');
           return frame(wires, nodes);
         },
