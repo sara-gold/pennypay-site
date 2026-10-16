@@ -170,6 +170,20 @@
 
   /* Intro */
   .intro-grid { display: grid; gap: 32px; padding-block: 96px; }
+  .fees { margin: 0 0 96px; padding-top: 32px; border-top: 1px solid var(--line); display: grid; gap: 18px; }
+  @media (min-width: 900px) { .fees { margin-bottom: 128px; margin-top: -40px; } }
+  .fees-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; }
+  .fees-note { font-family: var(--font-ui); font-size: 13px; color: var(--putney); }
+  .fee-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "amt val" "bar bar"; gap: 8px 16px; align-items: center; }
+  @media (min-width: 760px) { .fee-row { grid-template-columns: 150px minmax(0, 1fr) 170px; grid-template-areas: "amt bar val"; } }
+  .fee-amt { grid-area: amt; font-family: var(--font-ui); font-weight: 600; font-size: 15px; }
+  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 20px; color: var(--putney); text-align: right; font-variant-numeric: tabular-nums; }
+  .fee-row.hot .fee-val { color: var(--penny); }
+  .fee-track { grid-area: bar; height: 14px; border-radius: 99px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
+  .fee-bar { display: block; height: 100%; width: var(--pct); min-width: 6px; border-radius: 99px; background: var(--putney); transform-origin: left; transition: transform 1.2s var(--ease); }
+  .fee-row.hot .fee-bar { background: linear-gradient(90deg, var(--penny), var(--penny-light)); }
+  .js .fees.pending .fee-bar { transform: scaleX(0); }
+  .fees-foot { font-family: var(--font-ui); font-size: 15px; line-height: 1.6; max-width: 70ch; }
   @media (min-width: 900px) { .intro-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 72px; padding-block: 128px; } }
   .reaction-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
   .reaction { font-family: var(--font-ui); font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 8px; color: var(--putney); background: var(--paper); transition: transform .3s var(--ease), border-color .3s, color .3s; }
@@ -465,6 +479,7 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     .js .reveal.pending { transform: none; }
+    .js .fees.pending .fee-bar { transform: none; }
     .final-coins { display: none; }
   }
 </style>
@@ -546,6 +561,14 @@
           <span class="reaction">♡ likes</span><span class="reaction">✦ reactions</span><span class="reaction">↗ shares</span><span class="reaction">❝ comments</span><span class="reaction" style="border-color:var(--penny);color:var(--penny)">¢ PennyPay</span>
         </div>
       </div>
+    </div>
+    <div class="wrap">
+      <figure class="fees reveal" id="fees">
+        <figcaption class="fees-head"><span class="eyebrow">The fee problem</span><span class="fees-note">Processing fee as a share of the payment, using PayPal Micropayments pricing</span></figcaption>
+        <div class="fee-row" style="--pct:6.67%"><span class="fee-amt">$3.00 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.20 fee · 6.67%</span></div>
+        <div class="fee-row hot" style="--pct:100%"><span class="fee-amt">$0.05 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.05 fee · 100%</span></div>
+        <p class="fees-foot">PennyPay pre-funds wallets, so one standard card charge covers hundreds of tips instead of paying a fee on each one.</p>
+      </figure>
     </div>
   </section>
 
