@@ -341,6 +341,23 @@
   .disciplines { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line); margin-top: 40px; }
   .disciplines span { font-family: var(--font-accent); font-size: clamp(22px, 2.4vw, 32px); padding: 18px 26px 18px 0; margin-right: 26px; border-right: 1px solid var(--line); line-height: 1.1; }
   .disciplines span:last-child { border-right: 0; }
+  .disciplines-sm { margin-top: 32px; }
+  .disciplines-sm span { font-size: clamp(17px, 1.6vw, 21px); padding: 14px 20px 14px 0; margin-right: 20px; }
+  .people { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 20px; }
+  @media (min-width: 720px) { .people { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .lp { display: flex; flex-direction: column; gap: 22px; padding: 28px 26px 30px; border-radius: 22px; background: var(--paper); border: 1px solid var(--line); transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s; }
+  .lp:hover { transform: translateY(-4px); border-color: var(--penny); box-shadow: 0 24px 50px -32px rgba(13,43,26,.45); }
+  .lp-avatar { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: var(--forest); box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 4px var(--pewter); overflow: hidden; flex: none; transition: box-shadow .35s; }
+  .lp:hover .lp-avatar { box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 4px var(--penny); }
+  .lp-mono { font-family: var(--font-accent); font-size: 30px; letter-spacing: .02em; color: var(--penny-light); }
+  .lp-photo { width: 100%; height: 100%; object-fit: cover; }
+  .lp-body { display: flex; flex-direction: column; gap: 6px; }
+  .lp-name { font-weight: 600; font-size: 22px; letter-spacing: -.025em; line-height: 1.2; }
+  .lp-title { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--penny); }
+  .lp-bio { font-family: var(--font-ui); font-size: 15px; line-height: 1.55; color: var(--forest); margin-top: 6px; }
+  .lp-title:empty, .lp-bio:empty { display: none; }
+  .lp-link { align-self: flex-start; margin-top: 10px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--putney); border-bottom: 1px solid currentColor; }
+  .lp-link:hover { color: var(--penny); }
 
   /* Final CTA */
   .final { position: relative; overflow: hidden; }
@@ -786,7 +803,37 @@
         </div>
         <p class="body-copy reveal">PennyPay’s team has run finance, corporate strategy, growth, and operations, and has evaluated technology for commercial potential.</p>
       </div>
-      <div class="disciplines reveal" aria-label="Backgrounds"><span>Finance</span><span>Strategy</span><span>Growth</span><span>Operations</span><span>Technology evaluation</span></div>
+      <!-- TODO: needs real content from PennyPay: titles and one-line bios for Haj Young and John McCareins, LinkedIn URLs, and headshots.
+           To add a photo, replace the <span class="lp-mono">…</span> with <img class="lp-photo" src="assets/team/name.jpg" alt="">.
+           To add LinkedIn, add <a class="lp-link" href="…">LinkedIn<span class="sr-only"> profile of NAME</span> ↗</a> inside .lp-body.
+           Empty title/bio paragraphs are hidden automatically. -->
+      <ul class="people reveal" aria-label="Leadership team">
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">RM</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">Robert Musiala</h3>
+            <p class="lp-title">Founder &amp; Inventor</p>
+            <p class="lp-bio">Inventor of PennyPay’s patented micropayment architecture.</p>
+          </div>
+        </li>
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">HY</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">Elhajamin “Haj” Young</h3>
+            <p class="lp-title"></p>
+            <p class="lp-bio"></p>
+          </div>
+        </li>
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">JM</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">John McCareins</h3>
+            <p class="lp-title"></p>
+            <p class="lp-bio"></p>
+          </div>
+        </li>
+      </ul>
+      <div class="disciplines disciplines-sm reveal" aria-label="Backgrounds"><span>Finance</span><span>Strategy</span><span>Growth</span><span>Operations</span><span>Technology evaluation</span></div>
     </div>
   </section>
 
