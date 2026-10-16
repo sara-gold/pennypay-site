@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PennyPay | Patented Micropayment Platform for Digital Content</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%20-751%20550%20773%22%3E%3Cg%20transform%3D%22scale%281%2C-1%29%22%20fill%3D%22%23AB6C43%22%3E%3Cpath%20d%3D%22M20%20-2%2028%2019Q116%2018%20129%2063Q141%20104%20141%20283Q141%20611%20120%20635Q101%20651%2070%20651Q63%20651%2054.0%20650.0Q45%20649%2035%20647L45%20667Q76%20663%20179%20658Q183%20658%20203.5%20659.0Q224%20660%20261%20663Q303%20666%20333%20666Q432%20666%20478%20630Q530%20590%20530%20509Q530%20446%20498%20396Q455%20330%20378%20308Q356%20302%20332.5%20298.5Q309%20295%20285%20295Q278%20295%20270.5%20295.5Q263%20296%20255%20297L265%20315Q311%20313%20355%20331Q415%20354%20439%20400Q461%20438%20461%20484Q461%20546%20422%20588Q382%20633%20314%20633Q265%20633%20250%20630Q223%20626%20220%20603Q217%20570%20215.0%20520.0Q213%20470%20213%20403V259Q213%2082%20225%2046Q233%2031%20285%2024Q302%2022%20314.5%2020.5Q327%2019%20335%2019Q344%2019%20347%2020L337%20-1Q324%200%20310.0%201.5Q296%203%20282%204Q255%206%20232.5%207.0Q210%208%20192%208Q185%208%20179.0%208.0Q173%208%20167%207Z%22/%3E%3Crect%20x%3D%22270.4%22%20y%3D%22157.2%22%20width%3D%2242.3%22%20height%3D%22573.3%22/%3E%3Crect%20x%3D%22338.2%22%20y%3D%22157.2%22%20width%3D%2240.3%22%20height%3D%22573.3%22/%3E%3C/g%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="PennyPay is developing patented infrastructure for digital micropayments across creators, platforms, and nonprofits.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +109,12 @@
   .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 70px; }
   .brand { font-family: var(--font-accent); font-size: 28px; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 10px; flex: none; }
   .brand-mark { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #E7B289, var(--penny) 55%, #6E4024); box-shadow: inset 0 0 0 2px rgba(242,237,228,.4); position: relative; flex: none; }
-  .brand-mark::after { content: "¢"; position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-accent); font-size: 15px; color: var(--offwhite); }
+  .brand-mark { display: grid; place-items: center; }
+  .brand-mark .coin-mark { width: 46%; height: auto; color: var(--offwhite); }
+  .logo-mark { height: 34px; width: auto; color: var(--penny-light); flex: none; transition: transform .5s var(--ease); }
+  .brand:hover .logo-mark { transform: translateY(-2px); }
+  .footer .logo-mark { height: 44px; }
+  .watermark { position: absolute; pointer-events: none; color: var(--pewter); opacity: .07; height: auto; }
   .tabbar { position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid var(--line-dark); }
   .nav-tab { position: relative; z-index: 1; font-family: var(--font-ui); font-size: 14px; padding: 9px 15px; border-radius: 999px; color: rgba(242,237,228,.74); white-space: nowrap; transition: color .25s; }
   .nav-tab:hover { color: var(--offwhite); }
@@ -284,11 +290,11 @@
   .anchor-chip button:hover { background: rgba(242,237,228,.16); }
   .p-swap { transition: opacity .35s var(--ease), transform .45s var(--ease); }
   .p-swap.out { opacity: 0; transform: translateY(12px); }
-  .p-mark { position: absolute; right: -10px; top: -40px; font-family: var(--font-accent); font-size: 260px; line-height: 1; color: rgba(155,184,158,.07); pointer-events: none; }
+  .u-panel .watermark { right: -20px; top: -30px; width: 230px; }
 
   /* Patents */
   .patents { position: relative; overflow: hidden; }
-  .patents::after { content: "¢"; position: absolute; right: -4vw; bottom: -12vw; font-family: var(--font-accent); font-size: 46vw; line-height: 1; color: rgba(155,184,158,.05); pointer-events: none; }
+  .patents .watermark { right: -3vw; bottom: -8vw; width: min(52vw, 640px); opacity: .06; }
   .pat-grid { display: grid; gap: 48px; position: relative; z-index: 1; }
   @media (min-width: 1000px) { .pat-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; } }
   .pat-card { display: block; border-top: 1px solid var(--line-dark); padding-block: 28px; position: relative; }
@@ -318,6 +324,7 @@
   @media (min-width: 960px) { .final-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: end; } }
   .final h2 { font-size: clamp(40px, 6.2vw, 88px); }
   .final-coins { position: absolute; inset: 0; pointer-events: none; }
+  .final .watermark { left: -40px; bottom: -120px; width: 380px; opacity: .06; }
   .final-coins i { position: absolute; width: var(--s); height: var(--s); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #E7B289, var(--penny) 55%, #6E4024); opacity: .18; animation: drift var(--d) linear infinite; left: var(--x); top: 110%; }
   @keyframes drift { to { transform: translateY(-140vh) rotate(360deg); } }
 
@@ -360,15 +367,17 @@
   }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"PennyPay","description":"PennyPay is developing patented infrastructure for digital micropayments across creators, platforms, and nonprofits."}
+{"@context":"https://schema.org","@type":"Organization","name":"PennyPay","description":"PennyPay is developing patented infrastructure for digital micropayments across creators, platforms, and nonprofits.","logo":"assets/pennypay-logo.svg"}
 </script>
 </head>
 <body>
 
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="pp-mark" viewBox="0 -751 550 773"><g transform="scale(1,-1)" fill="currentColor"><path d="M20 -2 28 19Q116 18 129 63Q141 104 141 283Q141 611 120 635Q101 651 70 651Q63 651 54.0 650.0Q45 649 35 647L45 667Q76 663 179 658Q183 658 203.5 659.0Q224 660 261 663Q303 666 333 666Q432 666 478 630Q530 590 530 509Q530 446 498 396Q455 330 378 308Q356 302 332.5 298.5Q309 295 285 295Q278 295 270.5 295.5Q263 296 255 297L265 315Q311 313 355 331Q415 354 439 400Q461 438 461 484Q461 546 422 588Q382 633 314 633Q265 633 250 630Q223 626 220 603Q217 570 215.0 520.0Q213 470 213 403V259Q213 82 225 46Q233 31 285 24Q302 22 314.5 20.5Q327 19 335 19Q344 19 347 20L337 -1Q324 0 310.0 1.5Q296 3 282 4Q255 6 232.5 7.0Q210 8 192 8Q185 8 179.0 8.0Q173 8 167 7Z"/><rect x="270.4" y="157.2" width="42.3" height="573.3"/><rect x="338.2" y="157.2" width="40.3" height="573.3"/></g></symbol></svg>
+
 <header class="site-header" id="siteHeader">
   <div class="wrap nav-row">
-    <a href="#top" class="brand" aria-label="PennyPay, back to top"><span class="brand-mark" aria-hidden="true"></span>PennyPay</a>
+    <a href="#top" class="brand" aria-label="PennyPay, back to top"><svg class="logo-mark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>PennyPay</a>
     <nav class="tabs-desktop" aria-label="Page sections">
       <div class="tabbar" id="tabbarD">
         <span class="tab-ind" aria-hidden="true"></span>
@@ -459,7 +468,7 @@
           <div class="panel is-active" role="tabpanel" id="sp1" aria-labelledby="st1" aria-hidden="false">
             <div class="panel-top"><p class="panel-text">A user funds a PennyPay account.</p><span class="big-num" aria-hidden="true">01</span></div>
             <div class="viz" aria-hidden="true">
-              <div class="wallet"><div class="flex justify-between items-center"><span class="w-brand">PennyPay</span><span class="brand-mark" style="width:22px;height:22px"></span></div><div class="w-fill"><span></span></div></div>
+              <div class="wallet"><div class="flex justify-between items-center"><span class="w-brand">PennyPay</span><span class="brand-mark" style="width:22px;height:22px"><svg class="coin-mark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg></span></div><div class="w-fill"><span></span></div></div>
               <div class="stack"><i></i><i></i><i></i><i></i><i></i></div>
             </div>
           </div>
@@ -488,7 +497,7 @@
             <div class="panel-top"><p class="panel-text">Creators accumulate earnings and receive payouts after applicable service fees.</p><span class="big-num" aria-hidden="true">04</span></div>
             <div class="viz justify-between items-end" aria-hidden="true">
               <div class="bars"><i style="--h:18%;--i:0"></i><i style="--h:30%;--i:1"></i><i style="--h:26%;--i:2"></i><i style="--h:44%;--i:3"></i><i style="--h:52%;--i:4"></i><i style="--h:66%;--i:5"></i><i style="--h:80%;--i:6"></i><i style="--h:96%;--i:7"></i></div>
-              <div class="payout"><span class="line"></span><span class="brand-mark" style="width:30px;height:30px"></span></div>
+              <div class="payout"><span class="line"></span><span class="brand-mark" style="width:30px;height:30px"><svg class="coin-mark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg></span></div>
             </div>
           </div>
         </div>
@@ -533,7 +542,7 @@
           </div>
         </div>
         <div class="u-panel" role="tabpanel" id="uPanel" aria-labelledby="ut-investors">
-          <span class="p-mark" aria-hidden="true">¢</span>
+          <svg class="watermark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
           <div class="p-swap min-w-0" id="pSwapA"><h3 class="p-head" id="pHead">A new economic layer for digital engagement.</h3></div>
           <div class="p-swap flex flex-col gap-7 min-w-0" id="pSwapB">
             <p class="body-copy" id="pBody">PennyPay is building patented infrastructure for digital micropayments: a system designed to make one-cent-to-three-dollar support practical across digital platforms. The opportunity is much more than consumer tipping; it extends to creator monetization, partner integrations, nonprofit giving, and platform-level strategic value.</p>
@@ -581,6 +590,7 @@
 
   <!-- 05 PATENTS -->
   <section id="patents" data-anchor class="band-dark patents sec" aria-labelledby="patTitle">
+    <svg class="watermark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="wrap">
       <div class="pat-grid">
         <div class="flex flex-col gap-6 min-w-0">
@@ -616,6 +626,7 @@
 
   <!-- CONTACT -->
   <section id="contact" data-anchor class="band-dark final sec" aria-labelledby="finalTitle">
+    <svg class="watermark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="final-coins" aria-hidden="true">
       <i style="--x:8%;--s:22px;--d:19s;animation-delay:-3s"></i><i style="--x:22%;--s:12px;--d:15s;animation-delay:-9s"></i><i style="--x:41%;--s:30px;--d:24s;animation-delay:-14s"></i><i style="--x:63%;--s:16px;--d:17s;animation-delay:-5s"></i><i style="--x:78%;--s:26px;--d:22s;animation-delay:-18s"></i><i style="--x:91%;--s:14px;--d:16s;animation-delay:-11s"></i>
     </div>
@@ -633,7 +644,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="flex flex-col gap-4 min-w-0">
-        <a href="#top" class="brand"><span class="brand-mark" aria-hidden="true"></span>PennyPay</a>
+        <a href="#top" class="brand"><svg class="logo-mark" viewBox="0 -751 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>PennyPay</a>
         <p class="font-alex text-sm" style="color:var(--pewter)">US Patent 11,875,330 · US Patent 12,169,821</p>
       </div>
       <nav class="foot-col" aria-label="Sections">
