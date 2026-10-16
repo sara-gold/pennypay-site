@@ -109,8 +109,6 @@
   .link-ul:hover::after { transform: scaleX(1); }
 
   /* Header + anchor tabs */
-  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(13,43,26,.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: var(--offwhite); }
-  .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 70px; }
   .brand { font-family: var(--font-accent); font-size: 28px; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 10px; flex: none; }
   .brand-mark { width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 4px rgba(20,8,2,.45); position: relative; flex: none; }
   .brand-mark { display: grid; place-items: center; }
@@ -119,22 +117,39 @@
   .brand:hover .logo-mark { transform: translateY(-2px); }
   .footer .logo-mark { height: 44px; }
   .watermark { position: absolute; pointer-events: none; color: var(--penny); opacity: .09; height: auto; }
-  .tabbar { position: relative; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid var(--line-dark); }
-  .nav-tab { position: relative; z-index: 1; font-family: var(--font-ui); font-size: 14px; padding: 11px 15px; border-radius: 999px; color: rgba(242,237,228,.74); white-space: nowrap; transition: color .25s; }
-  .nav-tab:hover { color: var(--offwhite); }
-  .nav-tab[aria-current="true"] { color: var(--offwhite); }
-  .tab-ind { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: rgba(171,108,67,.9); box-shadow: inset 0 0 0 1px rgba(242,237,228,.18); opacity: 0; transition: transform .45s var(--ease), width .45s var(--ease), opacity .3s; }
-  .tabs-desktop { display: none; }
-  .nav-cta { display: none; }
-  @media (min-width: 1120px) { .tabs-desktop { display: block; } .tabs-mobile { display: none; } }
+  /* One navigation: a fixed sidebar on wide screens, a top bar below 1200px */
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(13,43,26,.96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: var(--offwhite); }
+  .sh-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand cta" "nav nav"; align-items: center; column-gap: 16px; max-width: 1240px; margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+  @media (min-width: 768px) { .sh-inner { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+  .sh-inner > .brand { grid-area: brand; min-height: 64px; justify-self: start; }
+  .nav-cta { grid-area: cta; display: none; }
   @media (min-width: 640px) { .nav-cta { display: inline-flex; } }
-  .tabs-mobile { border-top: 1px solid var(--line-dark); }
-  .tabbar-m { position: relative; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; }
-  .tabbar-m::-webkit-scrollbar { display: none; }
-  .tabbar-m .nav-tab { padding: 14px 12px 15px; border-radius: 0; }
-  .tab-ind-m { position: absolute; z-index: 0; bottom: 0; left: 0; height: 2px; width: 0; background: var(--penny-light); opacity: 0; transition: transform .45s var(--ease), width .45s var(--ease), opacity .3s; }
-  .read-progress { height: 2px; background: transparent; }
-  .read-progress span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--putney), var(--penny-light)); transform-origin: left; transform: scaleX(0); }
+  .sidenav { grid-area: nav; border-top: 1px solid var(--line-dark); min-width: 0; }
+  .tabbar { position: relative; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; }
+  .tabbar::-webkit-scrollbar { display: none; }
+  .nav-tab { position: relative; z-index: 1; display: flex; align-items: center; min-height: 48px; font-family: var(--font-ui); font-size: 14px; padding: 0 12px; color: rgba(242,237,228,.78); white-space: nowrap; transition: color .25s; }
+  .nav-tab:hover, .nav-tab[aria-current="true"] { color: var(--offwhite); }
+  .tab-ind { position: absolute; z-index: 0; left: 0; bottom: 0; width: 0; height: 2px; background: var(--penny-light); opacity: 0; transition: transform .45s var(--ease), width .45s var(--ease), height .45s var(--ease), opacity .3s; }
+  .sh-meta { display: none; }
+  .read-progress { height: 2px; }
+  .read-progress span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--putney), var(--penny-light)); transform-origin: left; transform: scaleX(var(--p, 0)); }
+
+  @media (min-width: 1200px) {
+    :root { --side-w: 252px; }
+    body { padding-left: var(--side-w); }
+    .site-header { position: fixed; top: 0; left: 0; bottom: 0; width: var(--side-w); background: var(--forest); backdrop-filter: none; -webkit-backdrop-filter: none; border-right: 1px solid var(--line-dark); }
+    .sh-inner { display: flex; flex-direction: column; height: 100%; max-width: none; margin: 0; gap: 40px; padding: calc(32px + env(safe-area-inset-top, 0px)) 24px calc(28px + env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); overflow-y: auto; }
+    .sh-inner > .brand { min-height: 0; }
+    .sidenav { border-top: 0; }
+    .tabbar { flex-direction: column; overflow: visible; gap: 4px; }
+    .nav-tab { min-height: 46px; padding: 0 16px; font-size: 15px; border-radius: 12px; }
+    .nav-tab:hover { background: rgba(242,237,228,.05); }
+    .tab-ind { left: 0; right: 0; bottom: auto; top: 0; width: auto; border-radius: 12px; background: rgba(171,108,67,.22); box-shadow: inset 3px 0 0 var(--penny-light); }
+    .nav-cta { display: inline-flex; justify-content: center; margin-top: auto; }
+    .sh-meta { display: block; font-family: var(--font-ui); font-size: 13px; line-height: 1.6; color: var(--pewter); }
+    .read-progress { position: absolute; top: 0; right: -1px; bottom: 0; width: 2px; height: auto; }
+    .read-progress span { background: linear-gradient(180deg, var(--putney), var(--penny-light)); transform-origin: top; transform: scaleY(var(--p, 0)); }
+  }
 
   /* Hero */
   .hero { position: relative; overflow: hidden; }
@@ -155,15 +170,6 @@
   @media (max-width: 1023px) { .hero-visual { max-width: 540px; margin-inline: auto; width: 100%; } }
 
   /* Jump index under hero: full browse or direct jump */
-  .jump { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line-dark); }
-  @media (min-width: 760px) { .jump { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-  .jump a:last-child { grid-column: 1 / -1; }
-  @media (min-width: 760px) { .jump a:last-child { grid-column: auto; } }
-  .jump a { display: flex; flex-direction: column; gap: 6px; padding: 18px 16px 20px 0; border-bottom: 1px solid var(--line-dark); font-family: var(--font-ui); font-size: 14px; color: rgba(242,237,228,.78); transition: color .25s, background-color .25s; }
-  @media (min-width: 760px) { .jump a { border-bottom: 0; border-right: 1px solid var(--line-dark); padding-left: 16px; } .jump a:first-child { padding-left: 0; } .jump a:last-child { border-right: 0; } }
-  .jump a .jn { font-family: var(--font-accent); font-size: 22px; color: var(--pewter); transition: color .25s, transform .35s var(--ease); display: inline-block; }
-  .jump a:hover { color: var(--offwhite); }
-  .jump a:hover .jn { color: var(--penny-light); transform: translateY(2px); }
 
   /* Reveal: content visible at rest; only position moves */
   .reveal { transition: transform .9s var(--ease); }
@@ -493,6 +499,12 @@
   .bts-svg .pop { transform-box: fill-box; transform-origin: center; }
   .bts-svg .pop.popping { animation: nodePop .6s var(--ease); }
   @keyframes nodePop { 0% { transform: scale(1); } 35% { transform: scale(1.09); } 100% { transform: scale(1); } }
+  /* With the sidebar open, size big type off the content area, not the whole window */
+  @media (min-width: 1200px) {
+    .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+    .hero h1 { font-size: clamp(46px, calc((100vw - var(--side-w)) * .056), 92px); }
+    .final h2 { font-size: clamp(40px, calc((100vw - var(--side-w)) * .06), 84px); }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -514,10 +526,10 @@
 
 <a class="skip" href="#top">Skip to content</a>
 <header class="site-header" id="siteHeader">
-  <div class="wrap nav-row">
+  <div class="sh-inner">
     <a href="#top" class="brand" aria-label="PennyPay home"><svg class="logo-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>PennyPay</a>
-    <nav class="tabs-desktop" aria-label="Page sections">
-      <div class="tabbar" id="tabbarD">
+    <nav class="sidenav" aria-label="Page sections">
+      <div class="tabbar" id="tabbar">
         <span class="tab-ind" aria-hidden="true"></span>
         <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
         <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
@@ -527,19 +539,8 @@
       </div>
     </nav>
     <a href="#contact" class="btn btn-penny btn-sm nav-cta">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
+    <p class="sh-meta">U.S. Patents 11,875,330 and 12,169,821</p>
   </div>
-  <nav class="tabs-mobile" aria-label="Page sections">
-    <div class="wrap">
-      <div class="tabbar-m" id="tabbarM">
-        <span class="tab-ind-m" aria-hidden="true"></span>
-        <a class="nav-tab" href="#how" data-sec="how">How It Works</a>
-        <a class="nav-tab" href="#technology" data-sec="technology">Technology</a>
-        <a class="nav-tab" href="#uses" data-sec="uses">Use cases</a>
-        <a class="nav-tab" href="#patents" data-sec="patents">Patents</a>
-        <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
-      </div>
-    </div>
-  </nav>
   <div class="read-progress" aria-hidden="true"><span id="readBar"></span></div>
 </header>
 
@@ -560,15 +561,6 @@
         <canvas id="flow" role="img" aria-label="Pennies moving between three phones"></canvas>
         <div class="readout" aria-hidden="true"><i class="mini-penny"></i><b id="tipCounter">0</b><span>¢</span></div>
       </div>
-    </div>
-    <div class="wrap relative">
-      <nav class="jump" aria-label="Jump to a section">
-        <a href="#how"><span class="jn">01</span>How It Works</a>
-        <a href="#technology"><span class="jn">02</span>Technology</a>
-        <a href="#uses"><span class="jn">03</span>Use cases</a>
-        <a href="#patents"><span class="jn">04</span>Patents</a>
-        <a href="#leadership"><span class="jn">05</span>Leadership</a>
-      </nav>
     </div>
   </section>
 
@@ -918,7 +910,9 @@
 
   /* ---------- Sticky header height → scroll offset ---------- */
   var header = $('#siteHeader');
-  function setNavH() { document.documentElement.style.setProperty('--nav-h', header.offsetHeight + 'px'); }
+  var sideMQ = window.matchMedia('(min-width: 1200px)');
+  function navH() { return sideMQ.matches ? 0 : header.offsetHeight; }
+  function setNavH() { document.documentElement.style.setProperty('--nav-h', navH() + 'px'); }
   setNavH(); window.addEventListener('resize', setNavH);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setNavH);
 
@@ -926,34 +920,36 @@
   var secIds = ['how', 'technology', 'uses', 'opportunity', 'patents', 'leadership'];
   var secs = secIds.map(function (id) { return document.getElementById(id); });
   var contact = $('#contact');
-  var tabsD = $$('#tabbarD .nav-tab'), tabsM = $$('#tabbarM .nav-tab');
-  var indD = $('#tabbarD .tab-ind'), indM = $('#tabbarM .tab-ind-m'), barM = $('#tabbarM');
+  var navTabs = $$('#tabbar .nav-tab'), ind = $('#tabbar .tab-ind'), bar = $('#tabbar');
   var active = null, readBar = $('#readBar'), toTop = $('#toTop');
 
-  function placeInd(ind, tab, offset) {
+  function placeInd(tab) {
     if (!tab) { ind.style.opacity = '0'; return; }
-    ind.style.opacity = '1'; ind.style.width = tab.offsetWidth + 'px'; ind.style.transform = 'translateX(' + (tab.offsetLeft - (offset || 0)) + 'px)';
+    ind.style.opacity = '1';
+    if (sideMQ.matches) { ind.style.width = ''; ind.style.height = tab.offsetHeight + 'px'; ind.style.transform = 'translateY(' + tab.offsetTop + 'px)'; }
+    else { ind.style.height = ''; ind.style.width = tab.offsetWidth + 'px'; ind.style.transform = 'translateX(' + tab.offsetLeft + 'px)'; }
   }
   function setActive(id) {
     if (id === active) return; active = id;
-    [tabsD, tabsM].forEach(function (list) { list.forEach(function (t) { if (t.dataset.sec === id) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); }); });
-    var td = tabsD.filter(function (t) { return t.dataset.sec === id; })[0];
-    var tm = tabsM.filter(function (t) { return t.dataset.sec === id; })[0];
-    placeInd(indD, td); placeInd(indM, tm);
-    if (tm && barM.scrollWidth > barM.clientWidth) { barM.scrollTo({ left: tm.offsetLeft - barM.clientWidth / 2 + tm.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' }); }
+    navTabs.forEach(function (t) { if (t.dataset.sec === id) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+    var tab = navTabs.filter(function (t) { return t.dataset.sec === id; })[0];
+    placeInd(tab);
+    if (tab && !sideMQ.matches && bar.scrollWidth > bar.clientWidth) { bar.scrollTo({ left: tab.offsetLeft - bar.clientWidth / 2 + tab.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' }); }
   }
   function spy() {
-    var line = header.offsetHeight + window.innerHeight * 0.3, id = null;
+    var line = navH() + window.innerHeight * 0.3, id = null;
     secs.forEach(function (s) { if (s.getBoundingClientRect().top <= line) id = s.id; });
     if (contact.getBoundingClientRect().top <= line) id = null;
     setActive(id);
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    readBar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+    readBar.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max) : 0);
     toTop.classList.toggle('show', window.scrollY > window.innerHeight);
   }
   var ticking = false;
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; spy(); }); } }, { passive: true });
-  window.addEventListener('resize', function () { var a = active; active = null; setActive(a); });
+  function replace() { setNavH(); var a = active; active = null; setActive(a); }
+  window.addEventListener('resize', replace);
+  if (sideMQ.addEventListener) sideMQ.addEventListener('change', replace);
   spy();
 
   // In-page links: smooth-scroll, add a history entry, and move keyboard focus to the target.
