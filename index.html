@@ -26,27 +26,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600&family=Gideon+Roman&family=Inter:wght@400;600;800&display=swap">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          offwhite: '#F2EDE4',
-          pewter: '#9BB89E',
-          putney: '#4E8060',
-          penny: '#AB6C43',
-          forest: '#0D2B1A'
-        },
-        fontFamily: {
-          inter: ['Inter', 'system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
-          alex: ['Alexandria', 'Inter', 'system-ui', 'sans-serif'],
-          gideon: ['"Gideon Roman"', 'Georgia', '"Times New Roman"', 'serif']
-        }
-      }
-    }
-  };
-</script>
 <style>
   /* Layout concept: one continuous scroll. A forest-green "vault" hero with a live penny-flow canvas, then
      ledger-paper and forest bands ruled by 1px lines; sticky anchor tabs track where you are. */
@@ -519,6 +498,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
 </script>
+<!-- Compiled Tailwind utilities. Kept last in <head> to match the cascade order the Play CDN used. Rebuild: see README. -->
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
