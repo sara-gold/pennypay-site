@@ -363,6 +363,68 @@
   .to-top.show { transform: none; }
   .to-top:hover { background: var(--penny); }
 
+  /* Behind the screens: animated walkthrough */
+  .bts { margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--line); }
+  .bts-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; }
+  .bts-head h3 { font-weight: 600; font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -.035em; line-height: 1.05; text-wrap: balance; }
+  .bts-ctrls { display: flex; gap: 8px; }
+  .bts-ctrl { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); color: var(--forest); background: var(--paper); transition: background-color .2s, color .2s, transform .15s; }
+  .bts-ctrl:hover { background: var(--forest); color: var(--offwhite); }
+  .bts-ctrl:active { transform: scale(.94); }
+  .bts-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin-top: 32px; }
+  @media (min-width: 860px) { .bts-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .bts-tab { position: relative; text-align: left; padding: 16px 0 18px; border-top: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; cursor: pointer; }
+  .bts-tab .n { font-family: var(--font-accent); font-size: 22px; color: var(--pewter); transition: color .3s; }
+  .bts-tab .t { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: rgba(13,43,26,.55); transition: color .3s; }
+  .bts-tab:hover .t { color: var(--forest); }
+  .bts-tab[aria-selected="true"] .n { color: var(--penny); }
+  .bts-tab[aria-selected="true"] .t { color: var(--forest); }
+  .bts-tab .pb { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--penny); transform: scaleX(0); transform-origin: left; }
+  .bts-tab.done .pb { transform: scaleX(1); opacity: .35; }
+  .bts-tab[aria-selected="true"] .pb { transform: scaleX(1); opacity: 1; }
+  .bts-tab.running .pb { animation: fill var(--d, 8s) linear forwards; }
+  .bts-stage { position: relative; margin-top: 8px; border-radius: 22px; background: var(--forest); color: var(--offwhite); overflow: hidden; border: 1px solid var(--line); }
+  .bts-stage::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(155,184,158,.05) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(155,184,158,.05) 0 1px, transparent 1px 40px); pointer-events: none; }
+  .bts-cap { position: relative; display: grid; gap: 10px 28px; padding: 28px 28px 0; }
+  @media (min-width: 900px) { .bts-cap { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); padding: 40px 44px 0; } }
+  .bts-cap h4 { font-weight: 600; font-size: clamp(20px, 2vw, 26px); letter-spacing: -.025em; line-height: 1.2; display: flex; gap: 12px; align-items: baseline; }
+  .bts-cap h4 .n { font-family: var(--font-accent); font-weight: 400; color: var(--penny-light); }
+  .bts-cap p { font-family: var(--font-ui); font-size: 15px; line-height: 1.65; color: rgba(242,237,228,.78); max-width: 72ch; transition: opacity .35s; }
+  .bts-scroll { position: relative; overflow-x: auto; padding: 8px 12px 20px; }
+  .bts-svg svg { display: block; width: 100%; min-width: 760px; height: auto; }
+  .bts-hint { position: relative; display: none; font-family: var(--font-ui); font-size: 12px; color: var(--pewter); padding: 0 28px 18px; }
+  @media (max-width: 800px) { .bts-hint { display: block; } }
+
+  .bts-svg .wire { fill: none; stroke: rgba(155,184,158,.32); stroke-width: 1.4; }
+  .bts-svg .flow { fill: none; stroke: #C98A5E; stroke-width: 2.2; stroke-linecap: round; }
+  .bts-svg .nf { fill: #143826; stroke: rgba(155,184,158,.55); stroke-width: 1.2; transition: fill .4s, stroke .4s; }
+  .bts-svg .nf2 { fill: #1B4430; stroke: rgba(155,184,158,.45); stroke-width: 1; }
+  .bts-svg .dot { fill: #9BB89E; }
+  .bts-svg .coinc { fill: none; stroke: rgba(201,138,94,.7); stroke-width: 1.4; }
+  .bts-svg .btc { fill: #C98A5E; font: 600 15px 'Inter', system-ui, sans-serif; }
+  .bts-svg .lbl { fill: #9BB89E; font: 600 11.5px 'Alexandria', 'Inter', sans-serif; letter-spacing: .1em; }
+  .bts-svg .amt { fill: #F2EDE4; font: 19px 'Gideon Roman', Georgia, serif; font-variant-numeric: tabular-nums; }
+  .bts-svg .init { fill: #F2EDE4; font: 26px 'Gideon Roman', Georgia, serif; }
+  .bts-svg .wl { fill: #F2EDE4; font: 13px 'Alexandria', 'Inter', sans-serif; opacity: .85; }
+  .bts-svg .big { fill: #C98A5E; font: 30px 'Gideon Roman', Georgia, serif; }
+  .bts-svg .boxl { fill: #F2EDE4; font: 600 13px 'Alexandria', 'Inter', sans-serif; }
+  .bts-svg .chan { fill: rgba(171,108,67,.07); stroke: #C98A5E; stroke-width: 1.4; stroke-dasharray: 10 6; }
+  .bts-svg .box2 { fill: rgba(155,184,158,.04); stroke: rgba(155,184,158,.5); stroke-width: 1.2; stroke-dasharray: 12 5 2 5; }
+  .bts-svg .box3 { fill: #143826; stroke: rgba(155,184,158,.55); stroke-width: 1.2; stroke-dasharray: 6 4; transition: fill .4s, stroke .4s; }
+  .bts-svg .chip { fill: #AB6C43; stroke: rgba(242,237,228,.35); stroke-width: 1; }
+  .bts-svg .chipt { fill: #F2EDE4; font: 600 12.5px 'Alexandria', 'Inter', sans-serif; }
+  .bts-svg .rcpt { fill: #F2EDE4; font: 600 15px 'Inter', system-ui, sans-serif; opacity: .45; transition: opacity .5s; }
+  .bts-svg .pct { fill: #9BB89E; font: 15px 'Gideon Roman', Georgia, serif; }
+  .bts-svg .hot .nf, .bts-svg .hot .box3 { fill: #1F5236; stroke: #C98A5E; }
+  .bts-svg .hot .coinc { stroke: #E7B289; }
+  .bts-svg .shown.rcpt, .bts-svg .shown .rcpt { opacity: 1; }
+  .bts-svg .mini { opacity: .18; transition: opacity .5s; }
+  .bts-svg .mini.shown { opacity: 1; }
+  .bts-svg .note { opacity: 0; transition: opacity .4s; }
+  .bts-svg .note.shown { opacity: 1; }
+  .bts-svg .pop { transform-box: fill-box; transform-origin: center; }
+  .bts-svg .pop.popping { animation: nodePop .6s var(--ease); }
+  @keyframes nodePop { 0% { transform: scale(1); } 35% { transform: scale(1.09); } 100% { transform: scale(1); } }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -504,6 +566,28 @@
               <div class="payout"><span class="line"></span><span class="brand-mark" style="width:30px;height:30px"><svg class="coin-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg></span></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Behind the screens: animated walkthrough -->
+      <div class="bts" id="bts">
+        <div class="bts-head">
+          <div class="flex flex-col gap-4 min-w-0">
+            <span class="eyebrow">Behind the screens</span>
+            <h3>PennyPay Micropayments Solution</h3>
+          </div>
+          <div class="bts-ctrls">
+            <button type="button" class="bts-ctrl" id="btsPrev" aria-label="Previous scene"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <button type="button" class="bts-ctrl" id="btsPlay" aria-label="Pause"><svg id="btsPlayIcon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2"/></svg></button>
+            <button type="button" class="bts-ctrl" id="btsReplay" aria-label="Replay scene"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.6-3.7M3 2v3h3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <button type="button" class="bts-ctrl" id="btsNext" aria-label="Next scene"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          </div>
+        </div>
+        <div class="bts-tabs" role="tablist" aria-label="Behind the screens scenes" id="btsTabs"></div>
+        <div class="bts-stage" role="tabpanel" id="btsPanel" aria-live="polite">
+          <div class="bts-cap"><h4 id="btsTitle"></h4><p id="btsCap"></p></div>
+          <div class="bts-scroll"><div class="bts-svg" id="btsSvg"></div></div>
+          <p class="bts-hint">Swipe sideways to see the whole diagram.</p>
         </div>
       </div>
     </div>
@@ -1012,6 +1096,275 @@
     try { localStorage.setItem('pp-seo', JSON.stringify(on)); } catch (e) {}
   }
   updateChecks();
+
+  /* ---------- Behind the screens: animated walkthrough ---------- */
+  (function behindTheScreens() {
+    var host = document.getElementById('btsSvg'); if (!host) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var m = getComputedStyle(document.documentElement).getPropertyValue('--penny-front').match(/url\(["']?([^"')]+)["']?\)/);
+    var PENNY = m ? m[1] : '';
+    var usd = function (v) { return '$' + v.toFixed(2); };
+    var ease = function (k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
+
+    /* --- drawing helpers (SVG strings) --- */
+    function wallet(id, x, y, amt, label) {
+      return '<g id="' + id + '" transform="translate(' + x + ' ' + y + ')"><g class="pop">' +
+        (label ? '<text class="lbl" y="-40" text-anchor="middle">' + label + '</text>' : '') +
+        '<rect x="-42" y="-29" width="84" height="58" rx="11" class="nf"/>' +
+        '<rect x="16" y="-12" width="26" height="24" rx="7" class="nf2"/><circle cx="29" cy="0" r="3.5" class="dot"/>' +
+        '<circle cx="-11" cy="0" r="15" class="coinc"/><text class="btc" x="-11" y="5.5" text-anchor="middle">₿</text>' +
+        '</g>' + (amt != null ? '<text class="amt" id="' + id + '-amt" y="52" text-anchor="middle">' + amt + '</text>' : '') + '</g>';
+    }
+    function bank(id, x, y) {
+      return '<g id="' + id + '" transform="translate(' + x + ' ' + y + ')"><g class="pop">' +
+        '<path d="M-32 -12 L0 -32 L32 -12 Z" class="nf"/>' +
+        '<rect x="-27" y="-8" width="8" height="28" class="nf"/><rect x="-12" y="-8" width="8" height="28" class="nf"/><rect x="4" y="-8" width="8" height="28" class="nf"/><rect x="19" y="-8" width="8" height="28" class="nf"/>' +
+        '<rect x="-32" y="22" width="64" height="8" rx="2" class="nf"/></g></g>';
+    }
+    function person(id, x, y, init, name) {
+      return '<g id="' + id + '" transform="translate(' + x + ' ' + y + ')"><g class="pop"><circle r="30" class="nf"/><text class="init" y="9" text-anchor="middle">' + init + '</text></g>' +
+        '<text class="lbl" y="50" text-anchor="middle">' + name + '</text></g>';
+    }
+    function wire(id, d, end) { return '<path id="' + id + '" d="' + d + '" class="wire"' + (end === false ? '' : ' marker-end="url(#ah)"') + '/>'; }
+    function text(x, y, cls, s, anchor) { return '<text x="' + x + '" y="' + y + '" class="' + cls + '" text-anchor="' + (anchor || 'middle') + '">' + s + '</text>'; }
+    function frame(wires, nodes) {
+      return '<svg viewBox="0 0 1000 450" role="img" aria-hidden="true">' +
+        '<defs><marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="rgba(155,184,158,.6)"/></marker></defs>' +
+        '<g>' + wires + '</g><g id="flows"></g><g>' + nodes + '</g><g id="tokens"></g></svg>';
+    }
+
+    /* --- the four scenes from the deck --- */
+    var scenes = [
+      {
+        title: 'Funding an account', dur: 8200,
+        cap: 'When Alice funds her PennyPay account, the $10 from Alice’s credit card transaction is converted into bitcoin and held in a PennyPay managed bitcoin wallet associated with Alice’s PennyPay account.',
+        svg: function () {
+          var card = '<g id="card" transform="translate(150 150)"><g class="pop"><rect x="-64" y="-40" width="128" height="80" rx="11" class="nf"/>' +
+            '<rect x="-48" y="-16" width="24" height="18" rx="4" fill="#C98A5E" opacity=".75"/><rect x="-48" y="14" width="70" height="5" rx="2.5" fill="rgba(155,184,158,.4)"/><rect x="-48" y="24" width="40" height="5" rx="2.5" fill="rgba(155,184,158,.25)"/>' +
+            '<circle cx="36" cy="-20" r="9" fill="rgba(201,138,94,.55)"/><circle cx="48" cy="-20" r="9" fill="rgba(155,184,158,.45)"/></g><text class="lbl" y="-54" text-anchor="middle">ALICE’S CREDIT CARD</text></g>';
+          var phone = '<g id="phone" transform="translate(860 150)"><g class="pop"><rect x="-56" y="-100" width="112" height="200" rx="18" class="nf"/>' +
+            '<rect x="-16" y="-90" width="32" height="6" rx="3" fill="rgba(155,184,158,.35)"/>' +
+            '<text y="-56" text-anchor="middle" class="amt" style="font-size:17px;fill:#C98A5E">PennyPay</text>' +
+            '<image class="mini" id="mn1" href="' + PENNY + '" x="-37" y="-40" width="22" height="22"/><image class="mini" id="mn2" href="' + PENNY + '" x="-11" y="-40" width="22" height="22"/><image class="mini" id="mn3" href="' + PENNY + '" x="15" y="-40" width="22" height="22"/>' +
+            '<text id="bal" y="18" text-anchor="middle" class="amt" style="font-size:28px">$0.00</text>' +
+            '<text y="44" text-anchor="middle" class="lbl" style="font-size:10px">ALICE’S ACCOUNT</text></g></g>';
+          var wires = wire('w1', 'M216 150 C 420 108, 620 108, 802 148') + wire('w2', 'M150 192 V 360 H 296') + wire('w3', 'M364 360 H 566') + wire('w4', 'M656 360 H 860 V 254');
+          var nodes = card + phone + bank('bank', 330, 360) + wallet('wal', 612, 360, null, 'BITCOIN WALLET') +
+            text(509, 106, 'wl', '$10 credit card transaction') + text(330, 412, 'lbl', 'BANK') + text(465, 348, 'wl', 'USD → BTC') + text(612, 412, 'lbl', 'MANAGED BY PENNYPAY');
+          return frame(wires, nodes);
+        },
+        play: async function (o) {
+          o.hot('card'); o.pop('card');
+          await o.travel('w1', 'chip', '$10.00', 1500); o.pop('phone');
+          await o.wait(250);
+          await o.travel('w2', 'chip', '$10', 1100); o.hot('bank'); o.pop('bank');
+          await o.wait(250);
+          await o.travel('w3', 'penny', '', 1200); o.hot('wal'); o.pop('wal');
+          await o.wait(250);
+          await o.travel('w4', 'penny', '', 1200); o.hot('phone'); o.pop('phone');
+          o.show('mn1'); await o.wait(140); o.show('mn2'); await o.wait(140); o.show('mn3');
+          await o.count('bal', 0, 10, 1100, usd);
+        }
+      },
+      {
+        title: 'Tipping through a channel', dur: 10400,
+        cap: 'At the time Bob registers to receive PennyPay tips, PennyPay creates a unique PennyPay Bitcoin Lightning Network Channel (“PBLNC”) for Bob. Bob has one PBLNC for each website he registers to receive tips through. When Alice tips Bob, a new wallet is created for Alice within the appropriate PBLNC and the wallet is funded with an amount calculated based on Alice’s tip amount (e.g., tip amount × 50). Each time Alice tips Bob through the same website, the tip is sent through the corresponding PBLNC.',
+        svg: function () {
+          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PENNYPAY BITCOIN LIGHTNING NETWORK CHANNEL (“PBLNC”) · BOB / WEBSITE A');
+          var bp = '<g id="bp" transform="translate(895 320)"><g class="pop"><rect x="-27" y="-46" width="54" height="92" rx="11" class="nf"/><rect x="-8" y="-39" width="16" height="4" rx="2" fill="rgba(155,184,158,.35)"/>' +
+            '<text id="bpn" class="note amt" y="8" text-anchor="middle" style="font-size:17px;fill:#E7B289">+2¢</text></g></g>';
+          var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M90 262 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
+          var nodes = chan + person('alice', 200, 80, 'A', 'ALICE') + person('bob', 800, 80, 'B', 'BOB') +
+            wallet('aw', 90, 230, '$10.00', 'ALICE’S WALLET') + wallet('ca', 360, 320, '$0.00', 'ALICE') + wallet('cb', 640, 320, '$0.00', 'BOB') + bp +
+            text(500, 66, 'big', '2¢') + text(500, 306, 'big', '2¢') + text(196, 308, 'wl', '$1.00');
+          return frame(wires, nodes);
+        },
+        play: async function (o) {
+          o.hot('alice'); o.pop('alice');
+          await Promise.all([o.travel('f1', 'chip', '$1.00', 1300), o.count('aw-amt', 10, 9, 1300, usd)]);
+          o.hot('ca'); o.pop('ca'); await o.count('ca-amt', 0, 1, 600, usd);
+          await o.wait(300);
+          await o.travel('t1', 'penny', '', 1300); o.pop('bob');
+          await Promise.all([o.travel('t2', 'penny', '', 1300), o.count('ca-amt', 1, .98, 1300, usd)]);
+          o.hot('cb'); o.pop('cb'); await o.count('cb-amt', 0, .02, 600, usd);
+          await o.travel('n1', 'chip', '+2¢', 950); o.hot('bp'); o.show('bpn'); o.pop('bp');
+          await o.travel('n2', 'penny', '', 850); o.hot('bob'); o.pop('bob');
+        }
+      },
+      {
+        title: 'Closing and payout', dur: 9400,
+        cap: 'At the end of every closing period (e.g., monthly) all tips received by Bob through various websites are sent from the corresponding PBLNCs to a clearing account. From there, the BTC is distributed to Bob, the website hosts, and PennyPay, according to agreed distribution percentages.',
+        svg: function () {
+          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', '“PBLNC” · BOB / WEBSITE A') +
+            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', '“PBLNC” · BOB / WEBSITE B');
+          var wires = wire('pa', 'M180 128 H 300 V 216 H 354') + wire('pb', 'M180 328 H 300 V 244 H 354') +
+            wire('x1', 'M444 230 H 500 V 90 H 554') + wire('x2', 'M444 230 H 554') + wire('x3', 'M444 230 H 500 V 370 H 554') +
+            wire('y1', 'M646 90 H 786') + wire('y2', 'M646 230 H 786') + wire('y3', 'M646 370 H 786');
+          var nodes = boxes + wallet('wa', 135, 128, '$50.00', 'BOB') + wallet('wb', 135, 328, '$50.00', 'BOB') +
+            wallet('cl', 400, 230, '$0.00', 'BOB · CLEARING') +
+            wallet('s1', 600, 90, '$0.00') + wallet('s2', 600, 230, '$0.00') + wallet('s3', 600, 370, '$0.00') +
+            bank('b1', 820, 90) + bank('b2', 820, 230) + bank('b3', 820, 370) +
+            text(716, 78, 'wl', 'FX · BTC → USD') + text(716, 218, 'wl', 'FX · BTC → USD') + text(716, 358, 'wl', 'FX · BTC → USD') +
+            '<g id="r1" class="rcpt-g">' + text(866, 88, 'rcpt', 'Bob', 'start') + text(866, 110, 'pct', '80%', 'start') + '</g>' +
+            '<g id="r2" class="rcpt-g">' + text(866, 228, 'rcpt', 'Website hosts', 'start') + text(866, 250, 'pct', '10%', 'start') + '</g>' +
+            '<g id="r3" class="rcpt-g">' + text(866, 368, 'rcpt', 'PennyPay', 'start') + text(866, 390, 'pct', '10%', 'start') + '</g>';
+          return frame(wires, nodes);
+        },
+        play: async function (o) {
+          o.hot('wa'); o.hot('wb');
+          await Promise.all([o.travel('pa', 'penny', '', 1400), o.travel('pb', 'penny', '', 1400),
+            o.count('wa-amt', 50, 0, 1400, usd), o.count('wb-amt', 50, 0, 1400, usd), o.count('cl-amt', 0, 100, 1400, usd)]);
+          o.hot('cl'); o.pop('cl');
+          await o.wait(400);
+          await Promise.all([o.travel('x1', 'chip', '$80.00', 1300), o.travel('x2', 'chip', '$10.00', 1300), o.travel('x3', 'chip', '$10.00', 1300), o.count('cl-amt', 100, 0, 1300, usd)]);
+          ['s1', 's2', 's3'].forEach(function (id) { o.hot(id); o.pop(id); });
+          await Promise.all([o.count('s1-amt', 0, 80, 600, usd), o.count('s2-amt', 0, 10, 600, usd), o.count('s3-amt', 0, 10, 600, usd)]);
+          await o.wait(250);
+          await Promise.all([o.travel('y1', 'chip', '$80 USD', 1300), o.travel('y2', 'chip', '$10 USD', 1300), o.travel('y3', 'chip', '$10 USD', 1300)]);
+          ['b1', 'b2', 'b3'].forEach(function (id) { o.hot(id); o.pop(id); });
+          ['r1', 'r2', 'r3'].forEach(function (id) { o.show(id); });
+        }
+      },
+      {
+        title: 'The platform behind it', dur: 12600,
+        cap: 'This is all accomplished through PennyPay proprietary application software that is integrated into websites registered to facilitate PennyPay tips, and the PennyPay proprietary technology interface platform, which sends and receives data to link actions taken by PennyPay users with corresponding wallets hosted by PennyPay on the Bitcoin Lightning Network.',
+        svg: function () {
+          var web = '<rect x="180" y="28" width="640" height="122" rx="14" class="box2"/>' + text(500, 52, 'lbl', 'WEB CONTENT PROVIDER WEBSITE');
+          var app = '<g id="app"><g class="pop"><rect x="360" y="70" width="280" height="46" rx="10" class="box3"/>' + text(500, 98, 'boxl', 'PennyPay Application Software') + '</g></g>';
+          var plat = '<g id="plat"><g class="pop"><rect x="360" y="190" width="280" height="46" rx="10" class="box3"/>' + text(500, 218, 'boxl', 'PennyPay Tech Interface Platform') + '</g></g>';
+          var chan = '<rect x="336" y="300" width="328" height="104" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PENNYPAY BITCOIN LIGHTNING NETWORK CHANNEL');
+          var wires = wire('top1', 'M128 93 H 358') + wire('top2', 'M642 93 H 870') +
+            wire('v1', 'M430 117 V 188') + wire('v3', 'M430 237 V 318') + wire('v4', 'M570 318 V 238') + wire('v2', 'M570 188 V 118') +
+            wire('a0', 'M90 156 V 316') + wire('e1', 'M124 352 H 171') + wire('e2', 'M259 352 H 386') + wire('lt', 'M474 352 H 526') +
+            wire('e3', 'M614 352 H 741') + wire('e4', 'M829 352 H 876') + wire('e5', 'M910 316 V 158');
+          var nodes = web + app + plat + chan + person('alice', 90, 95, 'A', 'ALICE') + person('bob', 910, 95, 'B', 'BOB') +
+            bank('bl', 90, 352) + wallet('wl', 215, 352) + wallet('la', 430, 352) + wallet('lb', 570, 352) + text(430, 397, 'lbl', 'ALICE') + text(570, 397, 'lbl', 'BOB') + wallet('wr', 785, 352) + bank('br', 910, 352) +
+            text(244, 82, 'wl', '2¢') + text(756, 82, 'wl', '2¢');
+          return frame(wires, nodes);
+        },
+        play: async function (o) {
+          o.hot('alice'); o.pop('alice');
+          await o.travel('a0', 'chip', '$10', 800); o.hot('bl'); o.pop('bl');
+          await o.travel('e1', 'penny', '', 550); o.hot('wl'); o.pop('wl');
+          await o.travel('e2', 'penny', '', 800); o.hot('la'); o.pop('la');
+          await o.wait(250);
+          await o.travel('top1', 'penny', '', 950); o.hot('app'); o.pop('app');
+          await o.travel('v1', 'chip', 'data', 650); o.hot('plat'); o.pop('plat');
+          await o.travel('v3', 'chip', 'data', 650);
+          await o.travel('lt', 'penny', '', 700); o.hot('lb'); o.pop('lb');
+          await o.travel('v4', 'chip', 'data', 650); o.pop('plat');
+          await o.travel('v2', 'chip', 'data', 650); o.pop('app');
+          await o.travel('top2', 'penny', '', 950); o.hot('bob'); o.pop('bob');
+          await o.wait(300);
+          await o.travel('e3', 'penny', '', 700); o.hot('wr'); o.pop('wr');
+          await o.travel('e4', 'chip', '$', 500); o.hot('br'); o.pop('br');
+          await o.travel('e5', 'chip', '$', 800); o.pop('bob');
+        }
+      }
+    ];
+
+    /* --- player --- */
+    var tabsEl = document.getElementById('btsTabs');
+    var titleEl = document.getElementById('btsTitle'), capEl = document.getElementById('btsCap');
+    var run = 0, cur = 0, playing = !reduce, inView = false, advanceT = null;
+    scenes.forEach(function (s, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'bts-tab'; b.setAttribute('role', 'tab'); b.id = 'btsTab' + i;
+      b.setAttribute('aria-controls', 'btsPanel'); b.setAttribute('aria-selected', 'false'); b.tabIndex = -1;
+      b.innerHTML = '<span class="pb" aria-hidden="true"></span><span class="n">0' + (i + 1) + '</span><span class="t"></span>';
+      b.querySelector('.t').textContent = s.title;
+      b.addEventListener('click', function () { go(i, true); });
+      b.addEventListener('keydown', function (e) { var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (d) { e.preventDefault(); go(cur + d, true); tabsEl.children[cur].focus(); } });
+      tabsEl.appendChild(b);
+    });
+
+    function ops(rid, root, instant) {
+      var stale = function () { return rid !== run; };
+      var q = function (id) { return root.querySelector('#' + id); };
+      function tween(dur, fn) {
+        return new Promise(function (res) {
+          if (stale()) return res();
+          if (reduce || instant || !dur) { fn(1); return res(); }
+          var s0 = performance.now();
+          (function f(now) { if (stale()) return res(); var k = Math.min(1, (now - s0) / dur); fn(k); if (k < 1) requestAnimationFrame(f); else res(); })(s0);
+        });
+      }
+      function wait(ms) { return new Promise(function (r) { setTimeout(r, (reduce || instant || stale()) ? 0 : ms); }); }
+      function token(kind, label) {
+        var g = document.createElementNS(NS, 'g'); q('tokens').appendChild(g);
+        if (kind === 'penny') {
+          var im = document.createElementNS(NS, 'image'); im.setAttribute('href', PENNY); im.setAttribute('x', -15); im.setAttribute('y', -15); im.setAttribute('width', 30); im.setAttribute('height', 30); g.appendChild(im);
+        } else {
+          var w = label.length * 8 + 26, r = document.createElementNS(NS, 'rect');
+          r.setAttribute('x', -w / 2); r.setAttribute('y', -14); r.setAttribute('width', w); r.setAttribute('height', 28); r.setAttribute('rx', 14); r.setAttribute('class', 'chip'); g.appendChild(r);
+          var t = document.createElementNS(NS, 'text'); t.setAttribute('y', 4.5); t.setAttribute('text-anchor', 'middle'); t.setAttribute('class', 'chipt'); t.textContent = label; g.appendChild(t);
+        }
+        return g;
+      }
+      function travel(pid, kind, label, dur) {
+        var p = q(pid); if (!p || stale()) return Promise.resolve();
+        var L = p.getTotalLength(), fl = p.cloneNode(false);
+        fl.removeAttribute('id'); fl.removeAttribute('marker-end'); fl.setAttribute('class', 'flow');
+        fl.style.strokeDasharray = L; fl.style.strokeDashoffset = L; q('flows').appendChild(fl);
+        var tk = token(kind, label);
+        return tween(dur, function (k) {
+          var e = ease(k), pt = p.getPointAtLength(L * e);
+          tk.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')' + (kind === 'penny' ? ' scale(' + Math.max(.12, Math.abs(Math.cos(e * Math.PI * 4))).toFixed(3) + ' 1)' : ''));
+          fl.style.strokeDashoffset = L * (1 - e);
+        }).then(function () { tk.remove(); });
+      }
+      function count(id, from, to, dur, fmt) { var el = q(id); if (!el) return Promise.resolve(); return tween(dur, function (k) { el.textContent = fmt(from + (to - from) * ease(k)); }); }
+      function hot(id) { var n = q(id); if (n && !stale()) n.classList.add('hot'); }
+      function pop(id) { var n = q(id); if (!n || stale() || reduce) return; var p = n.querySelector('.pop'); if (!p) return; p.classList.remove('popping'); requestAnimationFrame(function () { p.classList.add('popping'); }); }
+      function show(id) { var n = q(id); if (n && !stale()) n.classList.add('shown'); }
+      return { travel: travel, count: count, hot: hot, pop: pop, show: show, wait: wait };
+    }
+
+    function render(i) {
+      var s = scenes[i];
+      host.innerHTML = s.svg();
+      titleEl.innerHTML = '<span class="n">0' + (i + 1) + '</span><span></span>'; titleEl.lastChild.textContent = s.title;
+      capEl.textContent = s.cap;
+      Array.prototype.forEach.call(tabsEl.children, function (t, k) {
+        t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1;
+        t.classList.toggle('done', k < i); t.classList.remove('running');
+      });
+      document.getElementById('btsPanel').setAttribute('aria-labelledby', 'btsTab' + i);
+    }
+    function go(i, user) {
+      clearTimeout(advanceT);
+      cur = (i + scenes.length) % scenes.length; run++;
+      var rid = run, s = scenes[cur];
+      render(cur);
+      var tab = tabsEl.children[cur];
+      if (playing && !reduce) { tab.style.setProperty('--d', (s.dur + 1600) + 'ms'); void tab.offsetWidth; tab.classList.add('running'); }
+      s.play(ops(rid, host)).then(function () {
+        if (rid !== run) return;
+        if (playing && inView && !reduce) advanceT = setTimeout(function () { if (rid === run) go(cur + 1); }, 1600);
+      });
+    }
+    function setPlaying(p) {
+      playing = p;
+      var btn = document.getElementById('btsPlay'), icon = document.getElementById('btsPlayIcon');
+      btn.setAttribute('aria-label', p ? 'Pause' : 'Play');
+      icon.innerHTML = p ? '<path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2"/>' : '<path d="M4 2l8 5-8 5z" fill="currentColor"/>';
+      if (p) go(cur); else { clearTimeout(advanceT); tabsEl.children[cur].classList.remove('running'); }
+    }
+    document.getElementById('btsPrev').addEventListener('click', function () { go(cur - 1, true); });
+    document.getElementById('btsNext').addEventListener('click', function () { go(cur + 1, true); });
+    document.getElementById('btsReplay').addEventListener('click', function () { go(cur, true); });
+    document.getElementById('btsPlay').addEventListener('click', function () { setPlaying(!playing); });
+    if (reduce) { setPlaying(false); }
+
+    // Show the first scene's finished state at rest; start playing when it scrolls into view
+    render(0); scenes[0].play(ops(++run, host, true));
+    if ('IntersectionObserver' in window && !reduce) {
+      new IntersectionObserver(function (en) {
+        var was = inView; inView = en[0].isIntersecting;
+        if (inView && !was && playing) go(cur);
+        if (!inView) { clearTimeout(advanceT); }
+      }, { threshold: .35 }).observe(document.getElementById('bts'));
+    }
+  })();
 
   /* ---------- Scroll reveals (position only) ---------- */
   if ('IntersectionObserver' in window && !reduce) {
