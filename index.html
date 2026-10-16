@@ -6,31 +6,26 @@
 <title>PennyPay | Patented Micropayment Platform for Digital Content</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%20-751%20550%20773%22%3E%3Cg%20transform%3D%22scale%281%2C-1%29%22%20fill%3D%22%23AB6C43%22%3E%3Cpath%20d%3D%22M20%20-2%2028%2019Q116%2018%20129%2063Q141%20104%20141%20283Q141%20611%20120%20635Q101%20651%2070%20651Q63%20651%2054.0%20650.0Q45%20649%2035%20647L45%20667Q76%20663%20179%20658Q183%20658%20203.5%20659.0Q224%20660%20261%20663Q303%20666%20333%20666Q432%20666%20478%20630Q530%20590%20530%20509Q530%20446%20498%20396Q455%20330%20378%20308Q356%20302%20332.5%20298.5Q309%20295%20285%20295Q278%20295%20270.5%20295.5Q263%20296%20255%20297L265%20315Q311%20313%20355%20331Q415%20354%20439%20400Q461%20438%20461%20484Q461%20546%20422%20588Q382%20633%20314%20633Q265%20633%20250%20630Q223%20626%20220%20603Q217%20570%20215.0%20520.0Q213%20470%20213%20403V259Q213%2082%20225%2046Q233%2031%20285%2024Q302%2022%20314.5%2020.5Q327%2019%20335%2019Q344%2019%20347%2020L337%20-1Q324%200%20310.0%201.5Q296%203%20282%204Q255%206%20232.5%207.0Q210%208%20192%208Q185%208%20179.0%208.0Q173%208%20167%207Z%22/%3E%3Crect%20x%3D%22270.4%22%20y%3D%22157.2%22%20width%3D%2242.3%22%20height%3D%22573.3%22/%3E%3Crect%20x%3D%22338.2%22%20y%3D%22157.2%22%20width%3D%2240.3%22%20height%3D%22573.3%22/%3E%3C/g%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="PennyPay is developing patented infrastructure for digital micropayments across creators, platforms, and nonprofits.">
+<meta name="description" content="PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.">
+<!-- TODO: if the site moves to pennypaytech.com, update the canonical, og:url and og:image URLs below. -->
+<link rel="canonical" href="https://sara-gold.github.io/pennypay-site/">
+<meta name="theme-color" content="#0D2B1A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PennyPay">
+<meta property="og:title" content="PennyPay | Patented Micropayment Platform for Digital Content">
+<meta property="og:description" content="Patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.">
+<meta property="og:url" content="https://sara-gold.github.io/pennypay-site/">
+<meta property="og:image" content="https://sara-gold.github.io/pennypay-site/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PennyPay: Patented Micropayment Infrastructure for the Web. Payments from 1¢ to $3.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PennyPay | Patented Micropayment Platform for Digital Content">
+<meta name="twitter:description" content="Patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.">
+<meta name="twitter:image" content="https://sara-gold.github.io/pennypay-site/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600&family=Gideon+Roman&family=Inter:wght@400;600;800&display=swap">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          offwhite: '#F2EDE4',
-          pewter: '#9BB89E',
-          putney: '#4E8060',
-          penny: '#AB6C43',
-          forest: '#0D2B1A'
-        },
-        fontFamily: {
-          inter: ['Inter', 'system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
-          alex: ['Alexandria', 'Inter', 'system-ui', 'sans-serif'],
-          gideon: ['"Gideon Roman"', 'Georgia', '"Times New Roman"', 'serif']
-        }
-      }
-    }
-  };
-</script>
 <style>
   /* Layout concept: one continuous scroll. A forest-green "vault" hero with a live penny-flow canvas, then
      ledger-paper and forest bands ruled by 1px lines; sticky anchor tabs track where you are. */
@@ -170,6 +165,20 @@
 
   /* Intro */
   .intro-grid { display: grid; gap: 32px; padding-block: 96px; }
+  .fees { margin: 0 0 96px; padding-top: 32px; border-top: 1px solid var(--line); display: grid; gap: 18px; }
+  @media (min-width: 900px) { .fees { margin-bottom: 128px; margin-top: -40px; } }
+  .fees-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; }
+  .fees-note { font-family: var(--font-ui); font-size: 13px; color: var(--putney); }
+  .fee-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "amt val" "bar bar"; gap: 8px 16px; align-items: center; }
+  @media (min-width: 760px) { .fee-row { grid-template-columns: 150px minmax(0, 1fr) 170px; grid-template-areas: "amt bar val"; } }
+  .fee-amt { grid-area: amt; font-family: var(--font-ui); font-weight: 600; font-size: 15px; }
+  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 20px; color: var(--putney); text-align: right; font-variant-numeric: tabular-nums; }
+  .fee-row.hot .fee-val { color: var(--penny); }
+  .fee-track { grid-area: bar; height: 14px; border-radius: 99px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
+  .fee-bar { display: block; height: 100%; width: var(--pct); min-width: 6px; border-radius: 99px; background: var(--putney); transform-origin: left; transition: transform 1.2s var(--ease); }
+  .fee-row.hot .fee-bar { background: linear-gradient(90deg, var(--penny), var(--penny-light)); }
+  .js .fees.pending .fee-bar { transform: scaleX(0); }
+  .fees-foot { font-family: var(--font-ui); font-size: 15px; line-height: 1.6; max-width: 70ch; }
   @media (min-width: 900px) { .intro-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 72px; padding-block: 128px; } }
   .reaction-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
   .reaction { font-family: var(--font-ui); font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 8px; color: var(--putney); background: var(--paper); transition: transform .3s var(--ease), border-color .3s, color .3s; }
@@ -308,6 +317,16 @@
   @media (min-width: 900px) { .evidence { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; padding: 52px 56px; } }
   .evidence h3 { font-weight: 600; font-size: clamp(26px, 2.8vw, 38px); letter-spacing: -.035em; line-height: 1.08; text-wrap: balance; }
   .agg { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 26px; max-width: 420px; }
+  .ev-copy { display: flex; flex-direction: column; gap: 18px; } .ev-copy .agg { margin-top: 6px; }
+  .ev-src { font-family: var(--font-ui); font-size: 13px; line-height: 1.5; color: var(--putney); max-width: 46ch; }
+  .stats { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--line); margin: 0; }
+  @media (min-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .stat { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+  @media (min-width: 560px) { .stat:nth-child(odd) { padding-right: 20px; border-right: 1px solid var(--line); } .stat:nth-child(even) { padding-left: 20px; } }
+  .stats dd { margin: 0; }
+  .stat-num { font-family: var(--font-accent); font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -.01em; color: var(--penny); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat:last-child .stat-num { font-size: clamp(26px, 2.6vw, 34px); padding-top: 8px; }
+  .stat-lbl { font-family: var(--font-ui); font-size: 14px; line-height: 1.5; color: var(--forest); }
   .agg i { width: 14px; height: 14px; border-radius: 50%; background-color: var(--pewter); background-position: center; background-size: cover; opacity: .4; transform: scale(.75); transition: opacity .5s, transform .5s var(--ease); }
   .agg i.on { background-image: var(--penny-front); opacity: 1; transform: none; box-shadow: 0 1px 1px rgba(40,16,4,.35); }
 
@@ -317,12 +336,59 @@
   .disciplines { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line); margin-top: 40px; }
   .disciplines span { font-family: var(--font-accent); font-size: clamp(22px, 2.4vw, 32px); padding: 18px 26px 18px 0; margin-right: 26px; border-right: 1px solid var(--line); line-height: 1.1; }
   .disciplines span:last-child { border-right: 0; }
+  .disciplines-sm { margin-top: 32px; }
+  .disciplines-sm span { font-size: clamp(17px, 1.6vw, 21px); padding: 14px 20px 14px 0; margin-right: 20px; }
+  .people { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 20px; }
+  @media (min-width: 720px) { .people { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .lp { display: flex; flex-direction: column; gap: 22px; padding: 28px 26px 30px; border-radius: 22px; background: var(--paper); border: 1px solid var(--line); transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s; }
+  .lp:hover { transform: translateY(-4px); border-color: var(--penny); box-shadow: 0 24px 50px -32px rgba(13,43,26,.45); }
+  .lp-avatar { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: var(--forest); box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 4px var(--pewter); overflow: hidden; flex: none; transition: box-shadow .35s; }
+  .lp:hover .lp-avatar { box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 4px var(--penny); }
+  .lp-mono { font-family: var(--font-accent); font-size: 30px; letter-spacing: .02em; color: var(--penny-light); }
+  .lp-photo { width: 100%; height: 100%; object-fit: cover; }
+  .lp-body { display: flex; flex-direction: column; gap: 6px; }
+  .lp-name { font-weight: 600; font-size: 22px; letter-spacing: -.025em; line-height: 1.2; }
+  .lp-title { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--penny); }
+  .lp-bio { font-family: var(--font-ui); font-size: 15px; line-height: 1.55; color: var(--forest); margin-top: 6px; }
+  .lp-title:empty, .lp-bio:empty { display: none; }
+  .lp-link { align-self: flex-start; margin-top: 10px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--putney); border-bottom: 1px solid currentColor; }
+  .lp-link:hover { color: var(--penny); }
 
   /* Final CTA */
   .final { position: relative; overflow: hidden; }
   .final-grid { display: grid; gap: 36px; position: relative; z-index: 1; }
   @media (min-width: 960px) { .final-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: end; } }
   .final h2 { font-size: clamp(40px, 6.2vw, 88px); }
+  @media (min-width: 960px) { .final-grid { align-items: start; } .final h2 { position: sticky; top: calc(var(--nav-h) + 40px); } }
+
+  /* Contact form */
+  .cform { position: relative; z-index: 2; display: grid; gap: 18px; padding: 28px 24px; border-radius: 22px; border: 1px solid var(--line-dark); background: var(--forest-2); box-shadow: 0 30px 60px -40px rgba(0,0,0,.6); }
+  @media (min-width: 768px) { .cform { padding: 36px 32px; } }
+  .cf-row { display: grid; gap: 18px; }
+  @media (min-width: 640px) { .cf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .cf-field { display: grid; gap: 8px; min-width: 0; }
+  .cf-field label { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: .02em; color: var(--pewter); }
+  .cf-opt { font-weight: 400; opacity: .75; }
+  .cf-field input, .cf-field select, .cf-field textarea { width: 100%; font-family: var(--font-ui); font-size: 16px; color: var(--offwhite); background: var(--forest-3); border: 1px solid var(--line-dark); border-radius: 12px; padding: 13px 14px; transition: border-color .2s, background-color .2s, box-shadow .2s; }
+  .cf-field textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
+  .cf-field input:hover, .cf-field select:hover, .cf-field textarea:hover { border-color: rgba(155,184,158,.45); }
+  .cf-field input:focus, .cf-field select:focus, .cf-field textarea:focus { outline: none; border-color: var(--penny-light); background: #06170D; box-shadow: 0 0 0 3px rgba(201,138,94,.25); }
+  .cf-field [aria-invalid="true"] { border-color: #E0866A; }
+  .cf-select { position: relative; }
+  .cf-select select { appearance: none; -webkit-appearance: none; padding-right: 40px; cursor: pointer; }
+  .cf-select select option { color: var(--forest); background: var(--offwhite); }
+  .cf-select::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; border-right: 1.5px solid var(--pewter); border-bottom: 1.5px solid var(--pewter); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+  .cf-err { font-family: var(--font-ui); font-size: 13px; color: #F0A58C; min-height: 0; }
+  .cf-err:empty { display: none; }
+  .cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .cf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 4px; }
+  .cf-mail { font-family: var(--font-ui); font-size: 14px; color: var(--pewter); }
+  .cf-mail a { color: var(--offwhite); }
+  .cf-status { font-family: var(--font-ui); font-size: 15px; line-height: 1.5; }
+  .cf-status:empty { display: none; }
+  .cf-status.ok { color: var(--pewter); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--putney); background: rgba(78,128,96,.18); }
+  .cf-status.bad { color: #F0A58C; }
+  .btn[disabled] { opacity: .65; cursor: progress; }
   .final-coins { position: absolute; inset: 0; pointer-events: none; }
   .final .watermark { left: -40px; bottom: -120px; width: 380px; opacity: .1; }
   .final-coins i { position: absolute; width: var(--s); height: var(--s); border-radius: 50%; background: var(--penny-front) center / cover no-repeat; box-shadow: 0 6px 14px rgba(0,0,0,.35); opacity: .55; animation: drift var(--d) linear infinite; left: var(--x); top: 110%; }
@@ -425,12 +491,15 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     .js .reveal.pending { transform: none; }
+    .js .fees.pending .fee-bar { transform: none; }
     .final-coins { display: none; }
   }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay is developing patented infrastructure for digital micropayments across creators, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
+{"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
 </script>
+<!-- Compiled Tailwind utilities. Kept last in <head> to match the cascade order the Play CDN used. Rebuild: see README. -->
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
@@ -450,7 +519,7 @@
         <a class="nav-tab" href="#leadership" data-sec="leadership">Leadership</a>
       </div>
     </nav>
-    <a href="#opportunity" class="btn btn-penny btn-sm nav-cta">Explore Opportunity <span class="arrow" aria-hidden="true">→</span></a>
+    <a href="#contact" class="btn btn-penny btn-sm nav-cta">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
   </div>
   <nav class="tabs-mobile" aria-label="Page sections">
     <div class="wrap">
@@ -506,6 +575,14 @@
           <span class="reaction">♡ likes</span><span class="reaction">✦ reactions</span><span class="reaction">↗ shares</span><span class="reaction">❝ comments</span><span class="reaction" style="border-color:var(--penny);color:var(--penny)">¢ PennyPay</span>
         </div>
       </div>
+    </div>
+    <div class="wrap">
+      <figure class="fees reveal" id="fees">
+        <figcaption class="fees-head"><span class="eyebrow">The fee problem</span><span class="fees-note">Processing fee as a share of the payment, using PayPal Micropayments pricing</span></figcaption>
+        <div class="fee-row" style="--pct:6.67%"><span class="fee-amt">$3.00 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.20 fee · 6.67%</span></div>
+        <div class="fee-row hot" style="--pct:100%"><span class="fee-amt">$0.05 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.05 fee · 100%</span></div>
+        <p class="fees-foot">PennyPay pre-funds wallets, so one standard card charge covers hundreds of tips instead of paying a fee on each one.</p>
+      </figure>
     </div>
   </section>
 
@@ -595,13 +672,11 @@
       </div>
       <ol class="layer-list" id="layers">
         <li class="layer"><span class="ln">1</span><div><h3>Card economics</h3><p>A fixed card fee on every transaction makes payments under a few dollars too expensive to process one at a time.</p></div></li>
-        <li class="layer"><span class="ln">2</span><div><h3>Pre-funded wallets</h3><p>Users fund a PennyPay wallet once, then tip in context on any participating site or app.</p></div></li>
-        <li class="layer"><span class="ln">3</span><div><h3>Creator payouts</h3><p>Creators collect tips across every site they publish on and receive payouts after platform and service fees.</p></div></li>
-        <li class="layer"><span class="ln">4</span><div><h3>Publisher integration</h3><p>Publishers embed the tip button next to their content and earn a configurable share of every tip.</p></div></li>
-        <li class="layer"><span class="ln">5</span><div><h3>Transaction layer</h3><p>The patented architecture links each user action to hosted wallets: tip intent, payment initiation, wallet updates, transaction records, and analytics.</p></div>
+        <li class="layer"><span class="ln">2</span><div><h3>Publisher integration</h3><p>Publishers embed the tip button next to their content and earn a configurable share of every tip.</p></div></li>
+        <li class="layer"><span class="ln">3</span><div><h3>Transaction layer</h3><p>The patented architecture links each user action to hosted wallets: tip intent, payment initiation, wallet updates, transaction records, and analytics.</p></div>
           <div class="pipe" id="pipe" aria-hidden="true"><span>user intent</span><span>payment initiation</span><span>wallet updates</span><span>records</span><span>analytics</span></div>
         </li>
-        <li class="layer"><span class="ln">6</span><div><h3>Settlement</h3><p>Balances settle on a schedule or at a balance threshold and are distributed to each party by rule.</p></div></li>
+        <li class="layer"><span class="ln">4</span><div><h3>Settlement rules</h3><p>Balances settle on a schedule or once they cross a threshold, and each party’s share is set by rule, so creators can be paid across every site they publish on.</p></div></li>
       </ol>
     </div>
   </section>
@@ -627,7 +702,7 @@
           <div class="p-swap flex flex-col gap-7 min-w-0" id="pSwapB">
             <p class="body-copy" id="pBody">PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.</p>
             <div class="u-meta">
-              <a href="#opportunity" class="btn btn-penny" id="pCta"><span class="coin-dot" aria-hidden="true"></span><span id="pCtaText">Discuss the Opportunity</span></a>
+              <a href="#contact" class="btn btn-penny" id="pCta" data-role="Investor"><span class="coin-dot" aria-hidden="true"></span><span id="pCtaText">Request an investor conversation</span></a>
             </div>
           </div>
         </div>
@@ -659,7 +734,7 @@
         </div>
         <div class="ledger">
           <a class="v-card" data-aud="investors" href="#investors"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Market</span><div class="flex flex-col gap-4"><h4 class="v-title">For investors</h4><p class="v-body">A patented platform with revenue streams across media, creator, nonprofit, and partner ecosystems.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
-          <a class="v-card" data-aud="platforms" href="#platforms"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Engagement</span><div class="flex flex-col gap-4"><h4 class="v-title">For platforms</h4><p class="v-body">Designed to drive recurring engagement and audience monetization, with a share of every tip.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
+          <a class="v-card" data-aud="platforms" href="#platforms"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Engagement</span><div class="flex flex-col gap-4"><h4 class="v-title">For platforms</h4><p class="v-body">A paid action that rewards engagement, with a configurable share of every tip.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
           <a class="v-card" data-aud="creators" href="#creators"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Income</span><div class="flex flex-col gap-4"><h4 class="v-title">For creators</h4><p class="v-body">Earn from fans who would never subscribe, one cent to three dollars at a time.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
           <a class="v-card" data-aud="nonprofits" href="#nonprofits"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Giving</span><div class="flex flex-col gap-4"><h4 class="v-title">For nonprofits</h4><p class="v-body">A one-click micro-donation path for supporters who won’t make a larger gift.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
         </div>
@@ -697,8 +772,18 @@
         </article>
       </div>
       <div class="evidence reveal">
-        <div class="min-w-0"><h3>Independent evaluation found substantial interest.</h3><div class="agg" id="agg" aria-hidden="true"></div></div>
-        <p class="body-copy" style="color:var(--forest)">An independent evaluation and user survey found substantial interest in a simpler way to pay creators directly. The market is the sum of many small, repeat payments across digital platforms.</p>
+        <div class="min-w-0 ev-copy">
+          <h3>Independent evaluation found substantial interest.</h3>
+          <p class="body-copy" style="color:var(--forest)">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and surveyed website users aged 18–34. The market is the sum of many small, repeat payments across digital platforms.</p>
+          <div class="agg" id="agg" aria-hidden="true"></div>
+          <p class="ev-src">Source: Notre Dame IDEA Center technology evaluation and user survey (ages 18–34). Full report available on request.</p>
+        </div>
+        <dl class="stats" id="stats">
+          <div class="stat"><dt class="sr-only">Wish they could easily tip creators</dt><dd class="stat-num"><span data-count="76.83" data-dec="2">76.83</span>%</dd><dd class="stat-lbl">wish they could easily tip creators whose posts they like</dd></div>
+          <div class="stat"><dt class="sr-only">Would sign up</dt><dd class="stat-num"><span data-count="70.37" data-dec="2">70.37</span>%</dd><dd class="stat-lbl">would “definitely” or “probably” sign up and use PennyPay to tip</dd></div>
+          <div class="stat"><dt class="sr-only">Projected tips per user</dt><dd class="stat-num">$<span data-count="45.50" data-dec="2">45.50</span></dd><dd class="stat-lbl">projected annual tips per user, at about 1.68 tips a day</dd></div>
+          <div class="stat"><dt class="sr-only">Estimated revenue opportunity</dt><dd class="stat-num">$<span data-count="103.5" data-dec="1">103.5</span>M–$<span data-count="950" data-dec="0">950</span>M</dd><dd class="stat-lbl">estimated annual revenue opportunity</dd></div>
+        </dl>
       </div>
     </div>
   </section>
@@ -713,7 +798,37 @@
         </div>
         <p class="body-copy reveal">PennyPay’s team has run finance, corporate strategy, growth, and operations, and has evaluated technology for commercial potential.</p>
       </div>
-      <div class="disciplines reveal" aria-label="Backgrounds"><span>Finance</span><span>Strategy</span><span>Growth</span><span>Operations</span><span>Technology evaluation</span></div>
+      <!-- TODO: needs real content from PennyPay: titles and one-line bios for Haj Young and John McCareins, LinkedIn URLs, and headshots.
+           To add a photo, replace the <span class="lp-mono">…</span> with <img class="lp-photo" src="assets/team/name.jpg" alt="">.
+           To add LinkedIn, add <a class="lp-link" href="…">LinkedIn<span class="sr-only"> profile of NAME</span> ↗</a> inside .lp-body.
+           Empty title/bio paragraphs are hidden automatically. -->
+      <ul class="people reveal" aria-label="Leadership team">
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">RM</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">Robert Musiala</h3>
+            <p class="lp-title">Founder &amp; Inventor</p>
+            <p class="lp-bio">Inventor of PennyPay’s patented micropayment architecture.</p>
+          </div>
+        </li>
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">HY</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">Elhajamin “Haj” Young</h3>
+            <p class="lp-title"></p>
+            <p class="lp-bio"></p>
+          </div>
+        </li>
+        <li class="lp">
+          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">JM</span></span>
+          <div class="lp-body">
+            <h3 class="lp-name">John McCareins</h3>
+            <p class="lp-title"></p>
+            <p class="lp-bio"></p>
+          </div>
+        </li>
+      </ul>
+      <div class="disciplines disciplines-sm reveal" aria-label="Backgrounds"><span>Finance</span><span>Strategy</span><span>Growth</span><span>Operations</span><span>Technology evaluation</span></div>
     </div>
   </section>
 
@@ -727,7 +842,33 @@
       <h2 id="finalTitle" class="h-display reveal">Talk to the <span class="accent" style="color:var(--penny-light)">founding team.</span></h2>
       <div class="flex flex-col gap-8 min-w-0">
         <p class="body-copy">We’re talking with investors, publishers, platforms, sponsors, creators, and nonprofits about partnerships and pilots. If that’s you, get in touch.</p>
-        <div><a href="#contact" class="btn btn-penny"><span class="coin-dot" aria-hidden="true"></span>Start a conversation</a></div>
+        <!-- TODO: needs real content from PennyPay. Set CONTACT.endpoint (Formspree URL) and CONTACT.email in the script near the bottom of this file. -->
+        <form class="cform" id="contactForm" novalidate>
+          <div class="cf-row">
+            <div class="cf-field"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" required aria-describedby="cfNameErr"><p class="cf-err" id="cfNameErr"></p></div>
+            <div class="cf-field"><label for="cfEmail">Email</label><input id="cfEmail" name="email" type="email" autocomplete="email" required aria-describedby="cfEmailErr"><p class="cf-err" id="cfEmailErr"></p></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field"><label for="cfOrg">Organization <span class="cf-opt">(optional)</span></label><input id="cfOrg" name="organization" type="text" autocomplete="organization"></div>
+            <div class="cf-field"><label for="cfRole">I am a…</label>
+              <div class="cf-select"><select id="cfRole" name="role">
+                <option value="Investor">Investor</option>
+                <option value="Publisher or platform">Publisher or platform</option>
+                <option value="Creator">Creator</option>
+                <option value="Nonprofit">Nonprofit</option>
+                <option value="Job candidate">Job candidate</option>
+                <option value="Other">Other</option>
+              </select></div>
+            </div>
+          </div>
+          <div class="cf-field"><label for="cfMsg">Message</label><textarea id="cfMsg" name="message" rows="4" required aria-describedby="cfMsgErr"></textarea><p class="cf-err" id="cfMsgErr"></p></div>
+          <input type="text" name="_gotcha" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="cf-actions">
+            <button type="submit" class="btn btn-penny" id="cfSubmit"><span class="coin-dot" aria-hidden="true"></span><span id="cfSubmitText">Send message</span></button>
+            <p class="cf-mail" id="cfMail" hidden>Prefer email? <a class="link-ul" id="cfMailLink" href="#"></a></p>
+          </div>
+          <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -1013,13 +1154,29 @@
   function lightDots() { dots.forEach(function (d, i) { setTimeout(function () { d.classList.add('on'); }, reduce ? 0 : i * 18 + Math.random() * 300); }); }
   if ('IntersectionObserver' in window && !reduce) { var aggIO = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { lightDots(); aggIO.disconnect(); } }, { threshold: .4 }); aggIO.observe(agg); } else lightDots();
 
+  /* ---------- Evidence stats: count up once when visible ---------- */
+  (function () {
+    var nums = $$('#stats [data-count]'); if (!nums.length) return;
+    function run() {
+      nums.forEach(function (el) {
+        var to = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0, t0 = null, dur = 1400;
+        var fmt = function (v) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
+        (function step(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * e); if (k < 1) requestAnimationFrame(step); })(performance.now());
+      });
+    }
+    if (reduce || !('IntersectionObserver' in window)) return; // static final values already in the markup
+    nums.forEach(function (el) { el.textContent = '0'; });
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { run(); io.disconnect(); } }, { threshold: .35 });
+    io.observe($('#stats'));
+  })();
+
   /* ---------- Uses: audience views with direct #anchors ---------- */
   var personas = {
-    investors: { head: 'A transaction layer for digital media.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Discuss the Opportunity', href: '#opportunity' },
-    creators: { head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'See the Creator Experience', href: '#how' },
-    nonprofits: { head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Explore Nonprofit Use Cases', href: '#opportunity', filter: 'nonprofits' },
-    platforms: { head: 'Add a paid action next to the like button.', body: 'PennyPay is designed to drive recurring engagement and audience monetization. Your users support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Explore Platform Integration', href: '#technology' },
-    careers: { head: 'Help build micropayment infrastructure.', body: "We're hiring across product, design, payments engineering, and strategy. Small team, issued patents, and real technical and commercial problems to solve.", cta: 'Introduce Yourself', href: '#contact' }
+    investors: { head: 'A transaction layer for digital media.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
+    creators: { head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'Talk to us as a creator', href: '#contact', role: 'Creator' },
+    nonprofits: { head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Discuss a nonprofit pilot', href: '#contact', role: 'Nonprofit' },
+    platforms: { head: 'Earn a share of every tip on your platform.', body: 'A PennyPay button gives your users a paid way to engage. They support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Discuss an integration', href: '#contact', role: 'Publisher or platform' },
+    careers: { head: 'Help build micropayment infrastructure.', body: "We're hiring across product, design, payments engineering, and strategy. Small team, issued patents, and real technical and commercial problems to solve.", cta: 'Introduce yourself', href: '#contact', role: 'Job candidate' }
   };
   var uTabs = $$('.u-tab'), pCur = 'investors';
   function selectPersona(k) {
@@ -1027,7 +1184,7 @@
     uTabs.forEach(function (t) { var on = t.dataset.p === k; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on) $('#uPanel').setAttribute('aria-labelledby', t.id); });
     if (k === pCur) return; pCur = k;
     var a = $('#pSwapA'), b = $('#pSwapB');
-    var apply = function () { $('#pHead').textContent = p.head; $('#pBody').textContent = p.body; $('#pCtaText').textContent = p.cta; $('#pCta').setAttribute('href', p.href); a.classList.remove('out'); b.classList.remove('out'); };
+    var apply = function () { $('#pHead').textContent = p.head; $('#pBody').textContent = p.body; $('#pCtaText').textContent = p.cta; $('#pCta').setAttribute('href', p.href); $('#pCta').setAttribute('data-role', p.role || 'Other'); a.classList.remove('out'); b.classList.remove('out'); };
     if (reduce) { apply(); return; }
     a.classList.add('out'); setTimeout(function () { b.classList.add('out'); }, 60); setTimeout(apply, 300);
   }
@@ -1040,7 +1197,6 @@
     t.addEventListener('click', function () { selectPersona(t.dataset.p); try { history.replaceState(null, '', '#' + t.dataset.p); } catch (err) {} });
     t.addEventListener('keydown', function (e) { var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (d) { e.preventDefault(); var n = uTabs[(i + d + uTabs.length) % uTabs.length]; n.click(); n.focus(); } });
   });
-  $('#pCta').addEventListener('click', function () { var f = personas[pCur].filter; if (f) { var btn = $('.filter[data-f="' + f + '"]'); if (btn) btn.click(); } });
 
   // Direct jump for targeted visitors: #how, #technology, #creators, etc.
   function handleHash() {
@@ -1049,6 +1205,55 @@
     else { var el = document.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 50); }
   }
   window.addEventListener('hashchange', handleHash); handleHash();
+
+
+  /* ---------- Contact form ---------- */
+  // TODO: needs real content from PennyPay.
+  //   endpoint: the Formspree form URL, e.g. https://formspree.io/f/xxxxxxx
+  //   email:    the public contact address shown as the mailto fallback
+  var CONTACT = { endpoint: '', email: '' };
+  (function contactForm() {
+    var form = $('#contactForm'); if (!form) return;
+    var role = $('#cfRole'), status = $('#cfStatus'), submit = $('#cfSubmit'), submitText = $('#cfSubmitText');
+    if (CONTACT.email) { var ml = $('#cfMailLink'); ml.textContent = CONTACT.email; ml.href = 'mailto:' + CONTACT.email; $('#cfMail').hidden = false; }
+
+    // Any link carrying data-role preselects the matching "I am a…" option.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href="#contact"][data-role]'); if (!a) return;
+      var v = a.getAttribute('data-role'); if (v && role.querySelector('option[value="' + v + '"]')) role.value = v;
+    });
+
+    var rules = [
+      { el: $('#cfName'), err: $('#cfNameErr'), test: function (v) { return v.trim() ? '' : 'Please enter your name.'; } },
+      { el: $('#cfEmail'), err: $('#cfEmailErr'), test: function (v) { return !v.trim() ? 'Please enter your email.' : (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'That email doesn’t look right.'); } },
+      { el: $('#cfMsg'), err: $('#cfMsgErr'), test: function (v) { return v.trim().length >= 10 ? '' : 'Please add a short message (10+ characters).'; } }
+    ];
+    function check(r) { var m = r.test(r.el.value); r.err.textContent = m; r.el.setAttribute('aria-invalid', m ? 'true' : 'false'); return !m; }
+    rules.forEach(function (r) { r.el.addEventListener('blur', function () { if (r.el.value) check(r); }); r.el.addEventListener('input', function () { if (r.el.getAttribute('aria-invalid') === 'true') check(r); }); });
+
+    function setStatus(msg, kind) { status.className = 'cf-status' + (kind ? ' ' + kind : ''); status.textContent = msg; }
+    function busy(on) { submit.disabled = on; submitText.textContent = on ? 'Sending…' : 'Send message'; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); setStatus('');
+      var firstBad = null; rules.forEach(function (r) { if (!check(r) && !firstBad) firstBad = r.el; });
+      if (firstBad) { firstBad.focus(); return; }
+      var data = new FormData(form);
+      if (!CONTACT.endpoint) {
+        if (CONTACT.email) {
+          var body = 'Name: ' + data.get('name') + '\nEmail: ' + data.get('email') + '\nOrganization: ' + (data.get('organization') || '-') + '\nI am a: ' + data.get('role') + '\n\n' + data.get('message');
+          location.href = 'mailto:' + CONTACT.email + '?subject=' + encodeURIComponent('PennyPay inquiry: ' + data.get('role')) + '&body=' + encodeURIComponent(body);
+          setStatus('Your email app should open with the message filled in.', 'ok');
+        } else setStatus('The contact form isn’t connected yet. Please check back soon.', 'bad');
+        return;
+      }
+      busy(true);
+      fetch(CONTACT.endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function (res) { if (!res.ok) throw new Error(res.status); form.reset(); setStatus('Thanks, your message is on its way. The team will get back to you soon.', 'ok'); })
+        .catch(function () { setStatus('Something went wrong sending that.' + (CONTACT.email ? ' You can email ' + CONTACT.email + ' instead.' : ' Please try again in a moment.'), 'bad'); })
+        .then(function () { busy(false); });
+    });
+  })();
 
   /* ---------- Behind the screens: animated walkthrough ---------- */
   (function behindTheScreens() {
@@ -1086,11 +1291,14 @@
         '<g>' + wires + '</g><g id="flows"></g><g>' + nodes + '</g><g id="tokens"></g></svg>';
     }
 
-    /* --- the four scenes from the deck --- */
+    /* --- the four scenes ---
+       NOTE: these scenes are adapted from PennyPay's internal "How It Works" deck, which is marked
+       CONFIDENTIAL. Captions were rewritten in plain language, but the diagrams still show how the
+       system works. Get explicit sign-off from PennyPay before this goes live. */
     var scenes = [
       {
         title: 'Funding an account', dur: 8200,
-        cap: 'When Alice funds her PennyPay account, the $10 from Alice’s credit card transaction is converted into bitcoin and held in a PennyPay managed bitcoin wallet associated with Alice’s PennyPay account.',
+        cap: 'Alice loads her PennyPay wallet with one ordinary card payment. PennyPay converts those dollars and holds them in a hosted wallet tied to her account, ready for tipping.',
         svg: function () {
           var card = '<g id="card" transform="translate(150 150)"><g class="pop"><rect x="-64" y="-40" width="128" height="80" rx="11" class="nf"/>' +
             '<rect x="-48" y="-16" width="24" height="18" rx="4" fill="#C98A5E" opacity=".75"/><rect x="-48" y="14" width="70" height="5" rx="2.5" fill="rgba(155,184,158,.4)"/><rect x="-48" y="24" width="40" height="5" rx="2.5" fill="rgba(155,184,158,.25)"/>' +
@@ -1120,10 +1328,10 @@
         }
       },
       {
-        title: 'Tipping through a channel', dur: 10400,
-        cap: 'At the time Bob registers to receive PennyPay tips, PennyPay creates a unique PennyPay Bitcoin Lightning Network Channel (“PBLNC”) for Bob. Bob has one PBLNC for each website he registers to receive tips through. When Alice tips Bob, a new wallet is created for Alice within the appropriate PBLNC and the wallet is funded with an amount calculated based on Alice’s tip amount (e.g., tip amount × 50). Each time Alice tips Bob through the same website, the tip is sent through the corresponding PBLNC.',
+        title: 'Sending a tip', dur: 10400,
+        cap: 'When Alice taps Tip on Bob’s post, the amount moves between their hosted wallets over a dedicated payment channel secured on the Bitcoin Lightning Network. Her card is not charged again.',
         svg: function () {
-          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PENNYPAY BITCOIN LIGHTNING NETWORK CHANNEL (“PBLNC”) · BOB / WEBSITE A');
+          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'PAYMENT CHANNEL · BOB / WEBSITE A');
           var bp = '<g id="bp" transform="translate(895 320)"><g class="pop"><rect x="-27" y="-46" width="54" height="92" rx="11" class="nf"/><rect x="-8" y="-39" width="16" height="4" rx="2" fill="rgba(155,184,158,.35)"/>' +
             '<text id="bpn" class="note amt" y="8" text-anchor="middle" style="font-size:17px;fill:#E7B289">+2¢</text></g></g>';
           var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M90 262 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
@@ -1146,10 +1354,10 @@
       },
       {
         title: 'Closing and payout', dur: 9400,
-        cap: 'At the end of every closing period (e.g., monthly) all tips received by Bob through various websites are sent from the corresponding PBLNCs to a clearing account. From there, the BTC is distributed to Bob, the website hosts, and PennyPay, according to agreed distribution percentages.',
+        cap: 'At the end of each settlement period, Bob’s tips from every site he posts on are pooled, split by agreed rules between Bob, the host sites, and PennyPay, and paid out to bank accounts in dollars.',
         svg: function () {
-          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', '“PBLNC” · BOB / WEBSITE A') +
-            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', '“PBLNC” · BOB / WEBSITE B');
+          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'CHANNEL · BOB / WEBSITE A') +
+            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'CHANNEL · BOB / WEBSITE B');
           var wires = wire('pa', 'M180 128 H 300 V 216 H 354') + wire('pb', 'M180 328 H 300 V 244 H 354') +
             wire('x1', 'M444 230 H 500 V 90 H 554') + wire('x2', 'M444 230 H 554') + wire('x3', 'M444 230 H 500 V 370 H 554') +
             wire('y1', 'M646 90 H 786') + wire('y2', 'M646 230 H 786') + wire('y3', 'M646 370 H 786');
@@ -1180,7 +1388,7 @@
       },
       {
         title: 'The platform behind it', dur: 12600,
-        cap: 'This is all accomplished through PennyPay proprietary application software that is integrated into websites registered to facilitate PennyPay tips, and the PennyPay proprietary technology interface platform, which sends and receives data to link actions taken by PennyPay users with corresponding wallets hosted by PennyPay on the Bitcoin Lightning Network.',
+        cap: 'PennyPay software on each participating site connects to the PennyPay platform, which matches every tap to the right wallets and keeps the transaction records and analytics.',
         svg: function () {
           var web = '<rect x="180" y="28" width="640" height="122" rx="14" class="box2"/>' + text(500, 52, 'lbl', 'WEB CONTENT PROVIDER WEBSITE');
           var app = '<g id="app"><g class="pop"><rect x="360" y="70" width="280" height="46" rx="10" class="box3"/>' + text(500, 98, 'boxl', 'PennyPay Application Software') + '</g></g>';
