@@ -651,6 +651,118 @@
     .site-header:hover .nav-cta, .site-header:focus-within .nav-cta { width: 216px; }
     .nav-cta .ni { display: block; width: 20px; height: 20px; flex: none; }
   }
+  /* ================= Concrete product sections ================= */
+  :root { --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
+
+  /* Hero: live tipping demo */
+  .demo { position: relative; width: 100%; max-width: 460px; margin-left: auto; display: grid; gap: 18px; padding: 22px; border-radius: 22px; background: var(--card-gloss); color: var(--forest); box-shadow: inset 0 1px 0 #fff, 0 40px 80px -40px rgba(0,0,0,.75), 0 12px 28px -16px rgba(0,0,0,.45); }
+  .demo-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .demo-tag { font-family: var(--font-ui); font-weight: 600; font-size: 13px; color: var(--penny-ink); background: rgba(171,108,67,.12); padding: 6px 12px; border-radius: 999px; }
+  .demo-note { font-family: var(--font-ui); font-size: 13px; color: var(--muted-ink); }
+  .demo-post { display: grid; gap: 12px; padding: 18px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(13,43,26,.08), 0 10px 24px -18px rgba(13,43,26,.35); }
+  .dp-meta { display: flex; align-items: center; gap: 12px; }
+  .dp-av { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; background: radial-gradient(circle at 35% 25%, #24573B, #0D2B1A 70%); color: var(--penny-light); font-family: var(--font-accent); font-size: 16px; }
+  .dp-name { font-weight: 600; font-size: 15px; }
+  .dp-src { font-family: var(--font-ui); font-size: 13px; color: var(--muted-ink); }
+  .dp-title { font-weight: 600; font-size: 20px; line-height: 1.25; letter-spacing: -.02em; text-wrap: balance; }
+  .dp-ex { font-family: var(--font-ui); font-size: 15px; line-height: 1.55; color: var(--muted-ink); }
+  .dp-tips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 4px; }
+  .tipb { min-height: 46px; border-radius: 12px; font-family: var(--font-ui); font-weight: 600; font-size: 15px; color: var(--forest); background: rgba(13,43,26,.06); transition: background-color .2s, color .2s, transform .15s, box-shadow .2s; font-variant-numeric: tabular-nums; }
+  .tipb:hover:not(:disabled) { background: var(--copper-metal); color: var(--offwhite); box-shadow: inset 0 1px 0 rgba(255,222,192,.45), 0 8px 16px -10px rgba(122,66,36,.8); }
+  .tipb:active:not(:disabled) { transform: translateY(1px) scale(.97); }
+  .tipb:disabled { opacity: .4; cursor: not-allowed; }
+  .demo-ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 0; padding: 16px 18px; border-radius: 16px; background: var(--dark-gloss); color: var(--offwhite); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+  .dl-row { display: grid; gap: 6px; min-width: 0; }
+  .dl-row dt { font-family: var(--font-ui); font-size: 13px; color: var(--pewter); }
+  .dl-row dd { margin: 0; font-family: var(--font-accent); font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; transition: color .4s; }
+  .dl-row dd.bump { animation: bump .7s var(--ease); }
+  @keyframes bump { 0% { color: var(--penny-light); transform: translateY(-2px); } 100% { color: var(--offwhite); transform: none; } }
+  .demo-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; min-height: 44px; }
+  .demo-status { font-family: var(--font-ui); font-size: 14px; line-height: 1.5; color: var(--muted-ink); }
+  .demo-status.ok { color: var(--putney-ink); font-weight: 600; }
+  .demo-status.ok::before { content: "✓ "; }
+  .demo-reset { min-height: 44px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--penny-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .demo-fly { position: absolute; z-index: 3; width: 24px; height: 24px; border-radius: 50%; background: var(--penny-front) center / cover no-repeat; box-shadow: 0 4px 10px rgba(20,8,2,.4); pointer-events: none; animation: demoFly .85s var(--ease) forwards; }
+  @keyframes demoFly { 0% { transform: translate(0,0) scale(.7); opacity: 1; } 75% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(1) rotateY(540deg); opacity: 0; } }
+  @media (max-width: 1023px) { .demo { margin-inline: auto; } }
+
+  /* How it works: three-node flow and an example ledger */
+  .flow { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 32px; position: relative; }
+  @media (min-width: 900px) {
+    .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+    .flow::before { content: ""; position: absolute; top: 21px; left: 44px; right: calc(33.333% - 4px); height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(78,128,96,.55), rgba(171,108,67,.65)); }
+  }
+  .fnode { position: relative; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .fn-num { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-accent); font-size: 20px; color: var(--offwhite); background: radial-gradient(circle at 35% 25%, #2A6345, #0D2B1A 75%); box-shadow: 0 0 0 6px var(--offwhite), 0 8px 16px -8px rgba(13,43,26,.6); }
+  .fnode h3 { font-weight: 600; font-size: 22px; letter-spacing: -.02em; margin-top: 6px; }
+  .fnode p { font-family: var(--font-ui); font-size: 16px; line-height: 1.6; max-width: 34ch; }
+  .fn-data { justify-self: start; font-family: var(--font-mono); font-size: 13px; color: var(--forest); background: rgba(13,43,26,.06); padding: 6px 10px; border-radius: 8px; }
+  .ledger-ex { margin: 64px 0 0; display: grid; gap: 14px; }
+  .ledger-ex figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; }
+  .lx-title { font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
+  .lx-note, .tbl-foot { font-family: var(--font-ui); font-size: 14px; color: var(--muted-ink); }
+  .tbl-wrap { overflow-x: auto; border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(13,43,26,.08), 0 16px 36px -26px rgba(13,43,26,.35); }
+  .tbl { width: 100%; min-width: 560px; border-collapse: collapse; font-family: var(--font-ui); font-size: 15px; color: var(--forest); }
+  .tbl th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted-ink); padding: 14px 18px; background: rgba(13,43,26,.04); }
+  .tbl td { padding: 14px 18px; vertical-align: top; line-height: 1.45; }
+  .tbl tbody tr:nth-child(even) td { background: rgba(13,43,26,.025); }
+  .tbl .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* Technology: spec grid and code */
+  .spec { display: grid; gap: 40px; }
+  .spec-grid { display: grid; gap: 28px 40px; margin: 0; }
+  @media (min-width: 700px) { .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .spec-grid dt { font-weight: 600; font-size: 17px; color: var(--offwhite); letter-spacing: -.01em; }
+  .spec-grid dd { margin: 8px 0 0; font-family: var(--font-ui); font-size: 15.5px; line-height: 1.65; color: rgba(242,237,228,.78); }
+  .code { margin: 0; border-radius: 14px; overflow: hidden; background: #06160D; box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 30px 60px -36px rgba(0,0,0,.8); }
+  .code figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 12px 18px; font-family: var(--font-ui); font-size: 13px; color: var(--pewter); background: rgba(242,237,228,.04); }
+  .code-note { color: rgba(155,184,158,.75); }
+  .code pre { margin: 0; padding: 18px 20px 20px; overflow-x: auto; font-family: var(--font-mono); font-size: 14px; line-height: 1.75; color: var(--offwhite); }
+  .c-k { color: #A9C9AE; } .c-s { color: #E9B68B; } .c-n, .c-b { color: #F2C9A1; } .c-p { color: rgba(242,237,228,.6); }
+
+  /* Use cases: open typography instead of a dark card */
+  .u-panel { background: transparent; box-shadow: none; color: var(--forest); padding: 8px 0 0; min-height: 0; align-content: start; }
+  .u-panel .watermark { display: none; }
+  .u-panel .p-head { font-size: clamp(28px, 3.1vw, 44px); line-height: 1.08; max-width: 24ch; }
+  .u-panel .body-copy { color: var(--forest); }
+
+  /* Opportunity: borderless four-column type grid */
+  .ledger { gap: 32px 40px; }
+  @media (min-width: 640px) { .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .ledger { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .v-card { background: none; box-shadow: none; padding: 0; min-height: 0; gap: 14px; border-radius: 0; justify-content: flex-start; overflow: visible; }
+  .v-card::before, .v-coin { display: none; }
+  .v-card:hover, .v-card:focus-visible { color: inherit; box-shadow: none; }
+  .v-card:hover .v-label, .v-card:focus-visible .v-label { color: var(--putney-ink); }
+  .v-card:hover .v-title, .v-card:focus-visible .v-title { color: var(--penny-ink); }
+  .v-title { font-size: clamp(22px, 2vw, 28px); }
+
+  /* Patents: plain, institutional */
+  .band-paper { background: #FAF8F3; color: var(--forest); }
+  .band-paper .eyebrow { color: var(--putney-ink); }
+  .pat-h { font-size: clamp(28px, 3.1vw, 44px); line-height: 1.12; max-width: 30ch; }
+  .grants { display: grid; gap: 28px; margin-top: 48px; }
+  @media (min-width: 900px) { .grants { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .grant { display: flex; flex-direction: column; gap: 18px; min-width: 0; padding: 36px 34px 30px; border-radius: 6px; background: #fff; box-shadow: 0 1px 3px rgba(13,43,26,.10), 0 18px 40px -28px rgba(13,43,26,.30); }
+  .gr-kind { font-family: var(--font-ui); font-size: 13px; color: var(--muted-ink); }
+  .gr-num { font-family: var(--font-accent); font-size: clamp(32px, 3vw, 42px); line-height: 1.1; color: var(--forest); font-variant-numeric: tabular-nums; margin-top: 6px; }
+  .gr-title { font-weight: 600; font-size: 18px; line-height: 1.35; letter-spacing: -.01em; }
+  .gr-scope { font-family: var(--font-ui); font-size: 15.5px; line-height: 1.65; color: #2F4637; flex: 1; }
+  .gr-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; margin: 0; }
+  .gr-meta dt { font-family: var(--font-ui); font-size: 13px; color: var(--muted-ink); }
+  .gr-meta dd { margin: 3px 0 0; font-family: var(--font-ui); font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .gr-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-family: var(--font-ui); font-weight: 600; font-size: 15px; color: var(--penny-ink); text-decoration: underline; text-underline-offset: 4px; }
+  .gr-link:hover { color: var(--forest); }
+  .grants-foot { margin-top: 24px; font-family: var(--font-ui); font-size: 14px; line-height: 1.6; color: var(--muted-ink); max-width: 80ch; }
+
+  /* Research */
+  .research { display: grid; gap: 32px; }
+  @media (min-width: 1100px) { .research { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 56px; align-items: start; } .research .tbl-foot { grid-column: 2; } }
+  .res-head { display: grid; gap: 18px; align-content: start; }
+  .res-tbl { min-width: 520px; }
+  .res-n { font-family: var(--font-accent); font-size: 26px; color: var(--penny-ink); }
+  .res-tbl td:nth-child(3) { white-space: nowrap; color: var(--muted-ink); font-size: 14px; }
+
   /* With the sidebar open, size big type off the content area, not the whole window */
   @media (min-width: 1200px) {
     .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
@@ -703,7 +815,7 @@
     <div class="wrap hero-grid">
       <div class="hero-copy flex flex-col gap-8 min-w-0">
         <h1 id="heroTitle" class="h-display">Patented Micropayment Infrastructure <span class="accent">for the Web.</span></h1>
-        <p class="lede">PennyPay enables 1¢ to $3 friction-free transactions for creators, digital media, and platforms—backed by issued U.S. patents.</p>
+        <p class="lede">Fund a PennyPay balance once. Then tip 1¢ to $3 in one click on any participating article, video, or post. Tips settle in batches behind the scenes, so there is no card fee on each tip.</p>
         <div class="flex flex-wrap gap-4">
           <a href="#opportunity" class="btn btn-penny"><span class="coin-dot" aria-hidden="true"></span>Explore the Opportunity</a>
           <a href="#how" class="btn btn-ghost-dark">See How It Works <span class="arrow down" aria-hidden="true">↓</span></a>
@@ -711,8 +823,28 @@
         <p class="cred"><span class="seal" aria-hidden="true"></span><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Independently evaluated.</span></p>
       </div>
       <div class="hero-visual">
-        <canvas id="flow" role="img" aria-label="Pennies moving between three phones"></canvas>
-        <div class="readout" aria-hidden="true"><i class="mini-penny"></i><b id="tipCounter">0</b><span>¢</span></div>
+        <div class="demo" id="demo" role="group" aria-labelledby="demoTitle">
+          <div class="demo-head"><p id="demoTitle" class="demo-tag">Try a tip</p><p class="demo-note">Demo · no real money</p></div>
+          <article class="demo-post">
+            <div class="dp-meta"><span class="dp-av" aria-hidden="true">JA</span><div><p class="dp-name">Jamie Alvarez</p><p class="dp-src">The Riverside Ledger · 6 min read</p></div></div>
+            <p class="dp-title">How a small-town paper kept its newsroom open</p>
+            <p class="dp-ex">Three reporters, one press, and the readers who decided local news was worth paying for.</p>
+            <div class="dp-tips" role="group" aria-label="Tip the author">
+              <button type="button" class="tipb" data-c="5">5¢</button>
+              <button type="button" class="tipb" data-c="10">10¢</button>
+              <button type="button" class="tipb" data-c="25">25¢</button>
+              <button type="button" class="tipb" data-c="100">$1.00</button>
+            </div>
+          </article>
+          <dl class="demo-ledger">
+            <div class="dl-row"><dt>Your PennyPay balance</dt><dd id="dWallet">$5.00</dd></div>
+            <div class="dl-row"><dt>Jamie has earned</dt><dd id="dCreator">$0.00</dd></div>
+          </dl>
+          <div class="demo-foot">
+            <p class="demo-status" id="dStatus" role="status" aria-live="polite">Pick an amount. Your card is not charged for each tip.</p>
+            <button type="button" class="demo-reset" id="dReset" hidden>Reset demo</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -748,47 +880,43 @@
         </div>
         <a href="#technology" class="btn btn-forest">See the architecture <span class="arrow down" aria-hidden="true">↓</span></a>
       </div>
-      <div class="stepper">
-        <div class="step-list" role="tablist" aria-label="How it works steps" aria-orientation="vertical" id="stepList">
-          <button class="step-tab" role="tab" id="st1" aria-controls="sp1" aria-selected="true" tabindex="0"><span class="num">01</span><span class="txt">User wallet pre-funding</span><span class="bar" aria-hidden="true"></span></button>
-          <button class="step-tab" role="tab" id="st2" aria-controls="sp2" aria-selected="false" tabindex="-1"><span class="num">02</span><span class="txt">Low-latency API tipping</span><span class="bar" aria-hidden="true"></span></button>
-          <button class="step-tab" role="tab" id="st3" aria-controls="sp3" aria-selected="false" tabindex="-1"><span class="num">03</span><span class="txt">Batch settlement &amp; payouts</span><span class="bar" aria-hidden="true"></span></button>
+      <ol class="flow reveal" aria-label="How a tip moves">
+        <li class="fnode">
+          <span class="fn-num" aria-hidden="true">1</span>
+          <h3>Pre-fund once</h3>
+          <p>A reader adds $10 to a PennyPay balance with one card payment.</p>
+          <code class="fn-data">balance +$10.00 · 1 card charge</code>
+        </li>
+        <li class="fnode">
+          <span class="fn-num" aria-hidden="true">2</span>
+          <h3>Tip in one click</h3>
+          <p>On an article, the reader taps 5¢. It moves from their balance to the author. No new card charge.</p>
+          <code class="fn-data">reader −$0.05 → author +$0.05</code>
+        </li>
+        <li class="fnode">
+          <span class="fn-num" aria-hidden="true">3</span>
+          <h3>Ledger settles</h3>
+          <p>The author’s balance grows with each tip. Balances settle in batches and pay out to a bank account.</p>
+          <code class="fn-data">batch settlement → bank payout</code>
+        </li>
+      </ol>
+
+      <figure class="ledger-ex reveal">
+        <figcaption><span class="lx-title">Example ledger</span><span class="lx-note">One reader and one author. Illustrative figures.</span></figcaption>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="Example ledger">
+          <table class="tbl">
+            <thead><tr><th scope="col">Event</th><th scope="col" class="num">Reader balance</th><th scope="col" class="num">Author balance</th><th scope="col">Card charge</th></tr></thead>
+            <tbody>
+              <tr><td>Reader adds $10.00 by card</td><td class="num">$10.00</td><td class="num">$0.00</td><td>Yes, once</td></tr>
+              <tr><td>Reader tips 5¢ on an article</td><td class="num">$9.95</td><td class="num">$0.05</td><td>No</td></tr>
+              <tr><td>Reader tips 25¢ on a video</td><td class="num">$9.70</td><td class="num">$0.30</td><td>No</td></tr>
+              <tr><td>Other readers tip the author</td><td class="num">$9.70</td><td class="num">$41.30</td><td>No</td></tr>
+              <tr><td>Batch settlement pays the author</td><td class="num">$9.70</td><td class="num">Paid to bank</td><td>No</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="stage" id="stage">
-          <div class="panel is-active" role="tabpanel" id="sp1" aria-labelledby="st1" aria-hidden="false">
-            <div class="panel-top"><p class="panel-text">Users load a PennyPay wallet once. One standard card or bank transaction covers hundreds of tips.</p><span class="big-num" aria-hidden="true">01</span></div>
-            <div class="viz" aria-hidden="true">
-              <div class="wallet"><div class="flex justify-between items-center"><span class="w-brand">PennyPay</span><span class="brand-mark" style="width:22px;height:22px"><svg class="coin-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg></span></div><div class="w-fill"><span></span></div></div>
-              <div class="stack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            </div>
-          </div>
-          <div class="panel" role="tabpanel" id="sp2" aria-labelledby="st2" aria-hidden="true">
-            <div class="panel-top"><p class="panel-text">A tip button sits next to content. Each tap calls the PennyPay API and moves funds between hosted wallets, with no card charge per tip.</p><span class="big-num" aria-hidden="true">02</span></div>
-            <div class="chips" role="radiogroup" aria-label="Preferred tip amount">
-              <button type="button" class="chip" role="radio" aria-checked="true" data-amt="1" data-label="1¢">1¢</button>
-              <button type="button" class="chip" role="radio" aria-checked="false" data-amt="5" data-label="5¢" tabindex="-1">5¢</button>
-              <button type="button" class="chip" role="radio" aria-checked="false" data-amt="25" data-label="25¢" tabindex="-1">25¢</button>
-              <button type="button" class="chip" role="radio" aria-checked="false" data-amt="100" data-label="$1" tabindex="-1">$1</button>
-              <button type="button" class="chip" role="radio" aria-checked="false" data-amt="300" data-label="$3" tabindex="-1">$3</button>
-            </div>
-            <div class="viz items-end justify-between">
-              <div class="post" id="post">
-                <div class="media" aria-hidden="true"></div>
-                <div class="lines" aria-hidden="true"><span></span><span></span></div>
-                <div class="actions"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" class="tip-btn" id="tipBtn"><span class="coin-dot" aria-hidden="true"></span><span id="tipLabel">1¢</span></button></div>
-              </div>
-              <div class="tip-count" id="sentTotal" aria-live="polite">0¢</div>
-            </div>
-          </div>
-          <div class="panel" role="tabpanel" id="sp3" aria-labelledby="st3" aria-hidden="true">
-            <div class="panel-top"><p class="panel-text">Tips settle in batches on a set schedule, split by rule between the creator, the host platform, and PennyPay, then pay out to bank accounts.</p><span class="big-num" aria-hidden="true">03</span></div>
-            <div class="viz justify-between items-end" aria-hidden="true">
-              <div class="bars"><i style="--h:18%;--i:0"></i><i style="--h:30%;--i:1"></i><i style="--h:26%;--i:2"></i><i style="--h:44%;--i:3"></i><i style="--h:52%;--i:4"></i><i style="--h:66%;--i:5"></i><i style="--h:80%;--i:6"></i><i style="--h:96%;--i:7"></i></div>
-              <div class="payout"><span class="line"></span><span class="brand-mark" style="width:30px;height:30px"><svg class="coin-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <p class="tbl-foot">Payouts are made after platform and service fees.</p>
+      </figure>
 
       <!-- Behind the screens: animated walkthrough -->
       <div class="bts" id="bts">
@@ -822,14 +950,26 @@
         <h2 id="techTitle" class="h-section reveal">The architecture behind each tip</h2>
         <div><a href="#patents" class="btn btn-ghost-dark">View the patents <span class="arrow down" aria-hidden="true">↓</span></a></div>
       </div>
-      <ol class="layer-list" id="layers">
-        <li class="layer"><span class="ln">1</span><div><h3>Card economics</h3><p>Card networks charge a fixed fee per transaction. That makes payments under a few dollars too expensive to process one by one.</p></div></li>
-        <li class="layer"><span class="ln">2</span><div><h3>Publisher integration</h3><p>Publishers embed the tip button next to their content and earn a configurable share of every tip.</p></div></li>
-        <li class="layer"><span class="ln">3</span><div><h3>Transaction layer</h3><p>The patented architecture links each user action to hosted wallets: tip intent, payment initiation, wallet updates, transaction records, and analytics.</p></div>
-          <div class="pipe" id="pipe" aria-hidden="true"><span>user intent</span><span>payment initiation</span><span>wallet updates</span><span>records</span><span>analytics</span></div>
-        </li>
-        <li class="layer"><span class="ln">4</span><div><h3>Settlement rules</h3><p>Balances settle on a schedule or once they cross a threshold. Each party’s share is set by rule, so creators get paid across every site they publish on.</p></div></li>
-      </ol>
+      <div class="spec min-w-0">
+        <dl class="spec-grid">
+          <div><dt>Card economics</dt><dd>Card networks charge a fixed fee per transaction. That makes payments under a few dollars too expensive to process one by one.</dd></div>
+          <div><dt>Pre-funded balances</dt><dd>Readers fund a balance once. Each tip is a ledger entry between hosted wallets, not a new card charge.</dd></div>
+          <div><dt>Publisher integration</dt><dd>Publishers embed the tip button next to their content and earn a configurable share of every tip.</dd></div>
+          <div><dt>Settlement rules</dt><dd>Balances settle on a schedule or once they cross a threshold. Each party’s share is set by rule.</dd></div>
+        </dl>
+        <figure class="code">
+          <figcaption><span>Example tip record</span><span class="code-note">Illustrative</span></figcaption>
+          <pre tabindex="0"><code><span class="c-p">{</span>
+  <span class="c-k">"event"</span>: <span class="c-s">"tip.sent"</span>,
+  <span class="c-k">"amount_usd"</span>: <span class="c-n">0.05</span>,
+  <span class="c-k">"from"</span>: <span class="c-s">"reader_wallet"</span>,
+  <span class="c-k">"to"</span>: <span class="c-s">"author_wallet"</span>,
+  <span class="c-k">"site"</span>: <span class="c-s">"riverside-ledger"</span>,
+  <span class="c-k">"card_charge"</span>: <span class="c-b">false</span>,
+  <span class="c-k">"settles_in"</span>: <span class="c-s">"next batch"</span>
+<span class="c-p">}</span></code></pre>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -850,7 +990,7 @@
         </div>
         <div class="u-panel" role="tabpanel" id="uPanel" aria-labelledby="ut-investors">
           <svg class="watermark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
-          <div class="p-swap min-w-0" id="pSwapA"><h3 class="p-head" id="pHead">A transaction layer for digital media.</h3></div>
+          <div class="p-swap min-w-0" id="pSwapA"><h3 class="p-head" id="pHead">A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.</h3></div>
           <div class="p-swap flex flex-col gap-7 min-w-0" id="pSwapB">
             <p class="body-copy" id="pBody">PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.</p>
             <div class="u-meta">
@@ -895,47 +1035,67 @@
   </section>
 
   <!-- 05 PATENTS -->
-  <section id="patents" data-anchor class="band-dark patents sec" aria-labelledby="patTitle">
-    <svg class="watermark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
+  <section id="patents" data-anchor class="band-paper patents sec" aria-labelledby="patTitle">
     <div class="wrap">
       <div class="pat-grid">
         <div class="flex flex-col gap-6 min-w-0">
           <span class="eyebrow">Patents</span>
-          <h2 id="patTitle" class="h-section reveal">PennyPay’s core asset: <span class="accent" style="color:var(--penny-light)">protected platform architecture.</span></h2>
+          <h2 id="patTitle" class="h-section pat-h">Patented ledger technology designed to settle sub-dollar transactions without losing profits to credit card processing fees.</h2>
           <p class="body-copy">PennyPay holds two issued U.S. patents with an October 28, 2018 priority date. They cover how tips on third-party content move through hosted wallets and settle automatically among every party.</p>
         </div>
       </div>
-      <div class="pat-cards reveal">
-        <article class="pcard">
-          <div class="pc-top"><span>U.S. Patent No.</span><span class="pc-tag">Original patent</span></div>
-          <p class="pc-num">11,875,330</p>
-          <h3 class="pc-title">Systems and methods for a micropayment solution for media applications</h3>
-          <dl class="pc-meta"><div><dt>Granted</dt><dd>Jan 16, 2024</dd></div><div><dt>Filed</dt><dd>Oct 28, 2019</dd></div><div><dt>Claims</dt><dd>11</dd></div></dl>
-          <ul class="pc-list"><li><span class="pc-dot penny-img" aria-hidden="true"></span>Tip button presented alongside a creator’s content</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Selectable tip amounts from $0.01 to $3.00</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Consumer and creator wallets hosted by a central platform</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Automatic settlement at a threshold, split by rule set</li></ul>
-          <a class="btn btn-penny pc-cta" href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/11875330" target="_blank" rel="noopener"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M3 1h8l5 5v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 1v5h5" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="9" y="15.5" text-anchor="middle" font-size="5.2" font-weight="700" fill="currentColor" font-family="Inter, sans-serif">PDF</text></svg>View Official USPTO Grant (PDF)<span class="sr-only"> for U.S. Patent No. 11,875,330, opens in a new tab</span></a>
+      <div class="grants reveal">
+        <article class="grant">
+          <header class="gr-head"><p class="gr-kind">United States Patent · Original</p><p class="gr-num">US 11,875,330 B2</p></header>
+          <h3 class="gr-title">Systems and methods for a micropayment solution for media applications</h3>
+          <p class="gr-scope">Covers tips of $0.01 to $3.00 sent from a button beside a creator’s content. A central platform hosts consumer and creator wallets and moves funds between them for users. Balances settle automatically, split by rule between creator, website host, and platform.</p>
+          <dl class="gr-meta">
+            <div><dt>Issued</dt><dd>January 16, 2024</dd></div>
+            <div><dt>Filed</dt><dd>October 28, 2019</dd></div>
+            <div><dt>Application</dt><dd>16/665,584</dd></div>
+            <div><dt>Assignee</dt><dd>PennyPay, Inc.</dd></div>
+          </dl>
+          <a class="gr-link" href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/11875330" target="_blank" rel="noopener">View the USPTO grant (PDF) <span aria-hidden="true">↗</span><span class="sr-only"> for US 11,875,330, opens in a new tab</span></a>
         </article>
-        <article class="pcard">
-          <div class="pc-top"><span>U.S. Patent No.</span><span class="pc-tag">Continuation</span></div>
-          <p class="pc-num">12,169,821</p>
-          <h3 class="pc-title">Systems and methods for a micropayment solution for media applications</h3>
-          <dl class="pc-meta"><div><dt>Granted</dt><dd>Dec 17, 2024</dd></div><div><dt>Filed</dt><dd>Dec 1, 2023</dd></div><div><dt>Claims</dt><dd>19</dd></div></dl>
-          <ul class="pc-list"><li><span class="pc-dot penny-img" aria-hidden="true"></span>Extends coverage to payments of any amount</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Web and mobile applications, including in-app invoicing</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Multiple transaction networks, including card and bank rails</li><li><span class="pc-dot penny-img" aria-hidden="true"></span>Transaction data tracking and analysis for creators and consumers</li></ul>
-          <a class="btn btn-penny pc-cta" href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12169821" target="_blank" rel="noopener"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M3 1h8l5 5v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 1v5h5" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="9" y="15.5" text-anchor="middle" font-size="5.2" font-weight="700" fill="currentColor" font-family="Inter, sans-serif">PDF</text></svg>View Official USPTO Grant (PDF)<span class="sr-only"> for U.S. Patent No. 12,169,821, opens in a new tab</span></a>
+        <article class="grant">
+          <header class="gr-head"><p class="gr-kind">United States Patent · Continuation</p><p class="gr-num">US 12,169,821 B2</p></header>
+          <h3 class="gr-title">Systems and methods for a micropayment solution for media applications</h3>
+          <p class="gr-scope">Extends the same method to payments of any amount. Covers web and mobile apps, in-app invoicing, and transaction networks including card and bank rails. Adds tracking and analysis of transaction data.</p>
+          <dl class="gr-meta">
+            <div><dt>Issued</dt><dd>December 17, 2024</dd></div>
+            <div><dt>Filed</dt><dd>December 1, 2023</dd></div>
+            <div><dt>Application</dt><dd>18/526,451</dd></div>
+            <div><dt>Assignee</dt><dd>PennyPay, Inc.</dd></div>
+          </dl>
+          <a class="gr-link" href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12169821" target="_blank" rel="noopener">View the USPTO grant (PDF) <span aria-hidden="true">↗</span><span class="sr-only"> for US 12,169,821, opens in a new tab</span></a>
         </article>
       </div>
-      <div class="evidence reveal">
-        <div class="min-w-0 ev-copy">
-          <h3>Independent evaluation found substantial interest.</h3>
-          <p class="body-copy" style="color:var(--forest)">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and surveyed website users aged 18–34. The market is the sum of many small, repeat payments across digital platforms.</p>
-          <div class="agg" id="agg" aria-hidden="true"></div>
-          <p class="ev-src">Source: Notre Dame IDEA Center technology evaluation and user survey (ages 18–34). Full report available on request.</p>
+      <p class="grants-foot">Inventors: Robert A. Musiala Jr. and John H. Kuk. Priority date October 28, 2018. Summaries are plain-language and not legal advice; the issued claims control.</p>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" class="band-wash sec" aria-labelledby="resTitle">
+    <div class="wrap">
+      <div class="research">
+        <div class="res-head">
+          <span class="eyebrow">Research</span>
+          <h2 id="resTitle" class="h-section">What an independent evaluation found</h2>
+          <p class="body-copy">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and market. As part of that work, it surveyed website users aged 18 to 34 about tipping creators online.</p>
+          <!-- TODO(PennyPay): add the survey sample size and fielding date here, e.g. "Survey of N users, fielded Month YYYY." -->
         </div>
-        <dl class="stats" id="stats">
-          <div class="stat"><dt class="sr-only">Wish they could easily tip creators</dt><dd class="stat-num"><span data-count="76.83" data-dec="2">76.83</span>%</dd><dd class="stat-lbl">wish they could easily tip creators whose posts they like</dd></div>
-          <div class="stat"><dt class="sr-only">Would sign up</dt><dd class="stat-num"><span data-count="70.37" data-dec="2">70.37</span>%</dd><dd class="stat-lbl">would “definitely” or “probably” sign up and use PennyPay to tip</dd></div>
-          <div class="stat"><dt class="sr-only">Projected tips per user</dt><dd class="stat-num">$<span data-count="45.50" data-dec="2">45.50</span></dd><dd class="stat-lbl">projected annual tips per user, at about 1.68 tips a day</dd></div>
-          <div class="stat"><dt class="sr-only">Estimated revenue opportunity</dt><dd class="stat-num">$<span data-count="103.5" data-dec="1">103.5</span>M–$<span data-count="950" data-dec="0">950</span>M</dd><dd class="stat-lbl">estimated annual revenue opportunity</dd></div>
-        </dl>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="Research findings">
+          <table class="tbl res-tbl" id="stats">
+            <thead><tr><th scope="col" class="num">Result</th><th scope="col">Finding</th><th scope="col">Type</th></tr></thead>
+            <tbody>
+              <tr><td class="num res-n"><span data-count="76.83" data-dec="2">76.83</span>%</td><td>of respondents said they wish they could easily tip creators whose posts they like.</td><td>Survey response</td></tr>
+              <tr><td class="num res-n"><span data-count="70.37" data-dec="2">70.37</span>%</td><td>said they would “definitely” or “probably” sign up and use PennyPay to tip.</td><td>Survey response</td></tr>
+              <tr><td class="num res-n">$<span data-count="45.50" data-dec="2">45.50</span></td><td>projected annual tips per user, at about 1.68 tips a day.</td><td>Projection from survey</td></tr>
+              <tr><td class="num res-n">$<span data-count="103.5" data-dec="1">103.5</span>M–$<span data-count="950" data-dec="0">950</span>M</td><td>estimated annual revenue opportunity.</td><td>Market estimate</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-foot">Source: Notre Dame IDEA Center technology evaluation and user survey. The full report is available on request.</p>
       </div>
     </div>
   </section>
@@ -987,9 +1147,6 @@
   <!-- CONTACT -->
   <section id="contact" data-anchor class="band-dark final sec" aria-labelledby="finalTitle">
     <svg class="watermark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
-    <div class="final-coins" aria-hidden="true">
-      <i style="--x:8%;--s:22px;--d:19s;animation-delay:-3s"></i><i style="--x:22%;--s:12px;--d:15s;animation-delay:-9s"></i><i style="--x:41%;--s:30px;--d:24s;animation-delay:-14s"></i><i style="--x:63%;--s:16px;--d:17s;animation-delay:-5s"></i><i style="--x:78%;--s:26px;--d:22s;animation-delay:-18s"></i><i style="--x:91%;--s:14px;--d:16s;animation-delay:-11s"></i>
-    </div>
     <div class="wrap final-grid">
       <h2 id="finalTitle" class="h-display reveal">Talk to the <span class="accent" style="color:var(--penny-light)">founding team.</span></h2>
       <div class="flex flex-col gap-8 min-w-0">
@@ -1133,180 +1290,47 @@
     if (secIds.indexOf(id) > -1) setActive(id);
   });
 
-  /* ---------- Hero canvas: pennies on flight paths between phones ---------- */
-  (function heroCanvas() {
-    var cv = document.getElementById('flow'); if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext('2d');
-    var LW = 540, LH = 600, scale = 1, dpr = 1;
-    var phones = [
-      { x: 24, y: 28, w: 158, h: 318, kind: 'video', depth: 10, phase: 0 },
-      { x: 360, y: 92, w: 158, h: 318, kind: 'grid', depth: 18, phase: 2.1 },
-      { x: 190, y: 262, w: 158, h: 318, kind: 'text', depth: 26, phase: 4.2 }
-    ];
-    var routes = [[0, 1, -1], [1, 2, -1], [2, 0, -1], [1, 0, 1], [0, 2, 1], [2, 1, 1]];
-    var coins = [], ripples = [], floats = [], pulses = [0, 0, 0];
-    var mouse = { x: 0, y: 0, tx: 0, ty: 0, inside: false };
-    var boost = 0, lastY = window.scrollY, total = 0, counter = $('#tipCounter');
-    var running = false, visible = true, lastSpawn = 0, t0 = performance.now(), hoverPhone = -1;
-    function cssUrl(v) { var m = getComputedStyle(document.documentElement).getPropertyValue(v).match(/url\(["']?([^"')]+)["']?\)/); return m ? m[1] : ''; }
-    var pf = new Image(), pbk = new Image();
-    pf.onload = pbk.onload = function () { if (!running) draw(performance.now()); };
-    pf.src = cssUrl('--penny-front'); pbk.src = pf.src;
-    function ready(img) { return img.complete && img.naturalWidth > 0; }
-
-    function resize() { var r = cv.getBoundingClientRect(); if (!r.width) return; dpr = Math.min(window.devicePixelRatio || 1, 2); scale = r.width / LW; cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.width * (LH / LW) * dpr); if (!running) draw(performance.now()); }
-    function phonePos(i, t) { var p = phones[i]; var bob = reduce ? 0 : Math.sin(t / 1400 + p.phase) * 5; return { x: p.x + mouse.x * p.depth, y: p.y + bob + mouse.y * p.depth * .6 }; }
-    function tipPoint(i, t) { var p = phones[i], o = phonePos(i, t); return { x: o.x + p.w - 30, y: o.y + p.h * .64 }; }
-    function ctrl(a, b, sign) { var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1, k = .32 * len * sign; return { x: mx - dy / len * k, y: my + dx / len * k - 30 }; }
-    function bez(a, c, b, t) { var u = 1 - t; return { x: u * u * a.x + 2 * u * t * c.x + t * t * b.x, y: u * u * a.y + 2 * u * t * c.y + t * t * b.y }; }
-    function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
-    function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
-    function spawn(from, now) {
-      var opts = []; routes.forEach(function (r, i) { if (from == null || r[0] === from) opts.push(i); });
-      var ri = opts[Math.floor(Math.random() * opts.length)];
-      coins.push({ r: ri, t: 0, sp: .00042 + Math.random() * .00022, size: 9 + Math.random() * 4, trail: [], turns: 1.5 + Math.random() * 2, ph: Math.random() * 6.28 });
-      pulses[routes[ri][0]] = 1;
+  /* ---------- Hero: live tipping demo ---------- */
+  (function tipDemo() {
+    var root = $('#demo'); if (!root) return;
+    var wEl = $('#dWallet'), cEl = $('#dCreator'), st = $('#dStatus'), reset = $('#dReset'), btns = $$('.tipb', root);
+    var START = 500, wallet = START, earned = 0, tips = 0;
+    var money = function (c) { return '$' + (c / 100).toFixed(2); };
+    var label = function (c) { return c < 100 ? c + '¢' : money(c); };
+    function roll(el, from, to) {
+      el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+      if (reduce) { el.textContent = money(to); return; }
+      var t0 = null;
+      (function f(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / 650), e = 1 - Math.pow(1 - k, 3); el.textContent = money(Math.round(from + (to - from) * e)); if (k < 1) requestAnimationFrame(f); })(performance.now());
     }
-    function drawPhone(i, t) {
-      var p = phones[i], o = phonePos(i, t), x = o.x, y = o.y, w = p.w, h = p.h, hot = hoverPhone === i;
-      ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 18; rr(x, y, w, h, 26); ctx.fillStyle = 'rgba(20,56,38,.72)'; ctx.fill(); ctx.restore();
-      rr(x, y, w, h, 26); ctx.lineWidth = 1.4; ctx.strokeStyle = hot ? 'rgba(201,138,94,.75)' : 'rgba(155,184,158,.38)'; ctx.stroke();
-      rr(x + 7, y + 7, w - 14, h - 14, 20); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(155,184,158,.14)'; ctx.stroke();
-      rr(x + w / 2 - 22, y + 13, 44, 9, 4.5); ctx.fillStyle = 'rgba(155,184,158,.22)'; ctx.fill();
-      var sx = x + 16, sw = w - 32, sy = y + 34;
-      ctx.fillStyle = 'rgba(155,184,158,.13)'; ctx.strokeStyle = 'rgba(155,184,158,.16)';
-      ctx.beginPath(); ctx.arc(sx + 9, sy + 9, 9, 0, 7); ctx.fill(); rr(sx + 24, sy + 4, 56, 6, 3); ctx.fill(); rr(sx + 24, sy + 13, 34, 5, 2.5); ctx.fill();
-      var my = sy + 28;
-      if (p.kind === 'video') {
-        rr(sx, my, sw, 128, 12); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(sx + sw / 2 - 8, my + 52); ctx.lineTo(sx + sw / 2 + 12, my + 64); ctx.lineTo(sx + sw / 2 - 8, my + 76); ctx.closePath(); ctx.fillStyle = 'rgba(242,237,228,.22)'; ctx.fill();
-        ctx.fillStyle = 'rgba(155,184,158,.13)'; rr(sx, my + 140, sw * .9, 6, 3); ctx.fill(); rr(sx, my + 152, sw * .6, 6, 3); ctx.fill(); rr(sx, my + 196, sw, 50, 10); ctx.fill();
-      } else if (p.kind === 'grid') {
-        var g = 4, cw = (sw - g * 2) / 3; for (var r = 0; r < 4; r++) for (var c = 0; c < 3; c++) { rr(sx + c * (cw + g), my + r * (cw + g), cw, cw, 5); ctx.fill(); } rr(sx, my + 4 * (cw + g) + 6, sw * .8, 6, 3); ctx.fill();
-      } else {
-        for (var k = 0; k < 3; k++) { var by = my + k * 74; ctx.beginPath(); ctx.arc(sx + 7, by + 7, 7, 0, 7); ctx.fill(); rr(sx + 20, by + 3, sw - 20, 6, 3); ctx.fill(); rr(sx + 20, by + 15, sw - 34, 6, 3); ctx.fill(); rr(sx + 20, by + 27, sw - 50, 6, 3); ctx.fill(); ctx.beginPath(); ctx.moveTo(sx, by + 62); ctx.lineTo(sx + sw, by + 62); ctx.stroke(); }
-      }
-      var tp = tipPoint(i, t);
-      ctx.strokeStyle = 'rgba(155,184,158,.4)'; ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.arc(tp.x - 64, tp.y, 7, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.arc(tp.x - 40, tp.y, 7, 0, 7); ctx.stroke();
-      var pu = pulses[i];
-      if (pu > 0) { ctx.beginPath(); ctx.arc(tp.x, tp.y, 13 + (1 - pu) * 16, 0, 7); ctx.strokeStyle = 'rgba(201,138,94,' + (pu * .7).toFixed(3) + ')'; ctx.lineWidth = 1.5; ctx.stroke(); }
-      var pr = 13 + pu * 2.5;
-      if (ready(pf)) { ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3; ctx.drawImage(pf, tp.x - pr, tp.y - pr, pr * 2, pr * 2); ctx.restore(); }
-      else { ctx.beginPath(); ctx.arc(tp.x, tp.y, 13, 0, 7); ctx.fillStyle = '#AB6C43'; ctx.fill(); }
+    function fly(btn) {
+      if (reduce) return;
+      var a = btn.getBoundingClientRect(), b = cEl.getBoundingClientRect(), r = root.getBoundingClientRect();
+      var c = document.createElement('i'); c.className = 'demo-fly';
+      c.style.left = (a.left - r.left + a.width / 2 - 12) + 'px'; c.style.top = (a.top - r.top + a.height / 2 - 12) + 'px';
+      c.style.setProperty('--dx', (b.right - a.left - a.width / 2 - 20) + 'px'); c.style.setProperty('--dy', (b.top - a.top + 2) + 'px');
+      root.appendChild(c); setTimeout(function () { c.remove(); }, 900);
     }
-    function drawCoin(x, y, r, spin) {
-      // a real penny that flips end over end: front face, thin copper edge, then the back
-      var c = Math.cos(spin), sx = Math.max(.07, Math.abs(c)), img = c >= 0 ? pf : pbk;
-      ctx.save(); ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 5;
-      ctx.fillStyle = '#7A3F1F'; ctx.beginPath(); ctx.ellipse(c >= 0 ? -1.4 * (1 - sx) : 1.4 * (1 - sx), 0, r * sx + 1.6 * (1 - sx), r, 0, 0, 7); ctx.fill();
-      ctx.shadowColor = 'transparent';
-      ctx.scale(sx, 1);
-      if (ready(img)) ctx.drawImage(img, -r, -r, r * 2, r * 2);
-      else { ctx.fillStyle = '#AB6C43'; ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fill(); }
-      ctx.restore();
-    }
-    function draw(now) {
-      var t = now - t0;
-      ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0); ctx.clearRect(0, 0, LW, LH);
-      mouse.x += (mouse.tx - mouse.x) * .06; mouse.y += (mouse.ty - mouse.y) * .06;
-      routes.forEach(function (r) {
-        var a = tipPoint(r[0], t), b = tipPoint(r[1], t), c = ctrl(a, b, r[2]), lit = hoverPhone === r[0] || hoverPhone === r[1];
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.quadraticCurveTo(c.x, c.y, b.x, b.y);
-        ctx.setLineDash([]); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(155,184,158,' + (lit ? .28 : .12) + ')'; ctx.stroke();
-        ctx.setLineDash([2, 7]); ctx.lineDashOffset = reduce ? 0 : -t / 40; ctx.lineWidth = 1.3; ctx.strokeStyle = 'rgba(201,138,94,' + (lit ? .75 : .42) + ')'; ctx.stroke(); ctx.setLineDash([]);
+    function sync() { btns.forEach(function (b) { b.disabled = +b.dataset.c > wallet; }); reset.hidden = tips === 0; }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var c = +b.dataset.c; if (c > wallet) return;
+        roll(wEl, wallet, wallet - c); roll(cEl, earned, earned + c);
+        wallet -= c; earned += c; tips++;
+        fly(b);
+        st.classList.add('ok');
+        st.textContent = 'Tip sent! ' + label(c) + ' to Jamie. No card charge.';
+        if (wallet < 5) st.textContent = 'Tip sent! Your demo balance is used up. Reset to try again.';
+        sync();
       });
-      phones.forEach(function (p, i) { drawPhone(i, t); });
-      ripples = ripples.filter(function (rp) { rp.a -= .022; rp.r += 1.1; if (rp.a <= 0) return false; ctx.beginPath(); ctx.arc(rp.x, rp.y, rp.r, 0, 7); ctx.strokeStyle = 'rgba(201,138,94,' + rp.a.toFixed(3) + ')'; ctx.lineWidth = 1.2; ctx.stroke(); return true; });
-      coins = coins.filter(function (cn) {
-        var r = routes[cn.r], a = tipPoint(r[0], t), b = tipPoint(r[1], t), c = ctrl(a, b, r[2]), pt = bez(a, c, b, ease(cn.t));
-        cn.trail.push(pt); if (cn.trail.length > 12) cn.trail.shift();
-        for (var k = 0; k < cn.trail.length - 1; k++) { var q = cn.trail[k]; ctx.beginPath(); ctx.arc(q.x, q.y, cn.size * (k / cn.trail.length) * .55, 0, 7); ctx.fillStyle = 'rgba(201,138,94,' + (k / cn.trail.length * .35).toFixed(3) + ')'; ctx.fill(); }
-        drawCoin(pt.x, pt.y, cn.size * (0.85 + Math.sin(cn.t * Math.PI) * .4), reduce ? 0 : (cn.ph || 0) + cn.t * (cn.turns || 2) * Math.PI * 2);
-        if (cn.t >= 1) { ripples.push({ x: b.x, y: b.y, r: 12, a: .8 }); floats.push({ x: b.x, y: b.y - 18, a: 1 }); pulses[r[1]] = 1; total += 1; if (counter) counter.textContent = total.toLocaleString(); return false; }
-        return true;
-      });
-      ctx.font = '17px "Gideon Roman", Georgia, serif'; ctx.textAlign = 'center';
-      floats = floats.filter(function (f) { f.y -= .55; f.a -= .016; if (f.a <= 0) return false; ctx.fillStyle = 'rgba(242,237,228,' + f.a.toFixed(3) + ')'; ctx.fillText('+1¢', f.x, f.y); return true; });
-      for (var i = 0; i < 3; i++) pulses[i] = Math.max(0, pulses[i] - .025);
-    }
-    var lastNow = performance.now();
-    function loop(now) {
-      if (!running) return;
-      var dt = Math.min(48, now - lastNow); lastNow = now; boost *= .94;
-      if (now - lastSpawn > 620 / (1 + boost + (mouse.inside ? .6 : 0))) { spawn(null, now); lastSpawn = now; }
-      coins.forEach(function (c) { c.t = Math.min(1, c.t + c.sp * dt * (1 + boost * .5)); });
-      draw(now); requestAnimationFrame(loop);
-    }
-    function start() { if (running || reduce) return; running = true; lastNow = performance.now(); requestAnimationFrame(loop); }
-    function stop() { running = false; }
-    function toLogical(e) { var r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / scale, y: (e.clientY - r.top) / scale }; }
-    function phoneAt(pt) { var t = performance.now() - t0; for (var i = 0; i < phones.length; i++) { var o = phonePos(i, t), p = phones[i]; if (pt.x >= o.x && pt.x <= o.x + p.w && pt.y >= o.y && pt.y <= o.y + p.h) return i; } return -1; }
-    cv.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mouse.tx = (e.clientX - r.left) / r.width - .5; mouse.ty = (e.clientY - r.top) / r.height - .5; mouse.inside = true; hoverPhone = phoneAt(toLogical(e)); });
-    cv.addEventListener('pointerleave', function () { mouse.tx = 0; mouse.ty = 0; mouse.inside = false; hoverPhone = -1; });
-    cv.addEventListener('click', function (e) {
-      var pt = toLogical(e), best = 0, bd = Infinity, now = performance.now();
-      for (var i = 0; i < 3; i++) { var tp = tipPoint(i, now - t0), d = Math.hypot(tp.x - pt.x, tp.y - pt.y); if (d < bd) { bd = d; best = i; } }
-      if (reduce) { total += 1; counter.textContent = total.toLocaleString(); return; }
-      for (var k = 0; k < 5; k++) (function (k) { setTimeout(function () { spawn(best, performance.now()); }, k * 90); })(k);
-      boost = Math.min(3, boost + 1.2);
     });
-    window.addEventListener('scroll', function () { var y = window.scrollY; boost = Math.min(3.5, boost + Math.abs(y - lastY) / 60); lastY = y; }, { passive: true });
-    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(cv); else window.addEventListener('resize', resize);
-    resize();
-    [.18, .52, .78, .35, .64, .9].forEach(function (t, i) { coins.push({ r: i, t: t, sp: .0005, size: 10, trail: [], turns: 2, ph: i * .7 }); });
-    draw(performance.now());
-    if (reduce) return;
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible && !document.hidden) start(); else stop(); }, { threshold: 0.05 }).observe(cv); else start();
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!running) draw(performance.now()); });
+    reset.addEventListener('click', function () {
+      roll(wEl, wallet, START); roll(cEl, earned, 0); wallet = START; earned = 0; tips = 0;
+      st.classList.remove('ok'); st.textContent = 'Pick an amount. Your card is not charged for each tip.'; sync();
+      btns[0].focus();
+    });
+    sync();
   })();
-
-  /* ---------- Stepper ---------- */
-  var tabs = $$('.step-tab'), panels = $$('.panel'), cur = 0, auto = !reduce, timer = null, stepsInView = false;
-  function showStep(i, user) {
-    cur = (i + tabs.length) % tabs.length;
-    tabs.forEach(function (t, k) { var on = k === cur; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; t.classList.remove('running'); });
-    panels.forEach(function (p, k) { var on = k === cur; p.setAttribute('aria-hidden', String(!on)); p.classList.toggle('is-active', on); });
-    if (user) { auto = false; clearTimeout(timer); }
-    if (auto && stepsInView) runAuto();
-  }
-  function runAuto() { clearTimeout(timer); var t = tabs[cur]; t.classList.remove('running'); void t.offsetWidth; t.classList.add('running'); timer = setTimeout(function () { showStep(cur + 1); }, 5200); }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { showStep(i, true); });
-    t.addEventListener('keydown', function (e) {
-      var k = e.key;
-      if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); showStep(cur + 1, true); tabs[cur].focus(); }
-      else if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); showStep(cur - 1, true); tabs[cur].focus(); }
-      else if (k === 'Home') { e.preventDefault(); showStep(0, true); tabs[0].focus(); }
-      else if (k === 'End') { e.preventDefault(); showStep(tabs.length - 1, true); tabs[tabs.length - 1].focus(); }
-    });
-  });
-  $('#stage').addEventListener('pointerdown', function () { auto = false; clearTimeout(timer); tabs[cur].classList.remove('running'); });
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { stepsInView = en[0].isIntersecting; if (stepsInView && auto) runAuto(); else { clearTimeout(timer); tabs[cur].classList.remove('running'); } }, { threshold: .35 }).observe($('#stepList'));
-
-  var chips = $$('.chip'), amt = 1, sent = 0;
-  function fmt(c) { return c < 100 ? c + '¢' : '$' + (c / 100).toFixed(2); }
-  chips.forEach(function (c, i) {
-    c.addEventListener('click', function () { chips.forEach(function (x) { x.setAttribute('aria-checked', 'false'); x.tabIndex = -1; }); c.setAttribute('aria-checked', 'true'); c.tabIndex = 0; amt = +c.dataset.amt; $('#tipLabel').textContent = c.dataset.label; });
-    c.addEventListener('keydown', function (e) { var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (d) { e.preventDefault(); var n = chips[(i + d + chips.length) % chips.length]; n.click(); n.focus(); } });
-  });
-  $('#tipBtn').addEventListener('click', function (e) {
-    sent += amt; $('#sentTotal').textContent = fmt(sent); if (reduce) return;
-    var post = $('#post'), b = e.currentTarget.getBoundingClientRect(), pr = post.getBoundingClientRect(), tgt = $('#sentTotal').getBoundingClientRect();
-    var f = document.createElement('i'); f.className = 'fly'; f.style.left = (b.left - pr.left + 8) + 'px'; f.style.top = (b.top - pr.top + 8) + 'px';
-    f.style.setProperty('--dx', (tgt.left + tgt.width / 2 - b.left - 18) + 'px'); f.style.setProperty('--dy', (tgt.top - b.top - 10) + 'px');
-    post.appendChild(f); setTimeout(function () { f.remove(); }, 1000);
-  });
-
-  /* ---------- Technology: rows light up as you scroll through them ---------- */
-  var layers = $$('.layer'), pipeSpans = $$('#pipe span'), pipeTimer = null;
-  function runPipe() { if (pipeTimer || reduce) { if (reduce) pipeSpans.forEach(function (s) { s.classList.add('lit'); }); return; } var i = 0; pipeTimer = setInterval(function () { pipeSpans.forEach(function (s, k) { s.classList.toggle('lit', k === i % (pipeSpans.length + 1)); }); i++; }, 650); }
-  if ('IntersectionObserver' in window) {
-    var lio = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); if (e.target.querySelector('.pipe')) runPipe(); } else if (!reduce) e.target.classList.remove('on'); }); }, { rootMargin: '-30% 0px -30% 0px' });
-    layers.forEach(function (l) { lio.observe(l); });
-  } else layers.forEach(function (l) { l.classList.add('on'); });
 
   /* ---------- Audience filter (Opportunity) ---------- */
   var filters = $$('.filter'), pill = $('#filterPill'), cards = $$('.v-card');
@@ -1319,12 +1343,6 @@
   });
   function syncPill() { var a = $('.filter[aria-pressed="true"]'); if (a) movePill(a); }
   window.addEventListener('resize', syncPill); syncPill(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncPill);
-
-  /* ---------- Aggregation dots ---------- */
-  var agg = $('#agg'); for (var n = 0; n < 96; n++) agg.appendChild(document.createElement('i'));
-  var dots = $$('i', agg);
-  function lightDots() { dots.forEach(function (d, i) { setTimeout(function () { d.classList.add('on'); }, reduce ? 0 : i * 18 + Math.random() * 300); }); }
-  if ('IntersectionObserver' in window && !reduce) { var aggIO = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { lightDots(); aggIO.disconnect(); } }, { threshold: .4 }); aggIO.observe(agg); } else lightDots();
 
   /* ---------- Evidence stats: count up once when visible ---------- */
   (function () {
@@ -1344,7 +1362,7 @@
 
   /* ---------- Uses: audience views with direct #anchors ---------- */
   var personas = {
-    investors: { head: 'A transaction layer for digital media.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
+    investors: { head: 'A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
     creators: { head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'Talk to us as a creator', href: '#contact', role: 'Creator' },
     nonprofits: { head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Discuss a nonprofit pilot', href: '#contact', role: 'Nonprofit' },
     platforms: { head: 'Earn a share of every tip on your platform.', body: 'A PennyPay button gives your users a paid way to engage. They support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Discuss an integration', href: '#contact', role: 'Publisher or platform' },
