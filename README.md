@@ -46,3 +46,9 @@ All styles live in one `<style>` block in `index.html`, ordered tokens → base 
 **Spacing.** 8px scale: `--s1` 4 · `--s2` 8 · `--s3` 12 · `--s4` 16 · `--s5` 24 · `--s6` 32 · `--s7` 40 · `--s8` 48 · `--s9` 64 · `--s10` 80 · `--s11` 96 · `--s12` 128. Sections use `--sec-y` top and bottom; heading-to-content uses `--head-gap`.
 
 **Surfaces.** Pills, chips, tabs and small controls are glass (`--glass-light-*` on light, `--glass-dark-*` on dark). Copper buttons are raised (`--cu-face`, `--cu-shadow`) and carry text only, no coin icon.
+
+**Brand motifs.** The P monogram opens and closes the page: a tinted tile texture (`--p-tile`, used as a mask) and an oversized watermark (`.bigp`) in the hero, the closing section and the footer. The penny coin appears as the flipping coin in the hero, the thread nodes, the fee-bar ends, the coin on the How It Works track and the step numerals.
+
+**Shapes and flow.** Light sections are rounded sheets on Forest (`--sheet-x`, `--sheet-r`). Centred section openings start with a `.thread` (a copper line dropping to a penny) so the eye follows one axis down the page; Technology, Research and Contact stay left-aligned for contrast.
+
+**Motion.** Scroll-triggered only, played once. A small script in `<head>` adds `.motion` when the browser supports it and the visitor has not asked for reduced motion; without it, everything is visible and static. Elements reveal via `data-r` (`up`, `left`, `right`, `scale`, `tilt`), headings rise word by word, the hero coin flips and the P watermarks drift with scroll, and the How It Works penny rides its track as you scroll. Hover/press animation is reserved for things you can click.
