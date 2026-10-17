@@ -7,7 +7,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%20-751%20550%20773%22%3E%3Cg%20transform%3D%22scale%281%2C-1%29%22%20fill%3D%22%23AB6C43%22%3E%3Cpath%20d%3D%22M20%20-2%2028%2019Q116%2018%20129%2063Q141%20104%20141%20283Q141%20611%20120%20635Q101%20651%2070%20651Q63%20651%2054.0%20650.0Q45%20649%2035%20647L45%20667Q76%20663%20179%20658Q183%20658%20203.5%20659.0Q224%20660%20261%20663Q303%20666%20333%20666Q432%20666%20478%20630Q530%20590%20530%20509Q530%20446%20498%20396Q455%20330%20378%20308Q356%20302%20332.5%20298.5Q309%20295%20285%20295Q278%20295%20270.5%20295.5Q263%20296%20255%20297L265%20315Q311%20313%20355%20331Q415%20354%20439%20400Q461%20438%20461%20484Q461%20546%20422%20588Q382%20633%20314%20633Q265%20633%20250%20630Q223%20626%20220%20603Q217%20570%20215.0%20520.0Q213%20470%20213%20403V259Q213%2082%20225%2046Q233%2031%20285%2024Q302%2022%20314.5%2020.5Q327%2019%20335%2019Q344%2019%20347%2020L337%20-1Q324%200%20310.0%201.5Q296%203%20282%204Q255%206%20232.5%207.0Q210%208%20192%208Q185%208%20179.0%208.0Q173%208%20167%207Z%22/%3E%3Crect%20x%3D%22270.4%22%20y%3D%22157.2%22%20width%3D%2242.3%22%20height%3D%22573.3%22/%3E%3Crect%20x%3D%22338.2%22%20y%3D%22157.2%22%20width%3D%2240.3%22%20height%3D%22573.3%22/%3E%3C/g%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.">
-<!-- TODO: if the site moves to pennypaytech.com, update the canonical, og:url and og:image URLs below. -->
 <link rel="canonical" href="https://sara-gold.github.io/pennypay-site/">
 <meta name="theme-color" content="#0D2B1A">
 <meta property="og:type" content="website">
@@ -768,6 +767,29 @@
   @media (min-width: 900px) { .uses-merged { margin-top: 88px; } }
   .p-kick { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--penny-ink); margin-bottom: 14px; }
 
+  /* Less templated: flatter surfaces, fewer repeated devices */
+  .eyebrow::before { display: none; }
+  .js .reveal.pending { transform: none; }
+  .band-light, .band-wash { background-image: none; }
+  .band-dark:not(.hero) { background-image: linear-gradient(180deg, #0F3221 0%, #0B2517 100%); }
+  .btn-forest, .btn-forest:hover { background: var(--forest); box-shadow: none; }
+  .btn-forest:hover { background: var(--forest-2); }
+  .band-dark .btn-forest { background: transparent; box-shadow: inset 0 0 0 1px var(--line-dark); }
+  .flow::before { display: none; }
+  .fn-num { width: auto; height: auto; display: block; background: none; box-shadow: none; font-size: 44px; line-height: 1; color: var(--penny-ink); }
+  .tbl-wrap { border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+  .grant { border-radius: 2px; box-shadow: none; border: 1px solid var(--line); border-top: 3px solid var(--forest); }
+  .u-tab[aria-selected="true"], .bts-tab[aria-selected="true"] { background: transparent; box-shadow: none; }
+  .bts-ctrl { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
+  .bts-ctrl:hover { background: var(--forest); }
+  .demo-post { box-shadow: 0 0 0 1px var(--line); }
+  .people { gap: 0 32px; margin-top: 48px; }
+  .lp, .lp:hover { background: none; box-shadow: none; border-radius: 0; border: 0; border-top: 1px solid var(--line); padding: 22px 0 8px; transform: none; gap: 0; }
+  @media (min-width: 900px) { .lead-grid { grid-template-columns: minmax(0, 1fr); max-width: 760px; gap: 24px; } }
+  @media (min-width: 960px) { .opp-head { grid-template-columns: minmax(0, 1fr); max-width: 820px; gap: 24px; } }
+  @media (min-width: 1100px) { .res-head { grid-row: span 2; } }
+  @media (min-width: 1000px) { .u-tab[aria-selected="true"] { box-shadow: inset 2px 0 0 var(--penny); border-radius: 0; } }
+
   /* With the sidebar open, size big type off the content area, not the whole window */
   @media (min-width: 1200px) {
     .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
@@ -785,7 +807,6 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
 </script>
-<!-- Compiled Tailwind utilities. Kept last in <head> to match the cascade order the Play CDN used. Rebuild: see README. -->
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -815,23 +836,22 @@
 </header>
 
 <main id="top" data-anchor tabindex="-1" style="outline:none">
-  <!-- HERO -->
   <section class="hero band-dark" aria-labelledby="heroTitle">
     <div class="wrap hero-grid">
       <div class="hero-copy flex flex-col gap-8 min-w-0">
         <h1 id="heroTitle" class="h-display">Patented Micropayment Infrastructure <span class="accent">for the Web.</span></h1>
         <p class="lede">Fund a PennyPay balance once. Then tip 1¢ to $3 in one click on any participating article, video, or post. Tips settle in batches behind the scenes, so there is no card fee on each tip.</p>
         <div class="flex flex-wrap gap-4">
-          <a href="#opportunity" class="btn btn-penny"><span class="coin-dot" aria-hidden="true"></span>Explore the Opportunity</a>
+          <a href="#opportunity" class="btn btn-penny"><span class="coin-dot" aria-hidden="true"></span>See who it’s for</a>
           <a href="#how" class="btn btn-ghost-dark">See How It Works <span class="arrow down" aria-hidden="true">↓</span></a>
         </div>
-        <p class="cred"><span class="seal" aria-hidden="true"></span><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Independently evaluated.</span></p>
+        <p class="cred"><span class="seal" aria-hidden="true"></span><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Evaluated by Notre Dame’s IDEA Center.</span></p>
       </div>
       <div class="hero-visual">
         <div class="demo" id="demo" role="group" aria-labelledby="demoTitle">
           <div class="demo-head"><p id="demoTitle" class="demo-tag">Try a tip</p><p class="demo-note">Demo · no real money</p></div>
           <article class="demo-post">
-            <div class="dp-meta"><span class="dp-av" aria-hidden="true">JA</span><div><p class="dp-name">Jamie Alvarez</p><p class="dp-src">The Riverside Ledger · 6 min read</p></div></div>
+            <div class="dp-meta"><div><p class="dp-name">Jamie Alvarez</p><p class="dp-src">The Riverside Ledger · 6 min read</p></div></div>
             <p class="dp-title">How a small-town paper kept its newsroom open</p>
             <p class="dp-ex">Three reporters, one press, and the readers who decided local news was worth paying for.</p>
             <div class="dp-tips" role="group" aria-label="Tip the author">
@@ -854,15 +874,11 @@
     </div>
   </section>
 
-  <!-- INTRO -->
   <section id="intro" class="band-light" aria-labelledby="introTitle">
     <div class="wrap intro-grid">
-      <h2 id="introTitle" class="h-section reveal">Card fees make <span class="accent text-penny">small payments</span> uneconomical.</h2>
+      <h2 id="introTitle" class="h-section reveal">Card fees make small payments uneconomical.</h2>
       <div class="reveal flex flex-col justify-end min-w-0">
-        <p class="body-copy">Audiences like, share, and comment on content all day, and none of it pays the people who made it. Card networks charge a fixed fee on every transaction. On a payment of a few cents, the fee can be larger than the payment. So paid interactions online stay large: subscriptions, donations, purchases. PennyPay handles everything below that line, from 1¢ to $3.</p>
-        <div class="reaction-row" aria-hidden="true">
-          <span class="reaction">♡ likes</span><span class="reaction">✦ reactions</span><span class="reaction">↗ shares</span><span class="reaction">❝ comments</span><span class="reaction" style="border-color:var(--penny);color:var(--penny-ink)">¢ PennyPay</span>
-        </div>
+        <p class="body-copy">People like and share posts all day, and none of it pays whoever made them. Card networks charge a fixed fee on every transaction, and on a payment of a few cents that fee can be bigger than the payment itself. That is why paying for things online still means a subscription or a checkout page. PennyPay is built for the amounts underneath that, from 1¢ to $3.</p>
       </div>
     </div>
     <div class="wrap">
@@ -875,13 +891,11 @@
     </div>
   </section>
 
-  <!-- 01 HOW IT WORKS -->
   <section id="how" data-anchor class="band-light rule-top sec" aria-labelledby="howTitle">
     <div class="wrap">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div class="flex flex-col gap-5 min-w-0">
-          <span class="eyebrow">How It Works</span>
-          <h2 id="howTitle" class="h-section reveal">Three parts, <span class="accent text-penny">one click</span> for the user.</h2>
+          <h2 id="howTitle" class="h-section reveal">How a 5¢ tip gets from a reader to an author.</h2>
         </div>
         <a href="#technology" class="btn btn-forest">See the architecture <span class="arrow down" aria-hidden="true">↓</span></a>
       </div>
@@ -890,24 +904,21 @@
           <span class="fn-num" aria-hidden="true">1</span>
           <h3>Pre-fund once</h3>
           <p>A reader adds $10 to a PennyPay balance with one card payment.</p>
-          <code class="fn-data">balance +$10.00 · 1 card charge</code>
         </li>
         <li class="fnode">
           <span class="fn-num" aria-hidden="true">2</span>
           <h3>Tip in one click</h3>
           <p>On an article, the reader taps 5¢. It moves from their balance to the author. No new card charge.</p>
-          <code class="fn-data">reader −$0.05 → author +$0.05</code>
         </li>
         <li class="fnode">
           <span class="fn-num" aria-hidden="true">3</span>
           <h3>Ledger settles</h3>
           <p>The author’s balance grows with each tip. Balances settle in batches and pay out to a bank account.</p>
-          <code class="fn-data">batch settlement → bank payout</code>
         </li>
       </ol>
 
       <figure class="ledger-ex reveal">
-        <figcaption><span class="lx-title">Example ledger</span><span class="lx-note">One reader and one author. Illustrative figures.</span></figcaption>
+        <figcaption><span class="lx-title">Example ledger</span><span class="lx-note">One reader, one author, one card charge.</span></figcaption>
         <div class="tbl-wrap" tabindex="0" role="region" aria-label="Example ledger">
           <table class="tbl">
             <thead><tr><th scope="col">Event</th><th scope="col" class="num">Reader balance</th><th scope="col" class="num">Author balance</th><th scope="col">Card charge</th></tr></thead>
@@ -923,12 +934,10 @@
         <p class="tbl-foot">Payouts are made after platform and service fees.</p>
       </figure>
 
-      <!-- Behind the screens: animated walkthrough -->
       <div class="bts" id="bts">
         <div class="bts-head">
           <div class="flex flex-col gap-4 min-w-0">
-            <span class="eyebrow">Behind the screens</span>
-            <h3>PennyPay Micropayments Solution</h3>
+            <h3>What happens behind the button</h3>
           </div>
           <div class="bts-ctrls">
             <button type="button" class="bts-ctrl" id="btsPrev" aria-label="Previous scene"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
@@ -947,11 +956,9 @@
     </div>
   </section>
 
-  <!-- 02 TECHNOLOGY -->
   <section id="technology" data-anchor class="band-dark sec" aria-labelledby="techTitle">
     <div class="wrap tech-grid">
       <div class="tech-head flex flex-col gap-6 min-w-0">
-        <span class="eyebrow">Technology</span>
         <h2 id="techTitle" class="h-section reveal">The architecture behind each tip</h2>
         <div><a href="#patents" class="btn btn-ghost-dark">View the patents <span class="arrow down" aria-hidden="true">↓</span></a></div>
       </div>
@@ -962,31 +969,17 @@
           <div><dt>Publisher integration</dt><dd>Publishers embed the tip button next to their content and earn a configurable share of every tip.</dd></div>
           <div><dt>Settlement rules</dt><dd>Balances settle on a schedule or once they cross a threshold. Each party’s share is set by rule.</dd></div>
         </dl>
-        <figure class="code">
-          <figcaption><span>Example tip record</span><span class="code-note">Illustrative</span></figcaption>
-          <pre tabindex="0"><code><span class="c-p">{</span>
-  <span class="c-k">"event"</span>: <span class="c-s">"tip.sent"</span>,
-  <span class="c-k">"amount_usd"</span>: <span class="c-n">0.05</span>,
-  <span class="c-k">"from"</span>: <span class="c-s">"reader_wallet"</span>,
-  <span class="c-k">"to"</span>: <span class="c-s">"author_wallet"</span>,
-  <span class="c-k">"site"</span>: <span class="c-s">"riverside-ledger"</span>,
-  <span class="c-k">"card_charge"</span>: <span class="c-b">false</span>,
-  <span class="c-k">"settles_in"</span>: <span class="c-s">"next batch"</span>
-<span class="c-p">}</span></code></pre>
-        </figure>
       </div>
     </div>
   </section>
 
-  <!-- 03 USE CASES + OPPORTUNITY -->
   <section id="uses" data-anchor class="band-wash sec" aria-labelledby="oppTitle">
     <div class="wrap">
       <div class="opp-head" id="opportunity" data-anchor>
         <div class="flex flex-col gap-5 min-w-0">
-          <span class="eyebrow">Use cases</span>
-          <h2 id="oppTitle" class="h-section reveal">A paid action next to <span class="accent text-putney">like, share, and comment</span></h2>
+          <h2 id="oppTitle" class="h-section reveal">A paid button next to the like button.</h2>
         </div>
-        <p class="body-copy reveal">Platforms already track every like, share, and comment. PennyPay adds a paid action beside those buttons. Creators, nonprofits, and their host platforms earn from engagement they already have.</p>
+        <p class="body-copy reveal">Every platform already counts likes. PennyPay puts a tip button beside them, so the people who make the work, and the sites that host it, earn from attention they already get.</p>
       </div>
       <div class="uses-grid uses-merged">
         <div class="u-tabs-scroll">
@@ -1001,9 +994,9 @@
         <div class="u-panel" role="tabpanel" id="uPanel" aria-labelledby="ut-investors">
           <div class="p-swap min-w-0" id="pSwapA"><p class="p-kick" id="pKick">Market</p><h3 class="p-head" id="pHead">A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.</h3></div>
           <div class="p-swap flex flex-col gap-7 min-w-0" id="pSwapB">
-            <p class="body-copy" id="pBody">PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.</p>
+            <p class="body-copy" id="pBody">PennyPay holds two issued U.S. patents on pre-funded wallets and rule-based settlement for payments from 1¢ to $3. It earns a share of every tip that moves through the system, on whichever site the tip happens.</p>
             <div class="u-meta">
-              <a href="#contact" class="btn btn-penny" id="pCta" data-role="Investor"><span class="coin-dot" aria-hidden="true"></span><span id="pCtaText">Request an investor conversation</span></a>
+              <a href="#contact" class="btn btn-forest" id="pCta" data-role="Investor"><span id="pCtaText">Request an investor conversation</span></a>
             </div>
           </div>
         </div>
@@ -1011,12 +1004,10 @@
     </div>
   </section>
 
-  <!-- 05 PATENTS -->
   <section id="patents" data-anchor class="band-paper patents sec" aria-labelledby="patTitle">
     <div class="wrap">
       <div class="pat-grid">
         <div class="flex flex-col gap-6 min-w-0">
-          <span class="eyebrow">Patents</span>
           <h2 id="patTitle" class="h-section pat-h">Patented ledger technology designed to settle sub-dollar transactions without losing profits to credit card processing fees.</h2>
           <p class="body-copy">PennyPay holds two issued U.S. patents with an October 28, 2018 priority date. They cover how tips on third-party content move through hosted wallets and settle automatically among every party.</p>
         </div>
@@ -1047,28 +1038,24 @@
           <a class="gr-link" href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12169821" target="_blank" rel="noopener">View the USPTO grant (PDF) <span aria-hidden="true">↗</span><span class="sr-only"> for US 12,169,821, opens in a new tab</span></a>
         </article>
       </div>
-      <p class="grants-foot">Inventors: Robert A. Musiala Jr. and John H. Kuk. Priority date October 28, 2018. Summaries are plain-language and not legal advice; the issued claims control.</p>
+      <p class="grants-foot">Inventors: Robert A. Musiala Jr. and John H. Kuk. These are plain-language summaries; the issued claims control.</p>
     </div>
   </section>
 
-  <!-- RESEARCH -->
   <section id="research" class="band-wash sec" aria-labelledby="resTitle">
     <div class="wrap">
       <div class="research">
         <div class="res-head">
-          <span class="eyebrow">Research</span>
           <h2 id="resTitle" class="h-section">What an independent evaluation found</h2>
           <p class="body-copy">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and market. As part of that work, it surveyed website users aged 18 to 34 about tipping creators online.</p>
-          <!-- TODO(PennyPay): add the survey sample size and fielding date here, e.g. "Survey of N users, fielded Month YYYY." -->
         </div>
         <div class="tbl-wrap" tabindex="0" role="region" aria-label="Research findings">
           <table class="tbl res-tbl" id="stats">
             <thead><tr><th scope="col" class="num">Result</th><th scope="col">Finding</th><th scope="col">Type</th></tr></thead>
             <tbody>
-              <tr><td class="num res-n"><span data-count="76.83" data-dec="2">76.83</span>%</td><td>of respondents said they wish they could easily tip creators whose posts they like.</td><td>Survey response</td></tr>
-              <tr><td class="num res-n"><span data-count="70.37" data-dec="2">70.37</span>%</td><td>said they would “definitely” or “probably” sign up and use PennyPay to tip.</td><td>Survey response</td></tr>
-              <tr><td class="num res-n">$<span data-count="45.50" data-dec="2">45.50</span></td><td>projected annual tips per user, at about 1.68 tips a day.</td><td>Projection from survey</td></tr>
-              <tr><td class="num res-n">$<span data-count="103.5" data-dec="1">103.5</span>M–$<span data-count="950" data-dec="0">950</span>M</td><td>estimated annual revenue opportunity.</td><td>Market estimate</td></tr>
+              <tr><td class="num res-n">77%</td><td>of respondents said they wish they could easily tip creators whose posts they like.</td><td>Survey response</td></tr>
+              <tr><td class="num res-n">70%</td><td>said they would “definitely” or “probably” sign up and use PennyPay to tip.</td><td>Survey response</td></tr>
+              <tr><td class="num res-n">$45.50</td><td>projected annual tips per user, at about 1.68 tips a day.</td><td>Projection from survey</td></tr>
             </tbody>
           </table>
         </div>
@@ -1077,23 +1064,16 @@
     </div>
   </section>
 
-  <!-- 06 LEADERSHIP -->
   <section id="leadership" data-anchor class="band-light sec" aria-labelledby="leadTitle">
     <div class="wrap">
       <div class="lead-grid">
         <div class="flex flex-col gap-6 min-w-0">
-          <span class="eyebrow">Leadership</span>
-          <h2 id="leadTitle" class="h-section reveal">Operators from finance, strategy, and growth.</h2>
+          <h2 id="leadTitle" class="h-section reveal">The people behind PennyPay.</h2>
         </div>
-        <p class="body-copy reveal">PennyPay’s team has run finance, corporate strategy, growth, and operations, and has evaluated technology for commercial potential.</p>
+        <p class="body-copy reveal">Robert Musiala co-invented the patented system. The rest of the team comes from finance and corporate strategy, and has evaluated new technology for commercial potential.</p>
       </div>
-      <!-- TODO: needs real content from PennyPay: titles and one-line bios for Haj Young and John McCareins, LinkedIn URLs, and headshots.
-           To add a photo, replace the <span class="lp-mono">…</span> with <img class="lp-photo" src="assets/team/name.jpg" alt="">.
-           To add LinkedIn, add <a class="lp-link" href="…">LinkedIn<span class="sr-only"> profile of NAME</span> ↗</a> inside .lp-body.
-           Empty title/bio paragraphs are hidden automatically. -->
       <ul class="people reveal" aria-label="Leadership team">
         <li class="lp">
-          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">RM</span></span>
           <div class="lp-body">
             <h3 class="lp-name">Robert Musiala</h3>
             <p class="lp-title">Founder &amp; Inventor</p>
@@ -1101,7 +1081,6 @@
           </div>
         </li>
         <li class="lp">
-          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">HY</span></span>
           <div class="lp-body">
             <h3 class="lp-name">Elhajamin “Haj” Young</h3>
             <p class="lp-title"></p>
@@ -1109,7 +1088,6 @@
           </div>
         </li>
         <li class="lp">
-          <span class="lp-avatar" aria-hidden="true"><span class="lp-mono">JM</span></span>
           <div class="lp-body">
             <h3 class="lp-name">John McCareins</h3>
             <p class="lp-title"></p>
@@ -1117,18 +1095,14 @@
           </div>
         </li>
       </ul>
-      <div class="disciplines disciplines-sm reveal" aria-label="Backgrounds"><span>Finance</span><span>Strategy</span><span>Growth</span><span>Operations</span><span>Technology evaluation</span></div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" data-anchor class="band-dark final sec" aria-labelledby="finalTitle">
-    <svg class="watermark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="wrap final-grid">
-      <h2 id="finalTitle" class="h-display reveal">Talk to the <span class="accent" style="color:var(--penny-light)">founding team.</span></h2>
+      <h2 id="finalTitle" class="h-display reveal">Talk to the founding team.</h2>
       <div class="flex flex-col gap-8 min-w-0">
-        <p class="body-copy">We’re talking with investors, publishers, platforms, sponsors, creators, and nonprofits about partnerships and pilots. If that’s you, get in touch.</p>
-        <!-- TODO: needs real content from PennyPay. Set CONTACT.endpoint (Formspree URL) and CONTACT.email in the script near the bottom of this file. -->
+        <p class="body-copy">We’re lining up pilots and talking with investors. Tell us who you are and what you’d want to try.</p>
         <form class="cform" id="contactForm" novalidate>
           <div class="cf-row">
             <div class="cf-field"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" required aria-describedby="cfNameErr"><p class="cf-err" id="cfNameErr"></p></div>
@@ -1150,7 +1124,7 @@
           <div class="cf-field"><label for="cfMsg">Message</label><textarea id="cfMsg" name="message" rows="4" required aria-describedby="cfMsgErr"></textarea><p class="cf-err" id="cfMsgErr"></p></div>
           <input type="text" name="_gotcha" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="cf-actions">
-            <button type="submit" class="btn btn-penny" id="cfSubmit"><span class="coin-dot" aria-hidden="true"></span><span id="cfSubmitText">Send message</span></button>
+            <button type="submit" class="btn btn-penny" id="cfSubmit"><span id="cfSubmitText">Send message</span></button>
             <p class="cf-mail" id="cfMail" hidden>Prefer email? <a class="link-ul" id="cfMailLink" href="#"></a></p>
           </div>
           <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
@@ -1169,7 +1143,7 @@
       </div>
       <nav class="foot-col" aria-label="Sections">
         <h3>Sections</h3>
-        <a href="#how">How It Works</a><a href="#technology">Technology</a><a href="#uses">Use cases</a><a href="#opportunity">Opportunity</a><a href="#patents">Patents</a><a href="#leadership">Leadership</a>
+        <a href="#how">How It Works</a><a href="#technology">Technology</a><a href="#uses">Use cases</a><a href="#patents">Patents</a><a href="#leadership">Leadership</a>
       </nav>
       <nav class="foot-col" aria-label="Audiences">
         <h3>Use cases</h3>
@@ -1180,7 +1154,6 @@
 
     <div class="mt-12 flex flex-wrap justify-between gap-4 font-alex text-xs" style="color:rgba(242,237,228,.5)">
       <span>© <span id="yr">2026</span> PennyPay, Inc.</span>
-      <a href="#top" class="link-ul" style="min-height:44px">Back to top ↑</a>
     </div>
   </div>
   <a href="#top" class="to-top" id="toTop" aria-label="Back to top"><span aria-hidden="true">↑</span></a>
@@ -1309,25 +1282,9 @@
     sync();
   })();
 
-  /* ---------- Evidence stats: count up once when visible ---------- */
-  (function () {
-    var nums = $$('#stats [data-count]'); if (!nums.length) return;
-    function run() {
-      nums.forEach(function (el) {
-        var to = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0, t0 = null, dur = 1400;
-        var fmt = function (v) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
-        (function step(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * e); if (k < 1) requestAnimationFrame(step); })(performance.now());
-      });
-    }
-    if (reduce || !('IntersectionObserver' in window)) return; // static final values already in the markup
-    nums.forEach(function (el) { el.textContent = '0'; });
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { run(); io.disconnect(); } }, { threshold: .35 });
-    io.observe($('#stats'));
-  })();
-
   /* ---------- Uses: audience views with direct #anchors ---------- */
   var personas = {
-    investors: { kick: 'Market', head: 'A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
+    investors: { kick: 'Market', head: 'A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.', body: 'PennyPay holds two issued U.S. patents on pre-funded wallets and rule-based settlement for payments from 1¢ to $3. It earns a share of every tip that moves through the system, on whichever site the tip happens.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
     creators: { kick: 'Income', head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'Talk to us as a creator', href: '#contact', role: 'Creator' },
     nonprofits: { kick: 'Giving', head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Discuss a nonprofit pilot', href: '#contact', role: 'Nonprofit' },
     platforms: { kick: 'Engagement', head: 'Earn a share of every tip on your platform.', body: 'A PennyPay button gives your users a paid way to engage. They support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Discuss an integration', href: '#contact', role: 'Publisher or platform' },
@@ -1452,17 +1409,17 @@
     var scenes = [
       {
         title: 'Funding an account', dur: 8200,
-        cap: 'Alice loads her PennyPay wallet with one ordinary card payment. PennyPay converts those dollars and holds them in a hosted wallet tied to her account, ready for tipping.',
+        cap: 'Sam loads their PennyPay wallet with one ordinary card payment. PennyPay converts those dollars and holds them in a hosted wallet tied to their account, ready for tipping.',
         svg: function () {
           var card = '<g id="card" transform="translate(150 150)"><g class="pop"><rect x="-64" y="-40" width="128" height="80" rx="11" class="nf"/>' +
             '<rect x="-48" y="-16" width="24" height="18" rx="4" fill="#C98A5E" opacity=".75"/><rect x="-48" y="14" width="70" height="5" rx="2.5" fill="rgba(155,184,158,.4)"/><rect x="-48" y="24" width="40" height="5" rx="2.5" fill="rgba(155,184,158,.25)"/>' +
-            '<circle cx="36" cy="-20" r="9" fill="rgba(201,138,94,.55)"/><circle cx="48" cy="-20" r="9" fill="rgba(155,184,158,.45)"/></g><text class="lbl" y="-54" text-anchor="middle">Alice’s credit card</text></g>';
+            '<circle cx="36" cy="-20" r="9" fill="rgba(201,138,94,.55)"/><circle cx="48" cy="-20" r="9" fill="rgba(155,184,158,.45)"/></g><text class="lbl" y="-54" text-anchor="middle">Sam’s credit card</text></g>';
           var phone = '<g id="phone" transform="translate(860 150)"><g class="pop"><rect x="-56" y="-100" width="112" height="200" rx="18" class="nf"/>' +
             '<rect x="-16" y="-90" width="32" height="6" rx="3" fill="rgba(155,184,158,.35)"/>' +
             '<text y="-56" text-anchor="middle" class="amt" style="font-size:17px;fill:#C98A5E">PennyPay</text>' +
             '<image class="mini" id="mn1" href="' + PENNY + '" x="-37" y="-40" width="22" height="22"/><image class="mini" id="mn2" href="' + PENNY + '" x="-11" y="-40" width="22" height="22"/><image class="mini" id="mn3" href="' + PENNY + '" x="15" y="-40" width="22" height="22"/>' +
             '<text id="bal" y="18" text-anchor="middle" class="amt" style="font-size:28px">$0.00</text>' +
-            '<text y="44" text-anchor="middle" class="lbl" style="font-size:10px">Alice’s account</text></g></g>';
+            '<text y="44" text-anchor="middle" class="lbl" style="font-size:10px">Sam’s account</text></g></g>';
           var wires = wire('w1', 'M216 150 C 420 108, 620 108, 802 148') + wire('w2', 'M150 192 V 360 H 296') + wire('w3', 'M364 360 H 566') + wire('w4', 'M656 360 H 860 V 254');
           var nodes = card + phone + bank('bank', 330, 360) + wallet('wal', 612, 360, null, 'Bitcoin wallet') +
             text(509, 106, 'wl', '$10 credit card transaction') + text(330, 412, 'lbl', 'Bank') + text(465, 348, 'wl', 'USD → BTC') + text(612, 412, 'lbl', 'Managed by PennyPay');
@@ -1483,14 +1440,14 @@
       },
       {
         title: 'Sending a tip', dur: 10400,
-        cap: 'When Alice taps Tip on Bob’s post, the amount moves between their hosted wallets. It travels over a dedicated payment channel on the Bitcoin Lightning Network. Her card is not charged again.',
+        cap: 'When Sam taps Tip on Jamie’s post, the amount moves between their hosted wallets. It travels over a dedicated payment channel on the Bitcoin Lightning Network. Their card is not charged again.',
         svg: function () {
-          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'Bob’s payment channel · Website A');
+          var chan = '<rect x="250" y="252" width="500" height="150" rx="16" class="chan"/>' + text(500, 428, 'lbl', 'Jamie’s payment channel · Website A');
           var bp = '<g id="bp" transform="translate(895 320)"><g class="pop"><rect x="-27" y="-46" width="54" height="92" rx="11" class="nf"/><rect x="-8" y="-39" width="16" height="4" rx="2" fill="rgba(155,184,158,.35)"/>' +
             '<text id="bpn" class="note amt" y="8" text-anchor="middle" style="font-size:17px;fill:#E7B289">+2¢</text></g></g>';
           var wires = wire('t1', 'M238 80 H 760') + wire('f1', 'M132 230 H 200 V 320 H 316') + wire('t2', 'M404 320 H 596') + wire('n1', 'M684 320 H 866') + wire('n2', 'M895 272 V 160 Q 895 104 840 90');
-          var nodes = chan + person('alice', 200, 80, 'A', 'Alice') + person('bob', 800, 80, 'B', 'Bob') +
-            wallet('aw', 90, 230, '$10.00', 'Alice’s wallet') + wallet('ca', 360, 320, '$0.00', 'Alice') + wallet('cb', 640, 320, '$0.00', 'Bob') + bp +
+          var nodes = chan + person('alice', 200, 80, 'S', 'Sam') + person('bob', 800, 80, 'J', 'Jamie') +
+            wallet('aw', 90, 230, '$10.00', 'Sam’s wallet') + wallet('ca', 360, 320, '$0.00', 'Sam') + wallet('cb', 640, 320, '$0.00', 'Jamie') + bp +
             text(500, 66, 'big', '2¢') + text(500, 306, 'big', '2¢') + text(250, 308, 'wl', '$1.00');
           return frame(wires, nodes);
         },
@@ -1508,19 +1465,19 @@
       },
       {
         title: 'Closing and payout', dur: 9400,
-        cap: 'At the end of each settlement period, Bob’s tips from every site he posts on are pooled. They are split by agreed rules between Bob, the host sites, and PennyPay. Each share is paid out to a bank account in dollars.',
+        cap: 'At the end of each settlement period, Jamie’s tips from every site they post on are pooled. They are split by agreed rules between Jamie, the host sites, and PennyPay. Each share is paid out to a bank account in dollars.',
         svg: function () {
-          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'Bob’s channel · Website A') +
-            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'Bob’s channel · Website B');
+          var boxes = '<rect x="32" y="62" width="206" height="150" rx="14" class="chan"/>' + text(135, 46, 'lbl', 'Jamie’s channel · Website A') +
+            '<rect x="32" y="262" width="206" height="150" rx="14" class="chan"/>' + text(135, 246, 'lbl', 'Jamie’s channel · Website B');
           var wires = wire('pa', 'M180 128 H 300 V 216 H 354') + wire('pb', 'M180 328 H 300 V 244 H 354') +
             wire('x1', 'M444 230 H 500 V 90 H 554') + wire('x2', 'M444 230 H 554') + wire('x3', 'M444 230 H 500 V 370 H 554') +
             wire('y1', 'M646 90 H 786') + wire('y2', 'M646 230 H 786') + wire('y3', 'M646 370 H 786');
-          var nodes = boxes + wallet('wa', 135, 128, '$50.00', 'Bob') + wallet('wb', 135, 328, '$50.00', 'Bob') +
-            wallet('cl', 400, 230, '$0.00', 'Bob · clearing account') +
+          var nodes = boxes + wallet('wa', 135, 128, '$50.00', 'Jamie') + wallet('wb', 135, 328, '$50.00', 'Jamie') +
+            wallet('cl', 400, 230, '$0.00', 'Jamie · clearing account') +
             wallet('s1', 600, 90, '$0.00') + wallet('s2', 600, 230, '$0.00') + wallet('s3', 600, 370, '$0.00') +
             bank('b1', 820, 90) + bank('b2', 820, 230) + bank('b3', 820, 370) +
             text(716, 78, 'wl', 'FX · BTC → USD') + text(716, 218, 'wl', 'FX · BTC → USD') + text(716, 358, 'wl', 'FX · BTC → USD') +
-            '<g id="r1" class="rcpt-g">' + text(866, 88, 'rcpt', 'Bob', 'start') + text(866, 110, 'pct', '80%', 'start') + '</g>' +
+            '<g id="r1" class="rcpt-g">' + text(866, 88, 'rcpt', 'Jamie', 'start') + text(866, 110, 'pct', '80%', 'start') + '</g>' +
             '<g id="r2" class="rcpt-g">' + text(866, 228, 'rcpt', 'Website hosts', 'start') + text(866, 250, 'pct', '10%', 'start') + '</g>' +
             '<g id="r3" class="rcpt-g">' + text(866, 368, 'rcpt', 'PennyPay', 'start') + text(866, 390, 'pct', '10%', 'start') + '</g>';
           return frame(wires, nodes);
@@ -1552,8 +1509,8 @@
             wire('v1', 'M430 117 V 188') + wire('v3', 'M430 237 V 318') + wire('v4', 'M570 318 V 238') + wire('v2', 'M570 188 V 118') +
             wire('a0', 'M90 156 V 316') + wire('e1', 'M124 352 H 171') + wire('e2', 'M259 352 H 386') + wire('lt', 'M474 352 H 526') +
             wire('e3', 'M614 352 H 741') + wire('e4', 'M829 352 H 876') + wire('e5', 'M910 316 V 158');
-          var nodes = web + app + plat + chan + person('alice', 90, 95, 'A', 'Alice') + person('bob', 910, 95, 'B', 'Bob') +
-            bank('bl', 90, 352) + wallet('wl', 215, 352) + wallet('la', 430, 352) + wallet('lb', 570, 352) + text(430, 397, 'lbl', 'Alice') + text(570, 397, 'lbl', 'Bob') + wallet('wr', 785, 352) + bank('br', 910, 352) +
+          var nodes = web + app + plat + chan + person('alice', 90, 95, 'S', 'Sam') + person('bob', 910, 95, 'J', 'Jamie') +
+            bank('bl', 90, 352) + wallet('wl', 215, 352) + wallet('la', 430, 352) + wallet('lb', 570, 352) + text(430, 397, 'lbl', 'Sam') + text(570, 397, 'lbl', 'Jamie') + wallet('wr', 785, 352) + bank('br', 910, 352) +
             text(244, 82, 'wl', '2¢') + text(756, 82, 'wl', '2¢');
           return frame(wires, nodes);
         },
