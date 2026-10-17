@@ -24,3 +24,25 @@ npx tailwindcss@3.4.17 -c tailwind.config.js -i tailwind.input.css -o assets/sit
 ```
 
 Commit the updated `assets/site.css`. GitHub Pages has no build step.
+
+## Design system
+
+All styles live in one `<style>` block in `index.html`, ordered tokens → base → type → surfaces → buttons → navigation → sections. Please extend it rather than adding override blocks at the end; stacked overrides are what made the old stylesheet hard to reason about.
+
+**Colour.** Pages are white (`--white`); alternate light bands use `--tint`. Brand colours are unchanged: Pewter `#9BB89E`, Putney `#4E8060`, Penny `#AB6C43`, Forest `#0D2B1A`. Text uses `--ink` (headings), `--ink-2` (body), `--ink-3` (meta), all AA on white and tint. On dark, use `--on-dark`, `--on-dark-2`, `--on-dark-3`.
+
+**Type.** Weight carries the hierarchy, not just size:
+
+| Role | Font | Weight |
+|---|---|---|
+| Display (hero, closing) | Inter | 600 |
+| Section heading `.h-section` | Inter | 500 |
+| Card / item title | Inter | 600 |
+| Body, lede | Alexandria | 300 |
+| Meta, captions | Alexandria | 300–400 |
+| Labels (uppercase, tracked) | Alexandria | 500 |
+| Figures, step numbers, accents | Gideon Roman | 400 |
+
+**Spacing.** 8px scale: `--s1` 4 · `--s2` 8 · `--s3` 12 · `--s4` 16 · `--s5` 24 · `--s6` 32 · `--s7` 40 · `--s8` 48 · `--s9` 64 · `--s10` 80 · `--s11` 96 · `--s12` 128. Sections use `--sec-y` top and bottom; heading-to-content uses `--head-gap`.
+
+**Surfaces.** Pills, chips, tabs and small controls are glass (`--glass-light-*` on light, `--glass-dark-*` on dark). Copper buttons are raised (`--cu-face`, `--cu-shadow`) and carry text only, no coin icon.
