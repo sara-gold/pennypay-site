@@ -763,6 +763,11 @@
   .res-n { font-family: var(--font-accent); font-size: 26px; color: var(--penny-ink); }
   .res-tbl td:nth-child(3) { white-space: nowrap; color: var(--muted-ink); font-size: 14px; }
 
+  /* Merged Use cases section */
+  .uses-merged { margin-top: 64px; }
+  @media (min-width: 900px) { .uses-merged { margin-top: 88px; } }
+  .p-kick { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--penny-ink); margin-bottom: 14px; }
+
   /* With the sidebar open, size big type off the content area, not the whole window */
   @media (min-width: 1200px) {
     .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
@@ -973,12 +978,17 @@
     </div>
   </section>
 
-  <!-- 03 USES -->
-  <section id="uses" data-anchor class="band-light sec" aria-labelledby="usesTitle">
+  <!-- 03 USE CASES + OPPORTUNITY -->
+  <section id="uses" data-anchor class="band-wash sec" aria-labelledby="oppTitle">
     <div class="wrap">
-      <span class="eyebrow">Use cases</span>
-      <h2 id="usesTitle" class="sr-only">Use cases</h2>
-      <div class="uses-grid">
+      <div class="opp-head" id="opportunity" data-anchor>
+        <div class="flex flex-col gap-5 min-w-0">
+          <span class="eyebrow">Use cases</span>
+          <h2 id="oppTitle" class="h-section reveal">A paid action next to <span class="accent text-putney">like, share, and comment</span></h2>
+        </div>
+        <p class="body-copy reveal">Platforms already track every like, share, and comment. PennyPay adds a paid action beside those buttons. Creators, nonprofits, and their host platforms earn from engagement they already have.</p>
+      </div>
+      <div class="uses-grid uses-merged">
         <div class="u-tabs-scroll">
           <div class="u-tabs" role="tablist" aria-label="Audience" id="uTabs">
             <button class="u-tab" role="tab" aria-selected="true" aria-controls="uPanel" id="ut-investors" data-p="investors"><span class="un">1</span>Investors</button>
@@ -989,46 +999,13 @@
           </div>
         </div>
         <div class="u-panel" role="tabpanel" id="uPanel" aria-labelledby="ut-investors">
-          <svg class="watermark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
-          <div class="p-swap min-w-0" id="pSwapA"><h3 class="p-head" id="pHead">A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.</h3></div>
+          <div class="p-swap min-w-0" id="pSwapA"><p class="p-kick" id="pKick">Market</p><h3 class="p-head" id="pHead">A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.</h3></div>
           <div class="p-swap flex flex-col gap-7 min-w-0" id="pSwapB">
             <p class="body-copy" id="pBody">PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.</p>
             <div class="u-meta">
               <a href="#contact" class="btn btn-penny" id="pCta" data-role="Investor"><span class="coin-dot" aria-hidden="true"></span><span id="pCtaText">Request an investor conversation</span></a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 OPPORTUNITY -->
-  <section id="opportunity" data-anchor class="band-wash sec" aria-labelledby="oppTitle">
-    <div class="wrap">
-      <div class="opp-head">
-        <div class="flex flex-col gap-5 min-w-0">
-          <span class="eyebrow">Opportunity</span>
-          <h2 id="oppTitle" class="h-section reveal">A paid action next to <span class="accent text-putney">like, share, and comment</span></h2>
-        </div>
-        <p class="body-copy reveal">Platforms already track every like, share, and comment. PennyPay adds a paid action beside those buttons. Creators, nonprofits, and their host platforms earn from engagement they already have.</p>
-      </div>
-      <div class="value-block">
-        <h3 class="h-section" style="font-size:clamp(28px,3.4vw,44px)">Who it’s built for</h3>
-        <div class="filter-scroll">
-          <div class="filters" id="filters" role="group" aria-label="Filter by audience">
-            <span class="filter-pill" id="filterPill" aria-hidden="true"></span>
-            <button type="button" class="filter" aria-pressed="true" data-f="all">All</button>
-            <button type="button" class="filter" aria-pressed="false" data-f="investors">For investors</button>
-            <button type="button" class="filter" aria-pressed="false" data-f="platforms">For platforms</button>
-            <button type="button" class="filter" aria-pressed="false" data-f="creators">For creators</button>
-            <button type="button" class="filter" aria-pressed="false" data-f="nonprofits">For nonprofits</button>
-          </div>
-        </div>
-        <div class="ledger">
-          <a class="v-card" data-aud="investors" href="#investors"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Market</span><div class="flex flex-col gap-4"><h4 class="v-title">For investors</h4><p class="v-body">A patented platform with revenue streams across media, creator, nonprofit, and partner ecosystems.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
-          <a class="v-card" data-aud="platforms" href="#platforms"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Engagement</span><div class="flex flex-col gap-4"><h4 class="v-title">For platforms</h4><p class="v-body">A paid action that rewards engagement, with a configurable share of every tip.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
-          <a class="v-card" data-aud="creators" href="#creators"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Income</span><div class="flex flex-col gap-4"><h4 class="v-title">For creators</h4><p class="v-body">Earn from fans who would never subscribe, one cent to three dollars at a time.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
-          <a class="v-card" data-aud="nonprofits" href="#nonprofits"><span class="v-coin" aria-hidden="true">¢</span><span class="v-label">Giving</span><div class="flex flex-col gap-4"><h4 class="v-title">For nonprofits</h4><p class="v-body">A one-click micro-donation path for supporters who won’t make a larger gift.</p><span class="v-go">See details <span aria-hidden="true">↑</span></span></div></a>
         </div>
       </div>
     </div>
@@ -1227,7 +1204,7 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setNavH);
 
   /* ---------- Anchor tabs + scroll spy ---------- */
-  var secIds = ['how', 'technology', 'uses', 'opportunity', 'patents', 'leadership'];
+  var secIds = ['how', 'technology', 'uses', 'patents', 'leadership'];
   var secs = secIds.map(function (id) { return document.getElementById(id); });
   var contact = $('#contact');
   var navTabs = $$('#tabbar .nav-tab'), ind = $('#tabbar .tab-ind'), bar = $('#tabbar');
@@ -1332,18 +1309,6 @@
     sync();
   })();
 
-  /* ---------- Audience filter (Opportunity) ---------- */
-  var filters = $$('.filter'), pill = $('#filterPill'), cards = $$('.v-card');
-  function movePill(btn) { pill.style.width = btn.offsetWidth + 'px'; pill.style.transform = 'translateX(' + btn.offsetLeft + 'px)'; }
-  filters.forEach(function (f) {
-    f.addEventListener('click', function () {
-      filters.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); f.setAttribute('aria-pressed', 'true'); movePill(f);
-      var v = f.dataset.f; cards.forEach(function (c) { var m = v === 'all' || c.dataset.aud === v; c.classList.toggle('dim', !m); c.classList.toggle('hit', m && v !== 'all'); });
-    });
-  });
-  function syncPill() { var a = $('.filter[aria-pressed="true"]'); if (a) movePill(a); }
-  window.addEventListener('resize', syncPill); syncPill(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncPill);
-
   /* ---------- Evidence stats: count up once when visible ---------- */
   (function () {
     var nums = $$('#stats [data-count]'); if (!nums.length) return;
@@ -1362,11 +1327,11 @@
 
   /* ---------- Uses: audience views with direct #anchors ---------- */
   var personas = {
-    investors: { head: 'A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
-    creators: { head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'Talk to us as a creator', href: '#contact', role: 'Creator' },
-    nonprofits: { head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Discuss a nonprofit pilot', href: '#contact', role: 'Nonprofit' },
-    platforms: { head: 'Earn a share of every tip on your platform.', body: 'A PennyPay button gives your users a paid way to engage. They support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Discuss an integration', href: '#contact', role: 'Publisher or platform' },
-    careers: { head: 'Help build micropayment infrastructure.', body: "We're hiring across product, design, payments engineering, and strategy. Small team, issued patents, and real technical and commercial problems to solve.", cta: 'Introduce yourself', href: '#contact', role: 'Job candidate' }
+    investors: { kick: 'Market', head: 'A low-fee micropayment system that lets users tip 1¢ to $3 on any article, video, or post.', body: 'PennyPay owns issued U.S. patents covering pre-funded wallets, in-context tipping, and rule-based settlement for payments from 1¢ to $3. The model earns a share of every tip across creator monetization, publisher integrations, nonprofit giving, and platform partnerships.', cta: 'Request an investor conversation', href: '#contact', role: 'Investor' },
+    creators: { kick: 'Income', head: 'Get paid by the audience that already likes your work.', body: 'Fans who would never subscribe will send 5¢ in one tap. PennyPay collects those tips across every site you publish on and pays them out on a schedule.', cta: 'Talk to us as a creator', href: '#contact', role: 'Creator' },
+    nonprofits: { kick: 'Giving', head: 'Make small giving easy.', body: "A one-click micro-donation gives supporters who won't write a $25 check a way to give 25¢ today. It adds a new entry point alongside your existing giving programs.", cta: 'Discuss a nonprofit pilot', href: '#contact', role: 'Nonprofit' },
+    platforms: { kick: 'Engagement', head: 'Earn a share of every tip on your platform.', body: 'A PennyPay button gives your users a paid way to engage. They support creators directly, your platform earns a share of every tip, and you see which content earns.', cta: 'Discuss an integration', href: '#contact', role: 'Publisher or platform' },
+    careers: { kick: 'Team', head: 'Help build micropayment infrastructure.', body: "We're hiring across product, design, payments engineering, and strategy. Small team, issued patents, and real technical and commercial problems to solve.", cta: 'Introduce yourself', href: '#contact', role: 'Job candidate' }
   };
   var uTabs = $$('.u-tab'), pCur = 'investors';
   function selectPersona(k) {
@@ -1374,7 +1339,7 @@
     uTabs.forEach(function (t) { var on = t.dataset.p === k; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on) $('#uPanel').setAttribute('aria-labelledby', t.id); });
     if (k === pCur) return; pCur = k;
     var a = $('#pSwapA'), b = $('#pSwapB');
-    var apply = function () { $('#pHead').textContent = p.head; $('#pBody').textContent = p.body; $('#pCtaText').textContent = p.cta; $('#pCta').setAttribute('href', p.href); $('#pCta').setAttribute('data-role', p.role || 'Other'); a.classList.remove('out'); b.classList.remove('out'); };
+    var apply = function () { $('#pKick').textContent = p.kick; $('#pHead').textContent = p.head; $('#pBody').textContent = p.body; $('#pCtaText').textContent = p.cta; $('#pCta').setAttribute('href', p.href); $('#pCta').setAttribute('data-role', p.role || 'Other'); a.classList.remove('out'); b.classList.remove('out'); };
     if (reduce) { apply(); return; }
     a.classList.add('out'); setTimeout(function () { b.classList.add('out'); }, 60); setTimeout(apply, 300);
   }
