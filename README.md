@@ -52,3 +52,11 @@ All styles live in one `<style>` block in `index.html`, ordered tokens → base 
 **Shapes and flow.** Light sections are rounded sheets on Forest (`--sheet-x`, `--sheet-r`). Centred section openings start with a `.thread` (a copper line dropping to a penny) so the eye follows one axis down the page; Technology, Research and Contact stay left-aligned for contrast.
 
 **Motion.** Scroll-triggered only, played once. A small script in `<head>` adds `.motion` when the browser supports it and the visitor has not asked for reduced motion; without it, everything is visible and static. Elements reveal via `data-r` (`up`, `left`, `right`, `scale`, `tilt`), headings rise word by word, the hero coin flips and the P watermarks drift with scroll, and the How It Works penny rides its track as you scroll. Hover/press animation is reserved for things you can click.
+
+**Punctuation.** Every section headline (H1/H2, and the Use case panel headlines) is a statement and ends with a period; in section headlines the period is a copper `.pd` "penny dot". Titles, labels, buttons, table headers and caption fragments never take one. Write "U.S." with periods everywhere (patent numbers keep the USPTO "US 11,875,330 B2" form).
+
+**Emphasis for skimming.** At most one or two per paragraph: `.em` (one weight heavier) for a key fact, `.hl` (copper underline that draws in on scroll) for a key claim, `.ring` (hand-drawn loop) for the single number to remember. Wrap existing words only; never reword to create a highlight.
+
+**Serif weight.** Gideon Roman ships in one weight, so numerals and small serif text get a hairline `-webkit-text-stroke` in the text colour for readability.
+
+**Tip demo.** Three example stories (article, video, community post) are fictional and labelled "Demo · no real money". The ledger shows the balance and a "Creators supported" counter; after a tip, the demo moves to the next creator not yet tipped.

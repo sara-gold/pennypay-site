@@ -135,7 +135,8 @@
   .h-display { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.042em; line-height: 1; text-wrap: balance; }
   .h-section { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.032em; line-height: 1.08; text-wrap: balance; font-size: clamp(32px, 3.5vw, 52px); color: inherit; }
   .accent { font-family: var(--font-accent); font-weight: 400; letter-spacing: -0.01em; }
-  .body-copy { font-family: var(--font-ui); font-weight: 300; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.7; max-width: 60ch; color: var(--ink-2); }
+  .body-copy { font-family: var(--font-ui); font-weight: 300; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.7; max-width: 60ch; color: var(--ink-2); text-wrap: pretty; }
+  .lede, .fees-foot, .fnode p, .spec-grid dd, .gr-scope { text-wrap: pretty; }
   .band-dark .body-copy { color: var(--on-dark-2); }
   .eyebrow, .label { font-family: var(--font-ui); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; color: var(--putney-ink); }
   .band-dark .eyebrow { color: var(--pewter); }
@@ -285,6 +286,35 @@
   .demo-reset { min-height: 44px; font-family: var(--font-ui); font-weight: 500; font-size: 13px; color: var(--penny-light); text-decoration: underline; text-underline-offset: 3px; }
   .demo-fly { position: absolute; z-index: 3; width: 24px; height: 24px; border-radius: 50%; background: var(--penny-front) center / cover no-repeat; box-shadow: 0 4px 10px rgba(20,8,2,.4); pointer-events: none; animation: demoFly .85s var(--ease) forwards; }
   @keyframes demoFly { 0% { transform: translate(0,0) scale(.7); opacity: 1; } 75% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(1) rotateY(540deg); opacity: 0; } }
+  /* Story switcher: glass segmented tabs; a small copper tick marks stories you've tipped */
+  .demo-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s1); padding: var(--s1); border-radius: var(--r-md); background: rgba(5,20,11,.30); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+  .dtab { position: relative; display: flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 40px; border-radius: 10px; font-family: var(--font-ui); font-weight: 500; font-size: 13px; color: var(--on-dark-2); transition: background .3s var(--ease), color .2s, box-shadow .3s; }
+  .dtab svg { width: 16px; height: 16px; flex: none; }
+  .dtab:hover { color: var(--white); }
+  .dtab[aria-selected="true"] { color: var(--ink); background: var(--white); box-shadow: 0 6px 14px -8px rgba(0,0,0,.6); }
+  .dtab.done::after { content: ""; position: absolute; top: 6px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--cu-face); box-shadow: 0 0 0 2px rgba(201,138,94,.25); }
+  /* All stories share one grid cell, so the card height never jumps between them */
+  .demo-stage { display: grid; }
+  .demo-stage > .demo-post { grid-area: 1 / 1; align-content: start; transition: opacity .45s var(--ease), transform .55s var(--ease-out); }
+  .demo-stage > .demo-post:not(.is-on) { opacity: 0; visibility: hidden; transform: translateX(28px); }
+  .demo-stage > .demo-post.is-left:not(.is-on) { transform: translateX(-28px); }
+  .demo-stage > .demo-post .dp-tips { align-self: end; }
+  .demo-stage > .demo-post { grid-template-rows: auto auto 1fr auto; }
+  /* Video story: a thumbnail made from brand shapes */
+  .dp-thumb { position: relative; height: 92px; margin: calc(var(--s2) * -1) calc(var(--s2) * -1) var(--s1); border-radius: var(--r-md); overflow: hidden; background: radial-gradient(60% 90% at 78% 30%, rgba(201,138,94,.85), transparent 70%), radial-gradient(70% 120% at 10% 100%, #4E8060, transparent 70%), linear-gradient(135deg, #24583B, #0D2B1A); }
+  .dp-thumb::before { content: ""; position: absolute; left: 14%; bottom: 18%; width: 34%; height: 44%; border-radius: 6px; background: linear-gradient(160deg, rgba(255,255,255,.28), rgba(255,255,255,.06)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); transform: skewX(-8deg); }
+  .dp-play { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: rgba(255,255,255,.22); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
+  .dp-play::after { content: ""; position: absolute; left: 16px; top: 12px; border-left: 12px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+  .dp-dur { position: absolute; right: 8px; bottom: 8px; padding: 2px 6px; border-radius: 6px; font-family: var(--font-ui); font-weight: 500; font-size: 11px; color: #fff; background: rgba(0,0,0,.45); }
+  /* Community post */
+  .dp-org { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; font-family: var(--font-accent); font-size: 15px; -webkit-text-stroke: .3px currentColor; color: var(--white); background: radial-gradient(circle at 35% 28%, #2A6345, #0D2B1A 75%); }
+  .dp-body { color: var(--ink); }
+  .dp-react { display: flex; gap: var(--s4); font-family: var(--font-ui); font-weight: 400; font-size: 13px; color: var(--ink-3); }
+  /* Creators supported: one avatar per story, lit copper once you've tipped them */
+  .dl-row dd .dl-of { font-family: var(--font-ui); font-weight: 300; font-size: 14px; letter-spacing: 0; -webkit-text-stroke: 0; color: var(--on-dark-3); }
+  .dl-people { display: flex; margin-top: var(--s1); }
+  .dl-people span { width: 26px; height: 26px; margin-right: -6px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-ui); font-weight: 600; font-size: 9px; letter-spacing: .02em; color: var(--on-dark-3); background: #123A25; box-shadow: 0 0 0 2px #0F3020; transition: background .5s var(--ease), color .3s, transform .5s var(--ease-out); }
+  .dl-people span.on { color: var(--white); background: var(--cu-face); transform: translateY(-2px); box-shadow: 0 0 0 2px #0F3020, 0 6px 12px -4px rgba(171,108,67,.7); }
 
   /* ---------- Intro + fee chart ---------- */
   .intro-grid { display: grid; justify-items: center; text-align: center; gap: var(--s5); padding-block: 0 var(--s9); }
@@ -299,9 +329,9 @@
   .fee-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "amt val" "bar bar"; gap: var(--s2) var(--s4); align-items: center; }
   @media (min-width: 760px) { .fee-row { grid-template-columns: 152px minmax(0, 1fr) 184px; grid-template-areas: "amt bar val"; gap: var(--s5); } }
   .fee-amt { grid-area: amt; font-family: var(--font-ui); font-weight: 500; font-size: 15px; color: var(--white); }
-  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 22px; line-height: 1; color: var(--pewter); text-align: right; font-variant-numeric: tabular-nums; }
+  .fee-val { grid-area: val; font-family: var(--font-accent); font-size: 23px; line-height: 1; color: var(--pewter); text-align: right; font-variant-numeric: tabular-nums; }
   .fee-row.hot .fee-val { color: var(--penny-light); }
-  @media (max-width: 759px) { .fee-val { font-size: 17px; } .fee-amt { font-size: 14px; } }
+  @media (max-width: 759px) { .fee-val { font-size: 18px; } .fee-amt { font-size: 14px; } }
   .fee-track { grid-area: bar; position: relative; height: 14px; border-radius: var(--r-pill); background: rgba(255,255,255,.08); box-shadow: inset 0 1px 2px rgba(0,0,0,.35); }
   .fee-bar { position: relative; display: block; height: 100%; width: var(--pct); min-width: 8px; border-radius: var(--r-pill); background: linear-gradient(180deg, #6A9E7D, #4E8060 55%, #3E6B50); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); transform-origin: left; transition: transform 1.2s var(--ease); }
   .fee-row.hot .fee-bar { background: var(--cu-face); box-shadow: inset 0 1px 0 rgba(255,228,204,.55); }
@@ -538,6 +568,29 @@
   .to-top.show { transform: none; }
   .to-top:hover { background: rgba(171,108,67,.9); }
 
+  /* ---------- Emphasis for skimming ----------
+     .em   key fact: one step heavier and full-strength ink
+     .hl   key claim: heavier + a copper underline that draws in on scroll
+     .ring the one number to remember: a hand-drawn copper loop
+     .pd   the period that ends every section headline, set in copper            */
+  .em, .hl { font-weight: 500; color: var(--ink); }
+  .band-dark .em, .band-dark .hl, .fees .em, .fees .hl, .hero .hl, .hero .ring { color: var(--white); }
+  .hl { --u: 100%; background: linear-gradient(90deg, #C0805A, #D69564) 0 calc(100% - 1px) / var(--u) 2px no-repeat; padding-bottom: 2px; transition: background-size 1s var(--ease-out) .25s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .band-dark .hl, .fees .hl, .hero .hl { background-image: linear-gradient(90deg, #D69564, #F3CBA4); }
+  .ring { position: relative; display: inline-block; margin-inline: .3em; padding-inline: .15em; font-weight: 500; white-space: nowrap; color: var(--ink); }
+  .ring-path { position: absolute; left: -14%; top: -30%; width: 128%; height: 160%; overflow: visible; pointer-events: none; }
+  .ring-path path { fill: none; stroke: #D69564; stroke-width: 2.2; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s var(--ease-out) .5s; }
+  .pd { color: var(--penny); }
+  .band-dark .pd { color: var(--penny-light); }
+  .motion .hl { --u: 0%; }
+  .motion .hl.in { --u: 100%; }
+  .motion .ring .ring-path path { stroke-dashoffset: 1; }
+  .motion .ring.in .ring-path path { stroke-dashoffset: 0; }
+
+  /* Gideon Roman has a single weight; a hairline stroke in the text colour adds body where it is set small or must be read */
+  .fee-val, .fn-num, .dl-row dd, .gr-num, .res-n, .u-tab .un, .bts-tab .n, .bts-cap h4 .n, .brand, .demo .dp-org { -webkit-text-stroke: .022em currentColor; }
+  .hero h1 .accent { -webkit-text-stroke: .012em #C98A5E; }
+
   /* ---------- Brand motifs ----------
      The P monogram appears at the start (hero) and the end (closing + footer) as a tinted
      texture and an oversized watermark; the penny coin flips in the hero as you scroll.   */
@@ -552,12 +605,24 @@
   #uses { overflow: clip; }
 
   /* Flipping coin, pinned to the demo's corner */
-  .coin3d { position: absolute; z-index: 4; top: -56px; right: max(-16px, calc((100% - 440px) / 2 - 16px)); width: 104px; height: 104px; perspective: 700px; pointer-events: none; filter: drop-shadow(0 18px 22px rgba(0,0,0,.45)); }
-  @media (min-width: 1024px) { .coin3d { right: -40px; top: -68px; width: 120px; height: 120px; } }
-  .demo-head { padding-right: 64px; }
-  .coin3d-in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(8deg) rotateY(var(--flip, -18deg)); }
-  .coin3d img { position: absolute; inset: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 50%; }
-  .coin3d .cb { transform: rotateY(180deg); }
+  /* A coin with real thickness: 13 copper slices form the rim between the two faces.
+     Script sets --flip (angle), --lit (face brightness), --shine (highlight position)
+     and --sw (shadow width) from the scroll position, so it reads as metal turning in light. */
+  .coin3d { --t: 11px; position: absolute; z-index: 4; top: -56px; right: max(-16px, calc((100% - 440px) / 2 - 16px)); width: 104px; height: 104px; perspective: 900px; pointer-events: none; }
+  @media (min-width: 1024px) { .coin3d { --t: 12px; right: -40px; top: -68px; width: 120px; height: 120px; } }
+  .demo-tag { white-space: nowrap; }
+  /* Wide screens: the coin overlaps the corner, so the header makes room. Smaller screens: the coin sits above the card instead. */
+  @media (min-width: 1024px) { .demo-head { padding-right: 96px; } }
+  @media (max-width: 1023px) { .coin3d { top: -96px; } .hero-visual { margin-top: var(--s9); } }
+  .coin3d-in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(14deg) rotateY(var(--flip, -24deg)); }
+  .coin-edge, .coin-face { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .coin-edge i { position: absolute; inset: 1.5%; border-radius: 50%; background: linear-gradient(90deg, #5E2F15 0%, #8E4D2A 18%, #C47A4B 38%, #F2B98C 50%, #B36A3E 64%, #7E4223 82%, #4E2610 100%); transform: translateZ(calc(var(--t) * (var(--k) / 12 - .5))); }
+  .coin-face { border-radius: 50%; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .coin-face.cf { transform: translateZ(calc(var(--t) / 2 + .5px)); }
+  .coin-face.cb { transform: rotateY(180deg) translateZ(calc(var(--t) / 2 + .5px)); }
+  .coin-face img { display: block; width: 100%; height: 100%; filter: brightness(var(--lit, 1)) saturate(1.05); }
+  .coin-light { position: absolute; inset: 0; border-radius: 50%; mix-blend-mode: screen; background: linear-gradient(115deg, transparent 32%, rgba(255,236,214,.32) 48%, rgba(255,250,240,.48) 50%, rgba(255,236,214,.3) 52%, transparent 68%) var(--shine, 40%) 0 / 320% 100% no-repeat; }
+  .coin-shadow { position: absolute; left: 50%; bottom: -22px; width: 86%; height: 18px; margin-left: -43%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent); filter: blur(4px); transform: scaleX(var(--sw, .9)); }
 
   /* ---------- Shapes: light sections are rounded sheets on Forest ---------- */
   main > .band-light, main > .band-wash, main > .band-paper { display: flow-root; margin-inline: var(--sheet-x); overflow: clip; }
@@ -596,9 +661,10 @@
   .motion .wr.in .w > span { transform: none; }
   /* Threads draw down, then the penny lands */
   .motion .thread .th-line { transform: scaleY(0); transition: transform .9s var(--ease-out); }
-  .motion .thread .th-coin { transform: translateY(-30px) rotateY(180deg) scale(.4); opacity: 0; transition: transform .8s var(--ease-out) .55s, opacity .3s .55s; }
+  .motion .thread .th-coin { opacity: 0; }
+  .motion .thread.in .th-coin { animation: coinLand .9s var(--ease-out) .5s both; }
+  @keyframes coinLand { 0% { opacity: 0; transform: translateY(-38px) scale(.7); } 55% { opacity: 1; transform: translateY(3px) scale(1.04, .94); } 75% { transform: translateY(-3px) scale(.98, 1.02); } 100% { opacity: 1; transform: none; } }
   .motion .thread.in .th-line { transform: none; }
-  .motion .thread.in .th-coin { transform: none; opacity: 1; }
   /* Fee bars grow and their pennies roll in */
   .motion .fees .fee-bar { transform: scaleX(0); transition: transform 1.4s var(--ease-out); }
   .motion .fees .fee-row.hot .fee-bar { transition-delay: .25s; }
@@ -617,7 +683,7 @@
   .motion .demo { animation: rise 1.1s var(--ease-out) .25s both; }
   .motion .coin3d { animation: coinDrop 1.3s var(--ease-out) .55s both; }
   @keyframes rise { from { opacity: 0; transform: translate3d(0, 32px, 0); } to { opacity: 1; transform: none; } }
-  @keyframes coinDrop { from { opacity: 0; transform: translate3d(0, -60px, 0) rotate(-40deg) scale(.6); } to { opacity: 1; transform: none; } }
+  @keyframes coinDrop { from { opacity: 0; transform: translate3d(0, -70px, 0) scale(.75); } to { opacity: 1; transform: none; } }
 
   /* ---------- Reveal (content visible at rest) ---------- */
   .reveal { transition: transform .9s var(--ease); }
@@ -698,7 +764,7 @@
     <div class="wrap hero-grid">
       <div class="hero-copy flex flex-col gap-8 min-w-0">
         <h1 id="heroTitle" class="h-display">Patented Micropayment Infrastructure <span class="accent">for the Web.</span></h1>
-        <p class="lede">Fund a PennyPay balance once. Then tip 1¢ to $3 in one click on any participating article, video, or post. Tips settle in batches behind the scenes, so there is no card fee on each tip.</p>
+        <p class="lede">Fund a PennyPay balance once. Then tip <span class="ring">1¢ to $3<svg class="ring-path" viewBox="0 0 120 44" preserveAspectRatio="none" aria-hidden="true"><path d="M70 4C38 1 8 9 5 22c-3 13 30 19 58 18 30-1 53-8 52-21C113 8 86 3 56 6" pathLength="1"/></svg></span> in one click on any participating article, video, or post. Tips settle in batches behind the scenes, so there is <span class="hl">no card fee on each tip</span>.</p>
         <div class="flex flex-wrap gap-4">
           <a href="#opportunity" class="btn btn-penny">See who it’s for</a>
           <a href="#how" class="btn btn-ghost-dark">See How It Works <span class="arrow down" aria-hidden="true">↓</span></a>
@@ -706,23 +772,38 @@
         <p class="cred"><span class="seal" aria-hidden="true"></span><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Evaluated by Notre Dame’s IDEA Center.</span></p>
       </div>
       <div class="hero-visual">
-        <div class="coin3d" aria-hidden="true"><div class="coin3d-in"><img class="cf" src="assets/coin-front.webp" alt="" width="180" height="180"><img class="cb" src="assets/coin-back.webp" alt="" width="180" height="180"></div></div>
+        <div class="coin3d" aria-hidden="true"><span class="coin-shadow"></span><div class="coin3d-in"><span class="coin-edge"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i><i style="--k:12"></i></span><span class="coin-face cf"><img src="assets/coin-front.webp" alt="" width="180" height="180"><span class="coin-light"></span></span><span class="coin-face cb"><img src="assets/coin-back.webp" alt="" width="180" height="180"><span class="coin-light"></span></span></div></div>
         <div class="demo" id="demo" role="group" aria-labelledby="demoTitle">
           <div class="demo-head"><p id="demoTitle" class="demo-tag">Try a tip</p><p class="demo-note">Demo · no real money</p></div>
-          <article class="demo-post">
-            <div class="dp-meta"><div><p class="dp-name">Jamie Alvarez</p><p class="dp-src">The Riverside Ledger · 6 min read</p></div></div>
-            <p class="dp-title">How a small-town paper kept its newsroom open</p>
-            <p class="dp-ex">Three reporters, one press, and the readers who decided local news was worth paying for.</p>
-            <div class="dp-tips" role="group" aria-label="Tip the author">
-              <button type="button" class="tipb" data-c="5">5¢</button>
-              <button type="button" class="tipb" data-c="10">10¢</button>
-              <button type="button" class="tipb" data-c="25">25¢</button>
-              <button type="button" class="tipb" data-c="100">$1.00</button>
-            </div>
-          </article>
+          <div class="demo-tabs" role="tablist" aria-label="Example stories">
+            <button type="button" class="dtab" role="tab" id="dTab0" aria-controls="dStory0" aria-selected="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.5h10M3 6.5h10M3 9.5h10M3 12.5h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Article</span></button>
+            <button type="button" class="dtab" role="tab" id="dTab1" aria-controls="dStory1" aria-selected="false" tabindex="-1"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.6 5.9v4.2L10.2 8z" fill="currentColor"/></svg><span>Video</span></button>
+            <button type="button" class="dtab" role="tab" id="dTab2" aria-controls="dStory2" aria-selected="false" tabindex="-1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13.4S2.4 10.2 2.4 6.3A2.9 2.9 0 0 1 8 5a2.9 2.9 0 0 1 5.6 1.3c0 3.9-5.6 7.1-5.6 7.1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Post</span></button>
+          </div>
+          <div class="demo-stage">
+            <article class="demo-post is-on" id="dStory0" role="tabpanel" aria-labelledby="dTab0" data-name="Jamie">
+              <div class="dp-meta"><div><p class="dp-name">Jamie Alvarez</p><p class="dp-src">The Riverside Ledger · 6 min read</p></div></div>
+              <p class="dp-title">How a small-town paper kept its newsroom open</p>
+              <p class="dp-ex">Three reporters, one press, and the readers who decided local news was worth paying for.</p>
+              <div class="dp-tips" role="group" aria-label="Tip Jamie Alvarez"><button type="button" class="tipb" data-c="5">5¢</button><button type="button" class="tipb" data-c="10">10¢</button><button type="button" class="tipb" data-c="25">25¢</button><button type="button" class="tipb" data-c="100">$1.00</button></div>
+            </article>
+            <article class="demo-post dp-video" id="dStory1" role="tabpanel" aria-labelledby="dTab1" data-name="Priya" inert>
+              <div class="dp-thumb" aria-hidden="true"><span class="dp-play"></span><span class="dp-dur">4:12</span></div>
+              <div class="dp-meta"><div><p class="dp-name">Priya Nair</p><p class="dp-src">Maker Shed · Video</p></div></div>
+              <p class="dp-title">Turning salvaged parts into a solar phone charger</p>
+              <div class="dp-tips" role="group" aria-label="Tip Priya Nair"><button type="button" class="tipb" data-c="5">5¢</button><button type="button" class="tipb" data-c="10">10¢</button><button type="button" class="tipb" data-c="25">25¢</button><button type="button" class="tipb" data-c="100">$1.00</button></div>
+            </article>
+            <article class="demo-post dp-social" id="dStory2" role="tabpanel" aria-labelledby="dTab2" data-name="Eastside Pantry" inert>
+              <div class="dp-meta"><span class="dp-org" aria-hidden="true">EP</span><div><p class="dp-name">Eastside Community Pantry</p><p class="dp-src">Community post</p></div></div>
+              <p class="dp-ex dp-body">We packed 1,200 meals this weekend. Every small gift went straight to groceries for neighbors who needed them.</p>
+              <p class="dp-react" aria-hidden="true"><span>♡ 248</span><span>↗ 31</span></p>
+              <div class="dp-tips" role="group" aria-label="Tip Eastside Community Pantry"><button type="button" class="tipb" data-c="5">5¢</button><button type="button" class="tipb" data-c="10">10¢</button><button type="button" class="tipb" data-c="25">25¢</button><button type="button" class="tipb" data-c="100">$1.00</button></div>
+            </article>
+          </div>
           <dl class="demo-ledger">
             <div class="dl-row"><dt>Your PennyPay balance</dt><dd id="dWallet">$5.00</dd></div>
-            <div class="dl-row"><dt>Jamie has earned</dt><dd id="dCreator">$0.00</dd></div>
+            <div class="dl-row"><dt>Creators supported</dt><dd><span id="dCount">0</span><span class="dl-of"> of 3</span></dd>
+              <div class="dl-people" aria-hidden="true"><span data-i="0">JA</span><span data-i="1">PN</span><span data-i="2">EP</span></div></div>
           </dl>
           <div class="demo-foot">
             <p class="demo-status" id="dStatus" role="status" aria-live="polite">Pick an amount. Your card is not charged for each tip.</p>
@@ -736,9 +817,9 @@
   <section id="intro" class="band-light" aria-labelledby="introTitle">
     <div class="wrap"><div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div></div>
     <div class="wrap intro-grid">
-      <h2 id="introTitle" class="h-section reveal">Card fees make small payments uneconomical.</h2>
+      <h2 id="introTitle" class="h-section reveal">Card fees make small payments uneconomical<span class="pd">.</span></h2>
       <div class="reveal flex flex-col justify-end min-w-0">
-        <p class="body-copy">People like and share posts all day, and none of it pays whoever made them. Card networks charge a fixed fee on every transaction, and on a payment of a few cents that fee can be bigger than the payment itself. That is why paying for things online still means a subscription or a checkout page. PennyPay is built for the amounts underneath that, from 1¢ to $3.</p>
+        <p class="body-copy">People like and share posts all day, and none of it pays whoever made them. Card networks charge a fixed fee on every transaction, and on a payment of a few cents that fee can be <span class="hl">bigger than the payment itself</span>. That is why paying for things online still means a subscription or a checkout page. PennyPay is built for the amounts underneath that, <span class="em">from 1¢ to $3</span>.</p>
       </div>
     </div>
     <div class="wrap">
@@ -746,7 +827,7 @@
         <figcaption class="fees-head"><span class="eyebrow">The fee problem</span><span class="fees-note">Processing fee as a share of the payment, using PayPal Micropayments pricing</span></figcaption>
         <div class="fee-row" style="--pct:6.67%"><span class="fee-amt">$3.00 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.20 fee · 6.67%</span></div>
         <div class="fee-row hot" style="--pct:100%"><span class="fee-amt">$0.05 payment</span><span class="fee-track" aria-hidden="true"><span class="fee-bar"></span></span><span class="fee-val">$0.05 fee · 100%</span></div>
-        <p class="fees-foot">PennyPay pre-funds wallets, so one standard card charge covers hundreds of tips instead of paying a fee on each one.</p>
+        <p class="fees-foot">PennyPay pre-funds wallets, so <span class="hl">one standard card charge covers hundreds of tips</span> instead of paying a fee on each one.</p>
       </figure>
     </div>
   </section>
@@ -756,7 +837,7 @@
       <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div class="flex flex-col gap-5 min-w-0">
-          <h2 id="howTitle" class="h-section reveal">How a 5¢ tip gets from a reader to an author.</h2>
+          <h2 id="howTitle" class="h-section reveal">How a 5¢ tip gets from a reader to an author<span class="pd">.</span></h2>
         </div>
         <a href="#technology" class="btn btn-forest">See the architecture <span class="arrow down" aria-hidden="true">↓</span></a>
       </div>
@@ -764,22 +845,22 @@
         <li class="fnode">
           <span class="fn-num" aria-hidden="true">1</span>
           <h3>Pre-fund once</h3>
-          <p>A reader adds $10 to a PennyPay balance with one card payment.</p>
+          <p>A reader adds $10 to a PennyPay balance with <span class="em">one card payment</span>.</p>
         </li>
         <li class="fnode">
           <span class="fn-num" aria-hidden="true">2</span>
           <h3>Tip in one click</h3>
-          <p>On an article, the reader taps 5¢. It moves from their balance to the author. No new card charge.</p>
+          <p>On an article, the reader taps 5¢. It moves from their balance to the author. <span class="em">No new card charge.</span></p>
         </li>
         <li class="fnode">
           <span class="fn-num" aria-hidden="true">3</span>
           <h3>Ledger settles</h3>
-          <p>The author’s balance grows with each tip. Balances settle in batches and pay out to a bank account.</p>
+          <p>The author’s balance grows with each tip. Balances settle in batches and <span class="em">pay out to a bank account</span>.</p>
         </li>
       </ol>
 
       <figure class="ledger-ex reveal">
-        <figcaption><span class="lx-title">Example ledger</span><span class="lx-note">One reader, one author, one card charge.</span></figcaption>
+        <figcaption><span class="lx-title">Example ledger</span><span class="lx-note">One reader, one author, one card charge</span></figcaption>
         <div class="tbl-wrap" tabindex="0" role="region" aria-label="Example ledger">
           <table class="tbl">
             <thead><tr><th scope="col">Event</th><th scope="col" class="num">Reader balance</th><th scope="col" class="num">Author balance</th><th scope="col">Card charge</th></tr></thead>
@@ -820,15 +901,15 @@
   <section id="technology" data-anchor class="band-dark sec" aria-labelledby="techTitle">
     <div class="wrap tech-grid">
       <div class="tech-head flex flex-col gap-6 min-w-0">
-        <h2 id="techTitle" class="h-section reveal">The architecture behind each tip</h2>
+        <h2 id="techTitle" class="h-section reveal">The architecture behind each tip<span class="pd">.</span></h2>
         <div><a href="#patents" class="btn btn-ghost-dark">View the patents <span class="arrow down" aria-hidden="true">↓</span></a></div>
       </div>
       <div class="spec min-w-0">
         <dl class="spec-grid">
-          <div><dt>Card economics</dt><dd>Card networks charge a fixed fee per transaction. That makes payments under a few dollars too expensive to process one by one.</dd></div>
-          <div><dt>Pre-funded balances</dt><dd>Readers fund a balance once. Each tip is a ledger entry between hosted wallets, not a new card charge.</dd></div>
-          <div><dt>Publisher integration</dt><dd>Publishers embed the tip button next to their content and earn a configurable share of every tip.</dd></div>
-          <div><dt>Settlement rules</dt><dd>Balances settle on a schedule or once they cross a threshold. Each party’s share is set by rule.</dd></div>
+          <div><dt>Card economics</dt><dd>Card networks charge a <span class="em">fixed fee per transaction</span>. That makes payments under a few dollars too expensive to process one by one.</dd></div>
+          <div><dt>Pre-funded balances</dt><dd>Readers fund a balance once. Each tip is a ledger entry between hosted wallets, <span class="em">not a new card charge</span>.</dd></div>
+          <div><dt>Publisher integration</dt><dd>Publishers embed the tip button next to their content and earn a <span class="em">configurable share of every tip</span>.</dd></div>
+          <div><dt>Settlement rules</dt><dd>Balances settle on a schedule or once they cross a threshold. Each party’s share is <span class="em">set by rule</span>.</dd></div>
         </dl>
       </div>
     </div>
@@ -840,9 +921,9 @@
       <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="opp-head" id="opportunity" data-anchor>
         <div class="flex flex-col gap-5 min-w-0">
-          <h2 id="oppTitle" class="h-section reveal">A paid button next to the like button.</h2>
+          <h2 id="oppTitle" class="h-section reveal">A paid button next to the like button<span class="pd">.</span></h2>
         </div>
-        <p class="body-copy reveal">Every platform already counts likes. PennyPay puts a tip button beside them, so the people who make the work, and the sites that host it, earn from attention they already get.</p>
+        <p class="body-copy reveal">Every platform already counts likes. PennyPay puts a tip button beside them, so the people who make the work, and the sites that host it, <span class="hl">earn from attention they already get</span>.</p>
       </div>
       <div class="uses-grid uses-merged">
         <div class="u-tabs-scroll">
@@ -872,15 +953,15 @@
       <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="pat-grid">
         <div class="flex flex-col gap-6 min-w-0">
-          <h2 id="patTitle" class="h-section pat-h">Patented ledger technology designed to settle sub-dollar transactions without losing profits to credit card processing fees.</h2>
-          <p class="body-copy">PennyPay holds two issued U.S. patents with an October 28, 2018 priority date. They cover how tips on third-party content move through hosted wallets and settle automatically among every party.</p>
+          <h2 id="patTitle" class="h-section pat-h">Patented ledger technology designed to settle sub-dollar transactions without losing profits to credit card processing fees<span class="pd">.</span></h2>
+          <p class="body-copy">PennyPay holds <span class="hl">two issued U.S. patents</span> with an October 28, 2018 priority date. They cover how tips on third-party content move through hosted wallets and settle automatically among every party.</p>
         </div>
       </div>
       <div class="grants reveal">
         <article class="grant">
           <header class="gr-head"><p class="gr-kind">United States Patent · Original</p><p class="gr-num">US 11,875,330 B2</p></header>
           <h3 class="gr-title">Systems and methods for a micropayment solution for media applications</h3>
-          <p class="gr-scope">Covers tips of $0.01 to $3.00 sent from a button beside a creator’s content. A central platform hosts consumer and creator wallets and moves funds between them for users. Balances settle automatically, split by rule between creator, website host, and platform.</p>
+          <p class="gr-scope">Covers tips of <span class="em">$0.01 to $3.00</span> sent from a button beside a creator’s content. A central platform hosts consumer and creator wallets and moves funds between them for users. Balances settle automatically, split by rule between creator, website host, and platform.</p>
           <dl class="gr-meta">
             <div><dt>Issued</dt><dd>January 16, 2024</dd></div>
             <div><dt>Filed</dt><dd>October 28, 2019</dd></div>
@@ -892,7 +973,7 @@
         <article class="grant">
           <header class="gr-head"><p class="gr-kind">United States Patent · Continuation</p><p class="gr-num">US 12,169,821 B2</p></header>
           <h3 class="gr-title">Systems and methods for a micropayment solution for media applications</h3>
-          <p class="gr-scope">Extends the same method to payments of any amount. Covers web and mobile apps, in-app invoicing, and transaction networks including card and bank rails. Adds tracking and analysis of transaction data.</p>
+          <p class="gr-scope">Extends the same method to <span class="em">payments of any amount</span>. Covers web and mobile apps, in-app invoicing, and transaction networks including card and bank rails. Adds tracking and analysis of transaction data.</p>
           <dl class="gr-meta">
             <div><dt>Issued</dt><dd>December 17, 2024</dd></div>
             <div><dt>Filed</dt><dd>December 1, 2023</dd></div>
@@ -910,15 +991,15 @@
     <div class="wrap">
       <div class="research">
         <div class="res-head">
-          <h2 id="resTitle" class="h-section">What an independent evaluation found</h2>
-          <p class="body-copy">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and market. As part of that work, it surveyed website users aged 18 to 34 about tipping creators online.</p>
+          <h2 id="resTitle" class="h-section">What an independent evaluation found<span class="pd">.</span></h2>
+          <p class="body-copy">The University of Notre Dame’s IDEA Center evaluated PennyPay’s technology and market. As part of that work, it surveyed <span class="em">website users aged 18 to 34</span> about tipping creators online.</p>
         </div>
         <div class="tbl-wrap" tabindex="0" role="region" aria-label="Research findings">
           <table class="tbl res-tbl" id="stats">
             <thead><tr><th scope="col" class="num">Result</th><th scope="col">Finding</th><th scope="col">Type</th></tr></thead>
             <tbody>
-              <tr><td class="num res-n" data-label="Result">77%</td><td data-label="Finding">of respondents said they wish they could easily tip creators whose posts they like.</td><td data-label="Type">Survey response</td></tr>
-              <tr><td class="num res-n" data-label="Result">70%</td><td data-label="Finding">said they would “definitely” or “probably” sign up and use PennyPay to tip.</td><td data-label="Type">Survey response</td></tr>
+              <tr><td class="num res-n" data-label="Result">77%</td><td data-label="Finding">of respondents said they wish they could <span class="em">easily tip creators</span> whose posts they like.</td><td data-label="Type">Survey response</td></tr>
+              <tr><td class="num res-n" data-label="Result">70%</td><td data-label="Finding">said they would <span class="em">“definitely” or “probably” sign up</span> and use PennyPay to tip.</td><td data-label="Type">Survey response</td></tr>
               <tr><td class="num res-n" data-label="Result">$45.50</td><td data-label="Finding">projected annual tips per user, at about 1.68 tips a day.</td><td data-label="Type">Projection from survey</td></tr>
             </tbody>
           </table>
@@ -933,9 +1014,9 @@
       <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="lead-grid">
         <div class="flex flex-col gap-6 min-w-0">
-          <h2 id="leadTitle" class="h-section reveal">The people behind PennyPay.</h2>
+          <h2 id="leadTitle" class="h-section reveal">The people behind PennyPay<span class="pd">.</span></h2>
         </div>
-        <p class="body-copy reveal">Robert Musiala co-invented the patented system. The rest of the team comes from finance and corporate strategy, and has evaluated new technology for commercial potential.</p>
+        <p class="body-copy reveal">Robert Musiala <span class="hl">co-invented the patented system</span>. The rest of the team comes from finance and corporate strategy, and has evaluated new technology for commercial potential.</p>
       </div>
       <ul class="people reveal" aria-label="Leadership team">
         <li class="lp">
@@ -966,9 +1047,9 @@
   <section id="contact" data-anchor class="band-dark final sec" aria-labelledby="finalTitle">
     <div class="tex tex-final" aria-hidden="true"></div><svg class="bigp bigp-final" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="wrap final-grid">
-      <h2 id="finalTitle" class="h-display reveal">Talk to the founding team.</h2>
+      <h2 id="finalTitle" class="h-display reveal">Talk to the founding team<span class="pd">.</span></h2>
       <div class="flex flex-col gap-8 min-w-0">
-        <p class="body-copy">We’re lining up pilots and talking with investors. Tell us who you are and what you’d want to try.</p>
+        <p class="body-copy">We’re <span class="hl">lining up pilots</span> and talking with investors. Tell us who you are and what you’d want to try.</p>
         <form class="cform" id="contactForm" novalidate>
           <div class="cf-row">
             <div class="cf-field"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" required aria-describedby="cfNameErr"><p class="cf-err" id="cfNameErr"></p></div>
@@ -1006,7 +1087,7 @@
     <div class="foot-grid">
       <div class="flex flex-col gap-4 min-w-0">
         <a href="#top" class="brand"><svg class="logo-mark" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>PennyPay</a>
-        <p class="font-alex text-sm foot-meta">US Patent 11,875,330 · US Patent 12,169,821</p>
+        <p class="font-alex text-sm foot-meta">U.S. Patent 11,875,330 · U.S. Patent 12,169,821</p>
       </div>
       <nav class="foot-col" aria-label="Sections">
         <h3>Sections</h3>
@@ -1110,43 +1191,72 @@
   /* ---------- Hero: live tipping demo ---------- */
   (function tipDemo() {
     var root = $('#demo'); if (!root) return;
-    var wEl = $('#dWallet'), cEl = $('#dCreator'), st = $('#dStatus'), reset = $('#dReset'), btns = $$('.tipb', root);
-    var START = 500, wallet = START, earned = 0, tips = 0;
+    var wEl = $('#dWallet'), nEl = $('#dCount'), st = $('#dStatus'), reset = $('#dReset');
+    var tabs = $$('.dtab', root), stories = $$('.demo-post', root), people = $$('.dl-people span', root);
+    var START = 500, wallet = START, tips = 0, cur = 0, helped = [false, false, false], advance = null;
+    var IDLE = 'Pick an amount. Your card is not charged for each tip.';
     var money = function (c) { return '$' + (c / 100).toFixed(2); };
     var label = function (c) { return c < 100 ? c + '¢' : money(c); };
-    function roll(el, from, to) {
+    var count = function () { return helped.filter(Boolean).length; };
+    function roll(el, from, to, fmt) {
       el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
-      if (reduce) { el.textContent = money(to); return; }
+      if (reduce) { el.textContent = fmt(to); return; }
       var t0 = null;
-      (function f(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / 650), e = 1 - Math.pow(1 - k, 3); el.textContent = money(Math.round(from + (to - from) * e)); if (k < 1) requestAnimationFrame(f); })(performance.now());
+      (function f(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / 650), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(Math.round(from + (to - from) * e)); if (k < 1) requestAnimationFrame(f); })(performance.now());
     }
-    function fly(btn) {
+    function fly(btn, target) {
       if (reduce) return;
-      var a = btn.getBoundingClientRect(), b = cEl.getBoundingClientRect(), r = root.getBoundingClientRect();
+      var a = btn.getBoundingClientRect(), b = target.getBoundingClientRect(), r = root.getBoundingClientRect();
       var c = document.createElement('i'); c.className = 'demo-fly';
       c.style.left = (a.left - r.left + a.width / 2 - 12) + 'px'; c.style.top = (a.top - r.top + a.height / 2 - 12) + 'px';
-      c.style.setProperty('--dx', (b.right - a.left - a.width / 2 - 20) + 'px'); c.style.setProperty('--dy', (b.top - a.top + 2) + 'px');
+      c.style.setProperty('--dx', (b.left + b.width / 2 - a.left - a.width / 2) + 'px'); c.style.setProperty('--dy', (b.top + b.height / 2 - a.top - a.height / 2) + 'px');
       root.appendChild(c); setTimeout(function () { c.remove(); }, 900);
     }
-    function sync() { btns.forEach(function (b) { b.disabled = +b.dataset.c > wallet; }); reset.hidden = tips === 0; }
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var c = +b.dataset.c; if (c > wallet) return;
-        roll(wEl, wallet, wallet - c); roll(cEl, earned, earned + c);
-        wallet -= c; earned += c; tips++;
-        fly(b);
-        st.classList.add('ok');
-        st.textContent = 'Tip sent! ' + label(c) + ' to Jamie. No card charge.';
-        if (wallet < 5) st.textContent = 'Tip sent! Your demo balance is used up. Reset to try again.';
-        sync();
+    function show(i, focus) {
+      cur = i;
+      tabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+      stories.forEach(function (s, k) { var on = k === i; s.classList.toggle('is-on', on); s.classList.toggle('is-left', k < i); if (on) s.removeAttribute('inert'); else s.setAttribute('inert', ''); });
+      if (focus) tabs[i].focus();
+    }
+    function sync() {
+      $$('.tipb', root).forEach(function (b) { b.disabled = +b.dataset.c > wallet; });
+      reset.hidden = tips === 0;
+      tabs.forEach(function (t, k) { t.classList.toggle('done', helped[k]); });
+      people.forEach(function (p, k) { p.classList.toggle('on', helped[k]); });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { clearTimeout(advance); show(i); });
+      t.addEventListener('keydown', function (e) { var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); clearTimeout(advance); show((i + d + tabs.length) % tabs.length, true); } });
+    });
+    stories.forEach(function (story, i) {
+      $$('.tipb', story).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var c = +b.dataset.c; if (c > wallet) return;
+          var before = count();
+          roll(wEl, wallet, wallet - c, money);
+          wallet -= c; tips++; helped[i] = true;
+          if (count() !== before) roll(nEl, before, count(), String);
+          fly(b, people[i]);
+          st.classList.add('ok');
+          if (wallet < 5) st.textContent = 'Tip sent! Your demo balance is used up. Reset to try again.';
+          else if (count() === stories.length) st.textContent = 'Tip sent! ' + label(c) + ' to ' + story.dataset.name + '. Three creators supported from one balance, no card charges.';
+          else st.textContent = 'Tip sent! ' + label(c) + ' to ' + story.dataset.name + '. No card charge.';
+          sync();
+          /* Move on to the next story nobody has tipped yet, to show one balance reaching many people */
+          clearTimeout(advance);
+          var next = helped.indexOf(false);
+          if (next > -1 && wallet >= 5) advance = setTimeout(function () { show(next); }, reduce ? 600 : 1100);
+        });
       });
     });
     reset.addEventListener('click', function () {
-      roll(wEl, wallet, START); roll(cEl, earned, 0); wallet = START; earned = 0; tips = 0;
-      st.classList.remove('ok'); st.textContent = 'Pick an amount. Your card is not charged for each tip.'; sync();
-      btns[0].focus();
+      clearTimeout(advance);
+      roll(wEl, wallet, START, money); roll(nEl, count(), 0, String);
+      wallet = START; tips = 0; helped = [false, false, false];
+      st.classList.remove('ok'); st.textContent = IDLE; show(0); sync();
+      tabs[0].focus();
     });
-    sync();
+    show(0); sync();
   })();
 
   /* ---------- Uses: audience views with direct #anchors ---------- */
@@ -1584,17 +1694,29 @@
       if (e.target.matches('#research tbody tr')) { var n = e.target.querySelector('.res-n'); if (n) counter(n); }
     });
   }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
-  $$('[data-r], .wr, .rv').forEach(function (el) { io.observe(el); });
+  $$('[data-r], .wr, .rv, .hl, .ring').forEach(function (el) { io.observe(el); });
 
   /* 5. Scroll-linked: coin flip, P watermark parallax, the penny on the How track */
   var coin = document.querySelector('.coin3d-in'), hero = document.querySelector('.hero');
   var bigs = $$('.bigp'), flow = document.querySelector('.flow'), steps = $$('.flow .fnode');
   var vh = window.innerHeight, ticking = false;
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  /* Coin lighting follows the angle: faces dim as they turn away, the highlight slides across, the shadow narrows edge-on */
+  var coinBox = document.querySelector('.coin3d'), intro = -720;
+  function setCoin(deg) {
+    if (!coin) return;
+    var c = Math.abs(Math.cos(deg * Math.PI / 180));
+    coin.style.setProperty('--flip', deg.toFixed(1) + 'deg');
+    coinBox.style.setProperty('--lit', (0.6 + 0.38 * c).toFixed(3));
+    coinBox.style.setProperty('--shine', (((deg % 360) + 360) % 360 / 360 * 100).toFixed(1) + '%');
+    coinBox.style.setProperty('--sw', (0.25 + 0.7 * c).toFixed(3));
+  }
+  /* On load the coin spins in, in 3D, and settles at its resting angle */
+  (function () { var t0 = null; function f(t) { if (t0 === null) t0 = t; var k = Math.min(1, (t - t0 - 550) / 1600); if (k < 0) k = 0; intro = -720 * Math.pow(1 - k, 3); onScroll(); if (k < 1) requestAnimationFrame(f); } requestAnimationFrame(f); })();
   function frame() {
     ticking = false;
     var y = window.scrollY;
-    if (coin && hero) { var hb = hero.getBoundingClientRect(); if (hb.bottom > 0) coin.style.setProperty('--flip', (-18 + clamp(y / (hb.height * .9)) * 540) + 'deg'); }
+    if (coin && hero) { var hb = hero.getBoundingClientRect(); if (hb.bottom > 0) setCoin(-24 + clamp(y / (hb.height * .9)) * 540 + intro); }
     bigs.forEach(function (b) {
       var r = b.parentNode.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return;
       b.style.setProperty('--py', ((r.top + r.height / 2 - vh / 2) * -0.18).toFixed(1) + 'px');
