@@ -733,6 +733,14 @@
   .btn.btn-ghost-dark, .btn.btn-ghost-dark:hover, .btn.btn-ghost-dark:active,
   .band-dark .btn.btn-forest, .band-dark .btn.btn-forest:hover, .band-dark .btn.btn-forest:active { background: transparent; color: var(--white); box-shadow: inset 0 0 0 1px rgba(242,237,228,.45); transform: none; }
   .btn.btn-ghost-dark:hover, .band-dark .btn.btn-forest:hover { background: rgba(242,237,228,.08); }
+
+  /* Contact: team photo above the headline */
+  .final-lead { display: grid; gap: var(--s6); align-content: start; min-width: 0; }
+  @media (min-width: 960px) { .final h2 { position: static; } }
+  .team-photo { margin: 0; aspect-ratio: 4 / 3; border-radius: var(--r-xl); border: 1.5px dashed rgba(242,237,228,.32); background: rgba(242,237,228,.04); display: grid; place-items: center; align-content: center; gap: 10px; overflow: hidden; color: rgba(242,237,228,.7); font-family: var(--font-ui); font-size: 15px; }
+  .team-photo svg { width: 44px; height: 44px; }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-photo:has(img) { border: 0; }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
@@ -1044,7 +1052,10 @@
   <section id="contact" data-anchor class="band-dark final sec" aria-labelledby="finalTitle">
     <div class="tex tex-final" aria-hidden="true"></div><svg class="bigp bigp-final" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="wrap final-grid">
-      <h2 id="finalTitle" class="h-display reveal">Talk to the founding team<span class="pd">.</span></h2>
+      <div class="final-lead">
+        <figure class="team-photo" role="img" aria-label="Team photo coming soon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="9" r="2.6"/><circle cx="15.5" cy="9" r="2.6"/><path d="M3.5 18.5a5 5 0 0 1 10 0M10.5 18.5a5 5 0 0 1 10 0"/></g></svg><span>Team photo</span></figure>
+        <h2 id="finalTitle" class="h-display reveal">Talk to the founding team<span class="pd">.</span></h2>
+      </div>
       <div class="flex flex-col gap-8 min-w-0">
         <p class="body-copy">We’re <span class="hl">lining up pilots</span> and talking with investors. Tell us who you are and what you’d want to try.</p>
         <form class="cform" id="contactForm" novalidate>
