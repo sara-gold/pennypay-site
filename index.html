@@ -625,9 +625,9 @@
   #patents { border-radius: var(--sheet-r) var(--sheet-r) 0 0; }
   #leadership { border-radius: 0 0 var(--sheet-r) var(--sheet-r); }
   .hero { padding-bottom: var(--sheet-r); }
-  #how, #uses, #patents, #leadership { padding-top: 0; }
+  #patents { padding-top: 0; }
 
-  /* Thread: a copper line that drops from the top of each centred section to a penny */
+  /* Thread: a copper line that drops to a penny (intro and Patents only) */
   .thread { display: flex; flex-direction: column; align-items: center; height: clamp(96px, 10vw, 140px); margin-bottom: var(--s6); }
   .th-line { flex: 1; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(171,108,67,0), rgba(171,108,67,.75)); transform-origin: top; }
   .th-coin { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--penny-front) center / cover no-repeat; box-shadow: 0 0 0 5px rgba(171,108,67,.12), 0 6px 14px -4px rgba(84,40,14,.5); }
@@ -840,7 +840,6 @@
 
   <section id="how" data-anchor class="band-light rule-top sec" aria-labelledby="howTitle">
     <div class="wrap">
-      <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div class="flex flex-col gap-5 min-w-0">
           <h2 id="howTitle" class="h-section reveal">How a 5¢ tip gets from a reader to an author<span class="pd">.</span></h2>
@@ -918,7 +917,6 @@
   <section id="uses" data-anchor class="band-wash sec" aria-labelledby="oppTitle">
     <svg class="bigp bigp-uses" viewBox="0 0 550 773" aria-hidden="true" focusable="false"><use href="#pp-mark"/></svg>
     <div class="wrap">
-      <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="opp-head" id="opportunity" data-anchor>
         <div class="flex flex-col gap-5 min-w-0">
           <h2 id="oppTitle" class="h-section reveal">A paid button next to the like button<span class="pd">.</span></h2>
@@ -1011,7 +1009,6 @@
 
   <section id="leadership" data-anchor class="band-light sec" aria-labelledby="leadTitle">
     <div class="wrap">
-      <div class="thread" aria-hidden="true"><span class="th-line"></span><span class="th-coin"></span></div>
       <div class="lead-grid">
         <div class="flex flex-col gap-6 min-w-0">
           <h2 id="leadTitle" class="h-section reveal">The people behind PennyPay<span class="pd">.</span></h2>
