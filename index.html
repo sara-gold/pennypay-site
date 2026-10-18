@@ -722,14 +722,18 @@
     .js .fees.pending .fee-bar { transform: none; }
   }
 
-  /* Hero buttons: flat, set in Gideon Roman */
-  .hero .btn { font-family: var(--font-accent); font-weight: 400; font-size: 18px; letter-spacing: .01em; text-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .hero .btn::before, .hero .btn::after { display: none; }
-  .hero .btn-penny, .hero .btn-penny:hover, .hero .btn-penny:active { background: #A8643A; box-shadow: none; transform: none; }
-  .hero .btn-penny:hover { background: #9A5A33; }
-  .hero .btn-ghost-dark, .hero .btn-ghost-dark:hover, .hero .btn-ghost-dark:active { background: transparent; box-shadow: inset 0 0 0 1px rgba(242,237,228,.45); transform: none; }
-  .hero .btn-ghost-dark:hover { background: rgba(242,237,228,.08); }
-  .hero .btn .arrow { font-family: var(--font-display); }
+  /* Buttons: flat (2D), set in Gideon Roman */
+  .btn { font-family: var(--font-accent); font-weight: 400; font-size: 18px; letter-spacing: .01em; text-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .btn.btn-sm { font-size: 16px; }
+  .btn::before, .btn::after { display: none; }
+  .btn .arrow { font-family: var(--font-display); }
+  .btn.btn-penny, .btn.btn-penny:hover, .btn.btn-penny:active, .btn-sm.btn-penny:active { background: #A8643A; box-shadow: none; transform: none; text-shadow: none; }
+  .btn.btn-penny:hover { background: #9A5A33; }
+  .btn.btn-forest, .btn.btn-forest:hover, .btn.btn-forest:active { background: var(--forest); color: var(--white); box-shadow: none; transform: none; }
+  .btn.btn-forest:hover { background: #1E5136; }
+  .btn.btn-ghost-dark, .btn.btn-ghost-dark:hover, .btn.btn-ghost-dark:active,
+  .band-dark .btn.btn-forest, .band-dark .btn.btn-forest:hover, .band-dark .btn.btn-forest:active { background: transparent; color: var(--white); box-shadow: inset 0 0 0 1px rgba(242,237,228,.45); transform: none; }
+  .btn.btn-ghost-dark:hover, .band-dark .btn.btn-forest:hover { background: rgba(242,237,228,.08); }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
