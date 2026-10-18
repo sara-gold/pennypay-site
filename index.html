@@ -395,10 +395,6 @@
   .bts { margin-top: var(--s11); }
   .bts-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s4) var(--s6); }
   .bts-head h3 { font-weight: 500; font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.028em; line-height: 1.1; text-wrap: balance; }
-  .bts-ctrls { display: flex; gap: var(--s2); }
-  .bts-ctrl { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--ink); background: var(--glass-light-bg); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); box-shadow: var(--glass-light-edge), var(--glass-light-lift); transition: transform .15s var(--ease), background .2s, color .2s, box-shadow .2s; }
-  .bts-ctrl:hover { color: var(--white); background: linear-gradient(180deg, #24583B, #0D2B1A); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 0 0 1px rgba(5,20,11,.6), 0 8px 18px -10px rgba(5,20,11,.6); }
-  .bts-ctrl:active { transform: scale(.94); }
   /* Scene tabs as a glass segmented control */
   .bts-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s6); padding: var(--s1); border-radius: var(--r-lg); background: rgba(13,43,26,.04); box-shadow: inset 0 0 0 1px var(--line); }
   @media (min-width: 860px) { .bts-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -887,12 +883,6 @@
         <div class="bts-head">
           <div class="flex flex-col gap-4 min-w-0">
             <h3>What happens behind the button</h3>
-          </div>
-          <div class="bts-ctrls">
-            <button type="button" class="bts-ctrl" id="btsPrev" aria-label="Previous scene"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-            <button type="button" class="bts-ctrl" id="btsPlay" aria-label="Pause"><svg id="btsPlayIcon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2"/></svg></button>
-            <button type="button" class="bts-ctrl" id="btsReplay" aria-label="Replay scene"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.6-3.7M3 2v3h3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-            <button type="button" class="bts-ctrl" id="btsNext" aria-label="Next scene"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
           </div>
         </div>
         <div class="bts-tabs" role="tablist" aria-label="Behind the screens scenes" id="btsTabs"></div>
@@ -1588,6 +1578,7 @@
     }
     function go(i, user) {
       clearTimeout(advanceT);
+      if (user) playing = false; // choosing a scene stops autoplay
       cur = (i + scenes.length) % scenes.length; run++;
       var rid = run, s = scenes[cur];
       render(cur);
@@ -1598,18 +1589,6 @@
         if (playing && inView && !reduce) advanceT = setTimeout(function () { if (rid === run) go(cur + 1); }, 1600);
       });
     }
-    function setPlaying(p) {
-      playing = p;
-      var btn = document.getElementById('btsPlay'), icon = document.getElementById('btsPlayIcon');
-      btn.setAttribute('aria-label', p ? 'Pause' : 'Play');
-      icon.innerHTML = p ? '<path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2"/>' : '<path d="M4 2l8 5-8 5z" fill="currentColor"/>';
-      if (p) go(cur); else { clearTimeout(advanceT); tabsEl.children[cur].classList.remove('running'); }
-    }
-    document.getElementById('btsPrev').addEventListener('click', function () { go(cur - 1, true); });
-    document.getElementById('btsNext').addEventListener('click', function () { go(cur + 1, true); });
-    document.getElementById('btsReplay').addEventListener('click', function () { go(cur, true); });
-    document.getElementById('btsPlay').addEventListener('click', function () { setPlaying(!playing); });
-    if (reduce) { setPlaying(false); }
 
     // Show the first scene's finished state at rest; start playing when it scrolls into view
     render(0); scenes[0].play(ops(++run, host, true));
