@@ -248,8 +248,6 @@
   .hero-copy > .flex { gap: var(--s3); }
   @media (max-width: 479px) { .hero-copy > .flex .btn { flex: 1 1 100%; } }
   .cred { display: flex; align-items: flex-start; gap: var(--s3); max-width: 52ch; padding-top: var(--s5); border-top: 1px solid var(--line-dark); font-family: var(--font-ui); font-weight: 300; font-size: 14px; line-height: 22px; color: var(--on-dark-3); }
-  .seal { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--glass-dark-bg); box-shadow: var(--glass-dark-edge); }
-  .seal::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cu-face); box-shadow: inset 0 1px 0 rgba(255,228,204,.6); }
   .hero-visual { position: relative; min-width: 0; }
   .hero-visual::before { content: ""; position: absolute; z-index: -1; width: 340px; height: 340px; right: 4%; top: -6%; border-radius: 50%; background: radial-gradient(circle, rgba(201,138,94,.40), transparent 68%); filter: blur(30px); pointer-events: none; }
   .hero-visual::after { content: ""; position: absolute; z-index: -1; width: 300px; height: 300px; left: -2%; bottom: -10%; border-radius: 50%; background: radial-gradient(circle, rgba(155,184,158,.34), transparent 68%); filter: blur(30px); pointer-events: none; }
@@ -727,6 +725,15 @@
     *, *::before, *::after { animation-duration: .01ms; animation-iteration-count: 1; transition-duration: .01ms; }
     .js .fees.pending .fee-bar { transform: none; }
   }
+
+  /* Hero buttons: flat, set in Gideon Roman */
+  .hero .btn { font-family: var(--font-accent); font-weight: 400; font-size: 18px; letter-spacing: .01em; text-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .hero .btn::before, .hero .btn::after { display: none; }
+  .hero .btn-penny, .hero .btn-penny:hover, .hero .btn-penny:active { background: #A8643A; box-shadow: none; transform: none; }
+  .hero .btn-penny:hover { background: #9A5A33; }
+  .hero .btn-ghost-dark, .hero .btn-ghost-dark:hover, .hero .btn-ghost-dark:active { background: transparent; box-shadow: inset 0 0 0 1px rgba(242,237,228,.45); transform: none; }
+  .hero .btn-ghost-dark:hover { background: rgba(242,237,228,.08); }
+  .hero .btn .arrow { font-family: var(--font-display); }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"PennyPay","legalName":"PennyPay, Inc.","description":"PennyPay builds patented infrastructure for digital micropayments from 1¢ to $3 across creators, publishers, platforms, and nonprofits.","logo":"assets/pennypay-logo-penny.svg"}
@@ -769,7 +776,7 @@
           <a href="#opportunity" class="btn btn-penny">See who it’s for</a>
           <a href="#how" class="btn btn-ghost-dark">See How It Works <span class="arrow down" aria-hidden="true">↓</span></a>
         </div>
-        <p class="cred"><span class="seal" aria-hidden="true"></span><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Evaluated by Notre Dame’s IDEA Center.</span></p>
+        <p class="cred"><span>U.S. Patent Nos. 11,875,330 and 12,169,821. Evaluated by Notre Dame’s IDEA Center.</span></p>
       </div>
       <div class="hero-visual">
         <div class="coin3d" aria-hidden="true"><span class="coin-shadow"></span><div class="coin3d-in"><span class="coin-edge"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i><i style="--k:12"></i></span><span class="coin-face cf"><img src="assets/coin-front.webp" alt="" width="180" height="180"><span class="coin-light"></span></span><span class="coin-face cb"><img src="assets/coin-back.webp" alt="" width="180" height="180"><span class="coin-light"></span></span></div></div>
